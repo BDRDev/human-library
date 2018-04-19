@@ -224,6 +224,7 @@ function updateRented(result, bookId, difference){
     //we will see
     //console.log("print");
     printAlert(rentedOut);
+    init();
     initBtn();
 
 }//end updateRented
@@ -318,7 +319,7 @@ function printAlert(rentedOut){
 
 //Once I get the to files merge this will need some work
 function initBtn(){
-    //console.log("btn init");
+    console.log("btn init");
 
     //need to pass id
     $(".rentedReturn").unbind().bind("click", function(){
@@ -338,7 +339,7 @@ function initBtn(){
 }
 
 function removeAlert(divId){
-    //console.log("this is where we remove div " + divId);
+    console.log("this is where we remove div " + divId);
 
     //remove from the rentedOut array first
     divId = parseInt(divId);
@@ -407,9 +408,12 @@ function returnBook(displayId){
 //the display function displays the time that book is going ot be back
 //it also changes the button from rent to return
 function display(bookId, JSON){
+
+    console.log("this is the bookId");
+    console.log(bookId);
     var id = "#" + bookId;
 
-    $(id).children("div.employee-bookInformation").children("div.indexAva").html("Available: " + JSON.available);
+    $(id).children("div.employee-bookInformation").children("div.indexAva").html("<strong>Available</strong>: " + JSON.available);
 
     if(JSON.timeBack !== null) {
         $(id).children("div.employee-bookInformation").children("div.employee-TimeBack").html("Time Back: " + JSON.timeBack);
@@ -420,10 +424,10 @@ function display(bookId, JSON){
 
 
     if(JSON.available !== "yes") {
-        $(id).children("div.rentReturn").html("<div class='employee-Return' id='" + JSON.bookId + "'>RETURN</div>");
+        $(id).children("div.rentReturn").html("<div class='employee-Return' id='" + bookId + "'>RETURN</div>");
     } else {
 
-        $(id).children("div.rentReturn").html("<div class='employee-Rent' id='" + JSON.bookId + "' >RENT</div>");
+        $(id).children("div.rentReturn").html("<div class='employee-Rent' id='" + bookId + "' >RENT</div>");
     }
 
     init();
@@ -431,6 +435,7 @@ function display(bookId, JSON){
 
 //.unbind.bind is very crucial
 function init(){
+    //console.log('other init');
 
     $(".employee-Rent").unbind().bind("click", function(){
         rentBook(this.id);
@@ -490,7 +495,7 @@ $(document).ready(function(){
 
     //runs bookAlerts every 5 sec
     setInterval(function(){
-        //bookAlerts();
+        bookAlerts();
     }, 5000)
 
 });
