@@ -1,0 +1,55 @@
+/* ========================================================= NAV STYLE CSS */
+
+nav img { height: 80px; width: auto; margin-left: 20px; }
+
+nav {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  height: 100px;
+  background-color: rgba(255,255,255, 1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: #000;
+  margin-right: 20px;
+  transition: all .2s ease-in-out;
+  font-size: 14px;
+  font-family: Roboto Slab, "sans-serif";
+}
+
+nav a:hover { color: #ECC061; }
+
+.login {
+  border: 2px #ECC061 solid;
+  background-color: #ECC061;
+  color: #ffffff;
+  padding: 8px 20px;
+  transition: all .2s ease-in-out;
+}
+
+.login:hover {
+  background: transparent;
+  border: 2px #ECC061 solid;
+  color: #ECC061;
+}
+
+.logout {
+  border: 2px #ECC061 solid;
+  background-color: #ECC061;
+  color: #ffffff;
+  padding: 8px 20px;
+  transition: all .2s ease-in-out;
+}
+
+.logout:hover {
+  background: transparent;
+  border: 2px #ECC061 solid;
+  color: #ECC061;
+}
+
+/* ========================================================= END NAV STYLE CSS */

@@ -1,0 +1,78 @@
+.employee-BooksWrapper {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  font-family: Raleway, "sans-serif"; }
+
+.employee-BookWrapper {
+  width: 25%;
+  min-height: 25%;
+  margin: 15px 15px;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.employee-BookImage {
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 200px;
+  margin-bottom: 20px; }
+
+.employee-TimeBack {
+  color: #ECC061;
+  font-family: Roboto Slab, "sans-serif";
+  padding-top: 10px; }
+
+.employee-Rent {
+  margin-top: 80px;
+  color: #75AD59;
+  padding: 10px 15px;
+  border: 2px #75AD59 solid;
+  -webkit-transition: 0.3s all ease-in-out;
+  -o-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out; }
+
+.employee-Rent:hover {
+  color: white;
+  background-color: #75AD59; }
+
+.employee-Return {
+  margin-top: 47px;
+  color: #D62839;
+  padding: 10px 15px;
+  border: 2px #D62839 solid;
+  -webkit-transition: 0.3s all ease-in-out;
+  -o-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out; }
+
+.employee-Return:hover {
+  color: white;
+  background-color: #D62839; }
+
+.employee-yes a, .employee-no a {
+  text-decoration: none;
+  color: black; }

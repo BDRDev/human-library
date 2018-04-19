@@ -1,0 +1,173 @@
+.home {
+  padding-top: 100px;
+  box-sizing: border-box;
+  height: 100%;
+  background-image: url("../assets/images/booksBg.jpg");
+  *background-position: center;
+  *background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.home h1 {
+  margin-left: 60px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 5px #000000 solid;
+  width: 500px;
+  font-family: Raleway, sans-serif;
+  font-weight: 900;
+  font-size: 4em;
+}
+
+.about {
+  box-sizing: border-box;
+  height: 100%;
+  background-color: #ECC061;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about h1 {
+  margin-left: 60px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 5px #000000 solid;
+  width: 500px;
+  font-family: Raleway, sans-serif;
+  font-weight: 900;
+  font-size: 4em;
+}
+
+.bookHeader {
+  color: #75AD59;
+  font-family: Roboto Slab, "sans-serif";
+  font-size: 3.28em;
+  transform: rotate(-90deg);
+}
+
+.listOf {
+  font-family: Raleway, sans-serif;
+  font-weight: 900;
+  color: #000000;
+}
+
+.book {
+  padding: 100px 20px 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.books {
+  background-color: #75AD59;
+  width: 250px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 20px;
+}
+
+.books.unavailable {
+  background-color: #eee;
+}
+
+
+.bookImage { margin: auto; }
+
+.bookImage img {
+  padding: 10px;
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 200px;
+}
+
+.bookContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.time { color: #D62839; }
+
+.storyTitle {
+  font-family: Raleway, "sans-serif";
+  font-weight: 700;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+.name {
+  font-family: Roboto Slab, "sans-serif";
+  font-weight: normal;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #ffffff;
+}
+
+.bookAva { font-family: Roboto Slab, "sans-serif"; font-size: .8em; }
+
+.contact {
+  height: 15%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.contact a {
+  color: black;
+  text-decoration: none;
+  font-family: Raleway, "sans-serif";
+  font-weight: 900;
+  transition: 0.3s ease;
+}
+
+.contact a:hover { color: #ECC061; }
+
+svg #facebook {
+  width: 80%;
+  height: auto;
+  transition: 0.3s all ease-in-out;
+}
+
+svg:hover #facebook { fill: #ECC061; }
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.details_content {
+  min-height: 40%;
+  min-width: 800px;
+  max-width: 1000px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 2px solid #000000;
+}
+
+.book_Image, .firstName, .story, .chapters {
+  font-family: Raleway, "sans-serif";
+  font-weight: 900;
+  color: #000000;
+}
+
+.first_Name, .s_tory {
+  color: #75AD59;
+  font-family: Roboto Slab, "sans-serif";
+}

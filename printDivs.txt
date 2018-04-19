@@ -1,0 +1,22 @@
+if(difference > 5) {
+            $(".rentedBooks > div.rentedGreen").append(
+                "<div class='rentedBook green' id='rented_" + bookId.id + "'>" +
+                "<div class='rentedStory'>" + result.firstName + "</div>" +
+                "<div class='rentedTime'>" + difference + "</div>" +
+                "</div>"
+            );
+        } else if (difference <=5 && difference > 0) {
+            $(".rentedBooks > div.rentedYellow").append(
+                "<div class='rentedBook yellow' id='rented_" + bookId.id + "'>" +
+                "<div class='rentedStory'>" + result.firstName + "</div>" +
+                "<div class='rentedTime'>" + difference + "</div>" +
+                "</div>"
+            );
+        } else if(difference <= 0){
+            $(".rentedBooks > div.rentedRed").append(
+                "<div class='rentedBook red' id='rented_" + bookId.id + "'>" +
+                "<div class='rentedStory'>" + result.firstName + "</div>" +
+                "<div class='rentedTime'>" + difference + "</div>" +
+                "</div>"
+            );
+        }

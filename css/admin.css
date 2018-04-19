@@ -1,0 +1,139 @@
+.welcome {
+  font-family: Raleway, sans-serif;
+  font-weight: 900;
+  color: #000000; }
+
+.adminName {
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 16px;
+  color: #ECC061;
+  font-family: Roboto Slab, "sans-serif"; }
+
+.workerName {
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 16px;
+  color: #D62839;
+  font-family: Roboto Slab, "sans-serif"; }
+
+.bookName {
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 16px;
+  color: #75AD59;
+  font-family: Roboto Slab, "sans-serif"; }
+
+.adminSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.addWorker {
+  margin: auto 20px;
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 20px;
+  font-family: Raleway, sans-serif;
+  font-weight: 700; }
+
+.addWorker h3 {
+  text-align: center; }
+
+.addWorker label {
+  margin-top: 20px; }
+
+.addWorker input {
+  padding-left: 10px;
+  outline: none;
+  height: 30px;
+  border: none;
+  margin-top: 10px;
+  border-bottom: 2px #D62839 solid;
+  background-color: transparent;
+  font-family: Roboto Slab, "sans-serif";
+  font-weight: 100; }
+
+.addWorker input[type="submit"] {
+  background-color: #D62839;
+  min-height: 7%;
+  padding: 10px;
+  margin-top: 50px;
+  cursor: pointer;
+  color: white;
+  border: 2px #D62839 solid;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  font-family: Raleway, sans-serif;
+  font-weight: 700; }
+
+.addWorker input[type="submit"]:hover {
+  background-color: transparent;
+  color: #D62839; }
+
+.addBook {
+  margin: auto 20px;
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 20px;
+  font-family: Raleway, sans-serif;
+  font-weight: 700; }
+
+.addBook h3 {
+  text-align: center; }
+
+.addBook label {
+  margin-top: 20px; }
+
+.addBook input {
+  padding-left: 10px;
+  outline: none;
+  height: 30px;
+  border: none;
+  margin-top: 10px;
+  border-bottom: 2px #75AD59 solid;
+  background-color: transparent;
+  font-family: Roboto Slab, "sans-serif";
+  font-weight: 100; }
+
+.addBook input[type="submit"] {
+  background-color: #75AD59;
+  min-height: 7%;
+  padding: 10px;
+  margin-top: 50px;
+  cursor: pointer;
+  color: white;
+  border: 2px #75AD59 solid;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  font-family: Raleway, sans-serif;
+  font-weight: 700; }
+
+.addBook input[type="submit"]:hover {
+  background-color: transparent;
+  color: #75AD59; }
+
+.admin-decision {
+  margin-top: 10px;
+  font-family: Raleway, "sans-serif";
+  font-weight: 500; }

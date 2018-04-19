@@ -1,0 +1,88 @@
+.edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-spacing: 2em;
+  font-family: Raleway, "sans-serif";
+}
+
+.admin-option { text-align: center; }
+
+.edit td { font-size: 15px; font-weight: 500; }
+
+.edit th {
+  text-align: start;
+  border-bottom: 2px solid #D62839;
+  padding-bottom: 5px;
+  width: auto;
+  border-spacing: 2em;
+}
+
+.bookEdit th { border-bottom: 2px solid #75AD59; }
+
+.edit a {
+  text-decoration: none;
+  font-family: Roboto Slab, "sans-serif";
+  font-size: 14px;
+  color: black;
+  border: 2px #D62839 solid;
+  padding: 10px 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.bookEdit a { border: 2px #75AD59 solid; }
+
+.editBtn a:hover { color: #ffffff; background-color: #D62839; }
+
+.bookEdit a:hover { color: #ffffff; background-color: #75AD59; }
+
+.editWorker {
+  display: flex;
+  flex-direction: column;
+  padding-left: 300px;
+  padding-right: 300px;
+  font-family: Raleway, sans-serif;
+  font-weight: 700;
+}
+
+.editWorker img { width: 200px; height: auto; margin: auto; }
+
+.editWorker h3 { text-align: center; }
+
+.editWorker label { margin-top: 20px; }
+
+.editWorker input {
+  padding-left: 10px;
+  outline: none;
+  height: 30px;
+  border: none;
+  margin-top: 10px;
+  border-bottom: 2px #D62839 solid;
+  background-color: transparent;
+  font-family: Roboto Slab, "sans-serif";
+  font-weight: 100;
+}
+
+.editWorker input[type="submit"] {
+  min-height: 7%;
+  padding: 10px;
+  margin-top: 50px;
+  cursor: pointer;
+  color: white;
+  background-color: #D62839;
+  border: 2px #D62839 solid;
+  transition: all 0.2s ease-in-out;
+  font-family: Raleway, sans-serif;
+  font-weight: 700;
+}
+
+.editWorker input[type="submit"]:hover {
+  background-color: transparent;
+  color: #D62839;
+}
+
+.editEmployeeMessage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,52 @@
+.editBook {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-left: 300px;
+  padding-right: 300px;
+  font-family: Raleway, sans-serif;
+  font-weight: 700; }
+
+.editBook img {
+  width: 200px;
+  height: auto;
+  margin: auto; }
+
+.editBook h3 {
+  text-align: center; }
+
+.editBook label {
+  margin-top: 20px; }
+
+.editBook input {
+  padding-left: 10px;
+  outline: none;
+  height: 30px;
+  border: none;
+  margin-top: 10px;
+  border-bottom: 2px #75AD59 solid;
+  background-color: transparent;
+  font-family: Roboto Slab, "sans-serif";
+  font-weight: 100; }
+
+.editBook input[type="submit"] {
+  background-color: #75AD59;
+  min-height: 7%;
+  padding: 10px;
+  margin-top: 50px;
+  cursor: pointer;
+  color: white;
+  border: 2px #75AD59 solid;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  font-family: Raleway, sans-serif;
+  font-weight: 700; }
+
+.editBook input[type="submit"]:hover {
+  background-color: transparent;
+  color: #75AD59; }

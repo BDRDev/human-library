@@ -1,0 +1,56 @@
+.formContainer {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../assets/images/loginBg.png");
+  *background-position: center;
+  *background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.loginForm {
+  min-height: 50%;
+  width: 20%;
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  font-family: Raleway, sans-serif;
+  font-weight: 700;
+}
+
+.loginForm label {
+  margin-top: 50px;
+}
+
+.loginForm input {
+  outline: none;
+  height: 30px;
+  border: none;
+  margin-top: 10px;
+  border-bottom: 2px #ECC061 solid;
+  background-color: transparent;
+  font-family: Roboto Slab, "sans-serif";
+  font-weight: 100;
+}
+
+.loginForm input[type="submit"] {
+  min-height: 7%;
+  padding: 10px;
+  margin-top: 50px;
+  cursor: pointer;
+  background-color: #ECC061;
+  color: white;
+  border: 2px #ECC061 solid;
+  transition: all 0.2s ease-in-out;
+  font-family: Raleway, sans-serif;
+  font-weight: 700;
+}
+
+.loginForm input[type="submit"]:hover {
+  background-color: transparent;
+  color: #ECC061;
+}
