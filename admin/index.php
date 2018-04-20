@@ -52,13 +52,7 @@ if ($_COOKIE['admin'] === "yes") {
 
     <div class="adminSection">
         <?php
-        //displays the addEmployee message if it is set
-        /*
-        if (isset($_COOKIE['addEmployee'])) {
-            echo $_COOKIE['addEmployee'];
-            setcookie("addEmployee", "", time() - 3600, "/");
-        }
-        */
+
 
         //loads the add workers form
         include_once ABSOLUTE_PATH . '/addWorkers/addWorkers.php';

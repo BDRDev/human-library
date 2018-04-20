@@ -29,9 +29,6 @@ include_once '../_includes/config.php';
         <label for="no">No</label>
     </div>
 
-    <label for="#">Select Image to upload:</label>
-    <input style="color: black;" type="file" name="imageUpload" id="imageUpload" />
-
 
     <input type="submit" value="Submit" name="submit" />
 

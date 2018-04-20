@@ -33,7 +33,10 @@ if (!(isset($_COOKIE['admin']))) {
                 <a href="<?= URL_ROOT ?>/employee/index.php">Rent Books</a>
                 <a href="<?= URL_ROOT ?>/editBook/index.php">Edit Books</a>
                 <a href="<?= URL_ROOT ?>/editEmployee/edit.php">Edit Workers</a>
+                <a href="<?= URL_ROOT ?>/signUp/index.php">Sign Up</a>
                 <a href="<?= URL_ROOT ?>/admin/index.php">Admin Page</a>
+
+
                 <a class="logout" href="<?= URL_ROOT ?>/logout/logout_process.php">Log Out</a>
             </div>
         </nav>
