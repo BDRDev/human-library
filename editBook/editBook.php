@@ -32,35 +32,39 @@ if ($_COOKIE['admin'] === "yes") {
 
 <?php
 
-if(!empty($_GET['bookId'])) {
-    $bookId = filter_input(INPUT_GET, "bookId", FILTER_SANITIZE_NUMBER_INT);
+if(!empty($_GET['displayId'])) {
+    $displayId = filter_input(INPUT_GET, "displayId", FILTER_SANITIZE_NUMBER_INT);
 }
 
-$sql = "SELECT * FROM books WHERE bookId=:bookId LIMIT 1";
+$sql = "SELECT * 
+        FROM bookdisplay bd
+        INNER JOIN bookinfo bi
+        ON bd.displayId = bi.displayId
+        WHERE bd.displayId=:displayId";
 $pdoQuery = $conn->prepare($sql);
-$pdoQuery->bindValue(":bookId", $bookId, PDO::PARAM_INT);
+
+$pdoQuery->bindValue(":displayId", $displayId, PDO::PARAM_INT);
 $pdoQuery->execute();
 $book = $pdoQuery->fetch(PDO::FETCH_ASSOC);
 
 echo "<br><br>";
 
-$bookPath = $book["bookImage"];
-$bookStrings = explode("/", $bookPath);
-$bookImage = $bookStrings[2];
+
 
 ?>
 
 <form class="editBook" method="post" enctype="multipart/form-data" action="<?= URL_ROOT ?>/editBook/editBook_process.php" >
 
-    <img src='../<?=$book["bookImage"] ?>'/>
 
-    <input type="hidden" name="bookId" value="<?= $book["bookId"] ?>" required /> <br>
+    <input type="hidden" name="bookId" value="<?= $book["displayId"] ?>" required /> <br>
 
-    <label for="title_edit" class="">First Name</label>
+    <label for="title_edit" class="">Title</label>
     <input type="text" name="title" id="title_edit" value="<?= $book["title"] ?>" required><br>
 
+    <!--
     <label for="story_edit" class="">Story</label>
     <textarea name="story" id="story_edit" rows="5"><?= $book["story"] ?></textarea>
+    -->
 
     <label for="chapters_edit" class="">Chapters</label>
     <div id="editor" name="editor"><?php echo $book["chapters"]; ?></div>
@@ -99,16 +103,8 @@ $bookImage = $bookStrings[2];
     ?>
 
 
-
-    <label for="image_edit" class="">Book Image: </label> <?= $bookImage ?>
-    <input type="hidden" name="bookImage" id="image_edit" value="<?= $book["bookImage"] ?>" required><br>
-
-    <label for="newImage">New Image:</label>
-    <input style="color: black;" type="file" name="newImage" id="newImage" />
-
     <input type="hidden" name="timeBack" value="<?= $book["timeBack"] ?>" required>
 
-    <input type="hidden" name="alert" value="<?= $book["alert"] ?>" required><br>
 
     <input class="submit" type="submit" value="submit">
 </form>

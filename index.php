@@ -43,11 +43,12 @@ try {
 
         echo "<div class='bookContent'>";
         echo "<span class='storyTitle'>" . $book["title"] . "</span>";
+        echo "<span class=''><strong>Time</strong>: ". $book["time"] . "</span>";
         echo "<div class='avaHolder' style='padding: 50px 0;'>";
-        echo "<div class='bookAva'>" . "Available: " . $book["available"] . "</div>";
+        echo "<div class='bookAva'>" . "<strong>Available</strong>: " . $book["available"] . "</div>";
 
         if ($book["timeBack"] !== NULL) {
-            echo "<div class='bookAva time'>Time Back: " . $book["timeBack"] . "</div>";
+            echo "<div class='bookAva time'><strong>Time Back</strong>: " . $book["timeBack"] . "</div>";
         } else {
             echo "<div class='bookAva time'></div>";
         }

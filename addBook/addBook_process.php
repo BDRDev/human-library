@@ -3,15 +3,6 @@ include_once '../_includes/config.php';
 
 include_once ABSOLUTE_PATH . '/_includes/connection.php';
 
-//all variables for the image
-$uploadOk = 1;
-$targetDir = ABSOLUTE_PATH . "/assets/images/";
-$newFileName = strtolower($_FILES["imageUpload"]["name"]);
-
-$targetFile = $targetDir . $newFileName;
-
-$imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
 //all variables for the rest of the form
 $title = $_POST["title"];
 $story = $_POST["story"];

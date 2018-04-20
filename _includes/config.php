@@ -10,7 +10,7 @@
 
     //path for dusty: "dustytome.net"
 
-    define("URL_ROOT", "http://localhost:/humanLibrary");
+    define("URL_ROOT", "http://localhost:8383/humanLibrary");
 
 
     //Root for Muj: http://localhost/human-library/humanLibrary

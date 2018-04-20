@@ -39,11 +39,11 @@ function addDivsToArray(){
 } //ends addDivsToArray
 
 //gets all of the information of the book based off the bookId
-function process(bookId) {
+function process(displayId) {
     //creates a new XmlHttpRequest Object.
     var xmlHttp = new createXmlHttpRequestObject();
 
-    xmlHttp.open("GET", "indexUpdate/bookUpdate.php?bookId=" + bookId, true);
+    xmlHttp.open("GET", "indexUpdate/bookUpdate.php?displayId=" + displayId, true);
 
     xmlHttp.onreadystatechange = function() {
         //console.log(xmlHttp.readyState);
@@ -55,7 +55,7 @@ function process(bookId) {
 
             //console.log(resultJSON);
 
-            display(resultJSON, bookId);
+            display(resultJSON, displayId);
         }
     };
 
@@ -80,17 +80,17 @@ function display(bookResults, bookId){
 
     $(id).children().children("div.name").html(bookResults.firstName + " " + bookResults.lastName);
 
-    $(id).children().children("div.avaHolder").children("div.bookAva").html("Available: " + bookResults.available);
+    $(id).children().children("div.avaHolder").children("div.bookAva").html("<strong>Available</strong>: " + bookResults.available);
 
 
-    console.log($(id).children().children("div.avaHolder").children("div.bookAva").html());
+    //console.log($(id).children().children("div.avaHolder").children("div.bookAva").html());
 
-    console.log(bookResults.timeBack);
+    //console.log(bookResults.timeBack);
 
     if(bookResults.timeBack === null) {
         $(id).children().children("div.avaHolder").children("div.time").html(" ");
     } else {
-        $(id).children().children("div.avaHolder").children("div.time").html("Time Back: " + bookResults.timeBack);
+        $(id).children().children("div.avaHolder").children("div.time").html("<strong>Time Back</strong>: " + bookResults.timeBack);
     }
 
     if(bookResults.timeBack === null){

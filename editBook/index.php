@@ -33,7 +33,7 @@ if ($_COOKIE['admin'] === "yes") {
 
 <?php
 
-$sql = "SELECT * FROM books ORDER BY available DESC";
+$sql = "SELECT * FROM bookdisplay ORDER BY title";
 $books = $conn->query($sql);
 
 
@@ -68,16 +68,12 @@ $books = $conn->query($sql);
 
     foreach ($books as $book) {
 
-        $bookPath = $book["bookImage"];
-        $bookStrings = explode("/", $bookPath);
-        $bookImage = $bookStrings[2];
+
 
         echo "<tr>";
         echo "<td>" . $book["title"] . "</td>";
-        echo "<td>" . $book["story"] . "</td>";
-        echo "<td>" . $bookImage . "</td>";
-        echo "<td class='editBtn'>" . "<a href='" . URL_ROOT . "/editBook/editBook.php?bookId=" . $book["bookId"] . "'>Edit</a>" . "</td>";
-        echo "<td class='editBtn'>" . "<a href='" . URL_ROOT . "/editBook/deleteBook_process.php?bookId=" . $book["bookId"] . "'>Delete</a>" . "</td>";
+        echo "<td class='editBtn'>" . "<a href='" . URL_ROOT . "/editBook/editBook.php?displayId=" . $book["displayId"] . "'>Edit</a>" . "</td>";
+        echo "<td class='editBtn'>" . "<a href='" . URL_ROOT . "/editBook/deleteBook_process.php?displayId=" . $book["displayId"] . "'>Delete</a>" . "</td>";
 
 
         echo "</tr>";
