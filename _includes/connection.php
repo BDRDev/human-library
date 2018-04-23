@@ -37,6 +37,7 @@ try {
     //for dustytome.net
     //$conn = new PDO($dsn, $dbUser, $dbPass);
     //echo "Connection Successful <br>";
+
 } catch(PDOException $e){
     echo "Connection Failed <br>";
     echo $e->getMessage();

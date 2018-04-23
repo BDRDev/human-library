@@ -10,3 +10,26 @@ Book Details
 Do we want to have their story listed somewhere? for some reason I didnt think
 we wanted it
 
+
+
+For storing signing up
+
+my process.
+
+They put their name and email.
+
+When they press send, an email is sent to them with a link that will take them
+to a sign up page. based off of the link they click, it takes them to a sign up
+form that has their most of their information filled in
+
+link will take them to the sign up page and load their information in the form based off of
+their user id which will be tacked on at the end of the link
+
+all they would need to add is a password
+
+once that is done take them to their profile and allow them to change
+their details.
+
+One thing that may need to be done is to create unique id's like a random
+20 digit string so it would be harder to change up the links and
+sign up as different people?
