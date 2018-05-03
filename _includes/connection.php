@@ -4,11 +4,19 @@
 
 //variables for the database name, username, and password for the database
 
-
+/*
 $serverName = "localhost";
 $database = "humanlib";
 $dbusername = "phpuser";
 $dbpassword = "phpuser";
+*/
+
+
+
+$serverName = "blaker113699836.ipagemysql.com";
+$database = "humanlib";
+$dbusername = "blaker113699836";
+$dbpassword = "@Yoyoyo55";
 
 
 
@@ -26,6 +34,7 @@ $dsn = "mysql:dbname=bldrober_3_db";
 $dbUser = "bldrober";
 $dbPass = "bldrober";
 */
+
 
 
 

@@ -14,7 +14,7 @@ if ($_COOKIE['admin'] === "yes") {
 
         <h3 class="signUpHeader">Book Sign Up</h3>
 
-        <form class="signUpForm" action="<?= URL_ROOT ?>/signUp/signUp_process.php" method="post" enctype="multipart/form-data">
+        <form class="signUpForm" action="<?= URL_ROOT ?>/signUp/signUp_process.php" method="post" >
 
             <div class="signUpTop">
 

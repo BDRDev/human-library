@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2018 at 08:43 PM
+-- Generation Time: May 03, 2018 at 05:01 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bookdisplay` (
   `displayId` int(4) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `chapters` varchar(500) NOT NULL,
-  `time` varchar(50) NOT NULL,
+  `title` varchar(100) DEFAULT '',
+  `chapters` varchar(500) DEFAULT '',
+  `time` varchar(50) DEFAULT '',
   `timeBack` varchar(10) DEFAULT NULL,
-  `available` varchar(5) NOT NULL DEFAULT 'yes'
+  `available` varchar(5) DEFAULT 'yes'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -68,7 +68,11 @@ INSERT INTO `bookdisplay` (`displayId`, `title`, `chapters`, `time`, `timeBack`,
 (27, 'They\'re Here, They\'re Queer', '<p><strong style="color: black;">Chapter 1:</strong><span style="color: black;"> Religion &amp; Being Queer</span></p><p><strong style="color: black;">Chapter 2:</strong><span style="color: black;"> Forming an Identity</span></p><p><strong style="color: black;">Chapter 3:</strong><span style="color: black;"> Out Loud &amp; Proud</span></p>', '5pm-7pm', NULL, 'yes'),
 (28, 'From India to Indiana', '', '12pm-3pm', NULL, 'yes'),
 (29, 'I  Know Why The Caged Bird Does Not Sing', '', '', NULL, 'yes'),
-(30, 'Overcoming Adversity', '', '', NULL, 'yes');
+(30, 'Overcoming Adversity', '', '', NULL, 'yes'),
+(49, 'A good one', 'One three four', '4pm', NULL, 'yes'),
+(46, 'new Title', 'idk', 'three', NULL, 'yes'),
+(50, 'Good title', 'not sure yet', '4', NULL, 'yes'),
+(51, 'qwdqwd', 'qwdqwd', 'qwdqwd', NULL, 'yes');
 
 -- --------------------------------------------------------
 
@@ -77,19 +81,53 @@ INSERT INTO `bookdisplay` (`displayId`, `title`, `chapters`, `time`, `timeBack`,
 --
 
 CREATE TABLE `bookinfo` (
-  `firstName` varchar(50) NOT NULL,
-  `lastName` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `email` varchar(80) NOT NULL,
-  `displayId` int(5) NOT NULL
+  `firstName` varchar(50) DEFAULT '',
+  `lastName` varchar(50) DEFAULT '',
+  `password` varchar(300) DEFAULT NULL,
+  `email` varchar(80) DEFAULT '',
+  `displayId` int(5) NOT NULL,
+  `setPass` varchar(8) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bookinfo`
 --
 
-INSERT INTO `bookinfo` (`firstName`, `lastName`, `password`, `email`, `displayId`) VALUES
-('', '', '', '', 1);
+INSERT INTO `bookinfo` (`firstName`, `lastName`, `password`, `email`, `displayId`, `setPass`) VALUES
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 1, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 2, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 4, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 5, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 6, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 7, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 8, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 9, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 10, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 11, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 12, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 13, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 14, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 15, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 16, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 17, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 18, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 19, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 20, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 21, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 22, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 23, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 24, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 25, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 26, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 27, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 28, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 29, NULL),
+('', '', '$2y$10$VTJSzoJcSb4OvtA9Cy9l4.SggXi.AgcLxGivEgf/PuC3jrRgBs2o2', '', 30, NULL),
+('John', 'James', '$2y$10$ii.shPVZV4v.Nsz0EFdGCOS09inEH33bnHViYlj7Pu4DR8np6ZETS', 'Smitty@test.com', 46, NULL),
+('David', 'Caero', '$2y$10$XrVmF449uDCTldjCFmIfxutZRpBio68LTNyp3I.Gx1HJEKrEg2h1y', 'dogdog@gmail.com', 48, NULL),
+('Jacob', 'Dunder', '$2y$10$Veq1hQylrHFX9PXv7j1Zl.lbV0UpCCMxa4QkIT3PeQJQd/vjmPwDC', 'Jacob@gmail.com', 49, NULL),
+('Craig', 'Wellens', '$2y$10$8bK2TjAscEfMed0ISi9fp.8iFRU2opbgPAtMHODdmsUSiF/0WlXoy', 'Craig@gmail.com', 50, NULL),
+('Test', 'Josh', '$2y$10$PC46sUlWs6UChgHqj7uYDulnecS4Q8BKvRE722HIm0Mwa1R5w9By6', 'Josh@gmail.com', 51, NULL);
 
 -- --------------------------------------------------------
 
@@ -207,7 +245,12 @@ ALTER TABLE `worker`
 -- AUTO_INCREMENT for table `bookdisplay`
 --
 ALTER TABLE `bookdisplay`
-  MODIFY `displayId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `displayId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+--
+-- AUTO_INCREMENT for table `bookinfo`
+--
+ALTER TABLE `bookinfo`
+  MODIFY `displayId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `books`
 --

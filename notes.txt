@@ -33,3 +33,18 @@ their details.
 One thing that may need to be done is to create unique id's like a random
 20 digit string so it would be harder to change up the links and
 sign up as different people?
+
+// How we salt the password, used for later
+
+
+
+
+The way that I have this set up is that only one email can be user per db
+So a worker cant be a worker and a book, will ask ab this
+
+
+//Ask travis how to use the quill thing
+
+
+
+Next thing, working on admins being able to email everyone

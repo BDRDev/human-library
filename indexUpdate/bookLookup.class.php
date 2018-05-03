@@ -8,10 +8,21 @@ class BookLookup {
     public function __construct() {
         //for localhost
 
+
+        /*
         $serverName = "localhost";
         $database = "humanlib";
         $dbusername = "phpuser";
         $dbpassword = "phpuser";
+        */
+
+
+
+        $serverName = "blaker113699836.ipagemysql.com";
+        $database = "humanlib";
+        $dbusername = "blaker113699836";
+        $dbpassword = "@Yoyoyo55";
+
 
 
 

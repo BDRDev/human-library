@@ -13,48 +13,50 @@ echo "Last Name: " . $lastName . "<br>";
 echo "Email: " . $email . "<br><br>";
 
 
-$defaultPass = random_password(8);
+$setPass = random_password(8);
 
 
 function random_password($length) {
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&";
-    $defaultPass = substr( str_shuffle( $chars ), 0, $length );
-    return $defaultPass;
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@$%";
+    $setPass = substr( str_shuffle( $chars ), 0, $length );
+    return $setPass;
 }
 
-echo "Default Pass: " . $defaultPass . "<br><br>";
-
-//this is where we will encrypt the random password
-
-$options = [
-    'cost' => 11,
-    'salt' => mcrypt_create_iv(22, MCRYPT_DEV_RANDOM),
-];
-
-$passwordHash = password_hash($defaultPass, PASSWORD_BCRYPT, $options);
-
-echo "Password Hash: " . $passwordHash . "<br><br>";
-
-$passwordMatch = password_verify($defaultPass, $passwordHash);
-
-var_dump($passwordMatch);
-
-echo "Password Match: " . $passwordMatch;
+echo "Default Pass: " . $setPass . "<br><br>";
 
 
 
-mail("blaker1136@gmail.com", "idk", "this is the message");
 
 
-$sql = "INSERT INTO bookinfo (firstName, lastName, email, displayId) 
-        VALUES(:firstName, :lastName, :email, NULL)";
+//mail("blaker1136@gmail.com", "idk", "this is the message");
+
+//Need to check if the email is already in the db
+//Check if the email is in the
+
+/* =================================================================================
+This is a page that you would not see this is here because we cannot use the email function
+This would re rout back to the sign up page
+====================================================================================*/
+
+$sql = "INSERT INTO bookinfo (firstName, lastName, email, displayId, setPass) 
+        VALUES(:firstName, :lastName, :email, NULL, :setPass)";
 
 $pdoQuery = $conn->prepare($sql);
 
 $pdoQuery->bindValue(":firstName", $firstName, PDO::PARAM_STR);
 $pdoQuery->bindValue(":lastName", $lastName, PDO::PARAM_STR);
 $pdoQuery->bindValue(":email", $email, PDO::PARAM_STR);
+$pdoQuery->bindValue(":setPass", $setPass, PDO::PARAM_STR);
 
-//$pdoQuery->execute();
+if($pdoQuery->execute()){
+    echo "success" . "<br>";
+
+    echo "Wouldnt usually see this page, but I dont have the email set up yet <br>";
+
+    echo "THIS IS THE LINK THAT WOULD BE IN THE EMAIL <br>";
+
+    echo "<a href='" . URL_ROOT . "/book/signUp.php?setPass=" . $setPass . "'>Click Here<a/>";
+};
+
 
 

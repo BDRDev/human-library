@@ -14,4 +14,11 @@ if(isset($_COOKIE['workerId'])) {
     setcookie("workerId", "", time()-3600, "/");
 }
 
+if(isset($_COOKIE['bookLoggedIn'])) {
+
+    //if it is we delete it
+    setcookie("bookLoggedIn", "", time()-3600, "/");
+}
+
 header("Location: ../#homeSection");
+

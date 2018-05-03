@@ -62,6 +62,10 @@ if(isset($_POST['submit'])){
         }
 
 
+
+
+
+
         if($uploadOk === 1){
             if(move_uploaded_file($_FILES["imageUpload"]["tmp_name"], $targetFile)) {
                 //file was successfully uploaded
