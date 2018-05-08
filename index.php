@@ -8,24 +8,20 @@ include_once '_includes/header.inc.php';
 include_once '_includes/main_nav.inc.php';
 
 //sql to get all of the books
-$sql = "SELECT * FROM bookDisplay ORDER BY title";
+$sql = "SELECT * FROM bookdisplay ORDER BY title";
 
 //stores the books in a variable
-try {
-    $books = $conn->query($sql);
-} finally {
-    echo "Nu uh";
-}
+$pdoQuery = $conn->prepare($sql);
+$pdoQuery->execute();
 
+$books = $pdoQuery->fetchAll();
 ?>
 
 <div id="bookSection" class="book">
     <?php
-    /*
-    echo "<div class=''>";
-            echo "<h2 class='bookHeader'><span class='listOf'>List of</span> Books</h2>";
-    echo "</div>";
-    */
+
+
+
     foreach ($books as $book) {
 
 

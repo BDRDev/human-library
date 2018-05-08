@@ -13,7 +13,7 @@
 
     //path for dusty: "dustytome.net"
 
-    define("URL_ROOT", "http://blaker113699836.ipage.com/humanlibrary");
+    define("URL_ROOT", "http://www.humanlibrary.us");
 
     // http://blaker113699836.ipage.com/humanlibrary
 

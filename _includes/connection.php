@@ -39,11 +39,14 @@ $dbPass = "bldrober";
 
 
 
+
+
 //try to connect to the database
 try {
     $conn = new PDO("mysql:host=$serverName;dbname=$database", $dbusername, $dbpassword);
 
-    //for dustytome.net
+
+//for dustytome.net
     //$conn = new PDO($dsn, $dbUser, $dbPass);
     //echo "Connection Successful <br>";
 

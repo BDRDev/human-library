@@ -17,7 +17,7 @@ $setPass = random_password(8);
 
 
 function random_password($length) {
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@$%";
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@%";
     $setPass = substr( str_shuffle( $chars ), 0, $length );
     return $setPass;
 }
@@ -25,6 +25,46 @@ function random_password($length) {
 echo "Default Pass: " . $setPass . "<br><br>";
 
 
+
+$subject = "this is a subject";
+
+$message = "
+<html>
+<head>
+<title>HTML email</title>
+</head>
+<body>
+<p>This email contains HTML Tags!</p>
+<table>
+<tr>
+<th>Firstname</th>
+<th>Lastname</th>
+</tr>
+<tr>
+<td>John</td>
+<td>Doe</td>
+</tr>
+</table>
+</body>
+</html>
+";
+
+
+
+
+$headers .= "Reply-To: The Sender <sender@domain.com>\r\n";
+$headers .= "Return-Path: The Sender <sender@domain.com>\r\n";
+$headers .= "From: The Sender <sender@domain.com>\r\n";
+$headers .= "Organization: Sender Organization\r\n";
+$headers .= "X-Priority: 3\r\n";
+$headers .= "X-Mailer: PHP". phpversion() ."\r\n" ;
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+
+
+
+mail("blaker1136@gmail.com", $subject, $message, $headers);
 
 
 
@@ -48,6 +88,7 @@ $pdoQuery->bindValue(":lastName", $lastName, PDO::PARAM_STR);
 $pdoQuery->bindValue(":email", $email, PDO::PARAM_STR);
 $pdoQuery->bindValue(":setPass", $setPass, PDO::PARAM_STR);
 
+/*
 if($pdoQuery->execute()){
     echo "success" . "<br>";
 
@@ -57,6 +98,7 @@ if($pdoQuery->execute()){
 
     echo "<a href='" . URL_ROOT . "/book/signUp.php?setPass=" . $setPass . "'>Click Here<a/>";
 };
+*/
 
 
 
