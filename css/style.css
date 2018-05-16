@@ -451,6 +451,7 @@ svg:hover #facebook {
   color: #D62839; }
 
 .rentBooksWrapper {
+  min-height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -458,12 +459,12 @@ svg:hover #facebook {
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center; }
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
 
-.rent-BooksWrapper {
-  width: 80%;
+.bookTableWrapper {
+  width: 78%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -475,7 +476,14 @@ svg:hover #facebook {
   align-items: center;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  font-family: Raleway, "sans-serif"; }
+  font-family: Raleway, "sans-serif";
+  padding-left: 20px;
+  padding-right: 20px; }
+
+.rentedBooks {
+  width: 300px;
+  height: 100%;
+  border: 1px black solid; }
 
 .rent-BookWrapper {
   width: 20%;
@@ -484,27 +492,7 @@ svg:hover #facebook {
   padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center; }
-
-.employee-BookImage {
-  padding: 10px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 200px;
-  margin-bottom: 20px; }
+  display: flex; }
 
 .employee-TimeBack {
   color: #ECC061;
@@ -540,6 +528,50 @@ svg:hover #facebook {
 .employee-yes a, .employee-no a {
   text-decoration: none;
   color: black; }
+
+.rentedBook {
+  height: 65px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-left: 5px; }
+
+.rentedReturn {
+  cursor: pointer; }
+
+.green {
+  background-color: #7fff7f; }
+
+.yellow {
+  background-color: #ffff7f; }
+
+.red {
+  background-color: #ff7f7f; }
+
+.rentTable {
+  width: 100%;
+  min-height: 100%;
+  border: 1px black solid;
+  border-collapse: collapse;
+  border-spacing: 5px; }
+
+.rentTableHeader {
+  text-align: left; }
+
+.tableRow {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px; }
+
+.rowAvail {
+  background-color: lightgreen; }
 
 .edit {
   display: -webkit-box;
@@ -717,37 +749,6 @@ svg:hover #facebook {
   -ms-flex-pack: center;
   justify-content: center; }
 
-.rentedBooks {
-  width: 300px;
-  height: 100%;
-  border: 1px black solid; }
-
-.rentedBook {
-  height: 65px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  padding-left: 5px; }
-
-.rentedReturn {
-  cursor: pointer; }
-
-.green {
-  background-color: #7fff7f; }
-
-.yellow {
-  background-color: #ffff7f; }
-
-.red {
-  background-color: #ff7f7f; }
-
 .addBook {
   margin: auto 20px;
   width: 40%;
@@ -899,7 +900,7 @@ svg:hover #facebook {
 .nameInput {
   width: 100%; }
 
-.shit {
+.signUpHalf {
   width: 48%; }
 
 .bookProfileHolder {
@@ -916,6 +917,48 @@ svg:hover #facebook {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column; }
+
+.userNextEventHolder {
+  width: 50%;
+  height: 200px;
+  border: 1px black solid;
+  margin-top: 15px; }
+
+.userNextEvent {
+  width: 75%; }
+
+.holder {
+  width: 80px;
+  height: 30px;
+  background-color: #D3D3D3;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: absolute; }
+
+.jsSliderContainer {
+  width: 80px;
+  height: 30px;
+  background-color: #2a2a2a;
+  border-radius: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.jsSlider {
+  height: 25px;
+  width: 25px;
+  background-color: white;
+  border-radius: 45px;
+  margin-left: 5px;
+  cursor: pointer;
+  position: absolute; }
+
+.positionTwo {
+  left: 40px; }
 
 .bookSignUpHolder {
   width: 100%;

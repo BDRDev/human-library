@@ -2,9 +2,12 @@
 //checks to see if the user that is logged in is an admin
 //if the user is an admin it loads all the admin content
 //if the user is not an admin it shows a blank page
-if ($_COOKIE['admin'] === "yes") {
 
-    include_once '../_includes/config.php';
+include_once '../_includes/config.php';
+
+if ($_SESSION['loggedInUser'] === "admin") {
+
+
 
     include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
 

@@ -17,9 +17,9 @@ var rentedOut = [];
 //var rentedBooks = $(".rentedBooks");
 
 
-function addDivsToArray(){
+function addRowsToArray(){
     //loops through all of the bookWrapper divs
-    $("div.rent-bookWrapper").each(function(){
+    $("tr.tableRow").each(function(){
 
         //gets the divs id
         var value = $(this).attr('id');
@@ -409,25 +409,59 @@ function returnBook(displayId){
 //it also changes the button from rent to return
 function display(bookId, JSON){
 
+    console.log("display Function");
     console.log("this is the bookId");
     console.log(bookId);
     var id = "#" + bookId;
 
-    $(id).children("div.employee-bookInformation").children("div.indexAva").html("<strong>Available</strong>: " + JSON.available);
+    //$(id).children("div.employee-bookInformation").children("div.indexAva").html("<strong>Available</strong>: " + JSON.available);
 
+    //if timeBack does not equal null, that means that it is rented out
+    //so we need to change timeBack from empty to the time the book is back
     if(JSON.timeBack !== null) {
-        $(id).children("div.employee-bookInformation").children("div.employee-TimeBack").html("Time Back: " + JSON.timeBack);
+        //grabs the timeBack column of the row with the clicked on id
+        //changes is to the time its supposed to be returned
+        $(id).children("td.bookTimeBack").html(JSON.timeBack);
+
+        //$(id).children("div.employee-bookInformation").children("div.employee-TimeBack").html("Time Back: " + JSON.timeBack);
     } else {
-        $(id).children("div.employee-bookInformation").children("div.employee-TimeBack").html("<br>");
+        $(id).children("td.bookTimeBack").html(JSON.timeBack).html(" ");
 
     }
 
 
+    //if available does not equal yes that means its rented out and we need to change rent to return.
     if(JSON.available !== "yes") {
-        $(id).children("div.rentReturn").html("<div class='employee-Return' id='" + bookId + "'>RETURN</div>");
+
+        var clickedDiv = $(id).children("td.rentTableRent");
+
+        clickedDiv.html("RETURN");
+
+        if(clickedDiv.hasClass("rentTableRent")){
+            console.log("has it boi");
+
+            clickedDiv.removeClass("rentTableRent");
+
+            clickedDiv.addClass("rentTableReturn");
+
+        }
+
+
+        //$(id).children("div.rentReturn").html("<div class='employee-Return' id='" + bookId + "'>RETURN</div>");
     } else {
 
-        $(id).children("div.rentReturn").html("<div class='employee-Rent' id='" + bookId + "' >RENT</div>");
+        var clickedDiv = $(id).children("td.rentTableReturn");
+
+        clickedDiv.html("RENT");
+
+        if(clickedDiv.hasClass("rentTableReturn")){
+            console.log("has it boi");
+
+            clickedDiv.removeClass("rentTableReturn");
+
+            clickedDiv.addClass("rentTableRent");
+
+        }
     }
 
     init();
@@ -437,14 +471,15 @@ function display(bookId, JSON){
 function init(){
     //console.log('other init');
 
-    $(".employee-Rent").unbind().bind("click", function(){
+    $(".rentTableRent").unbind().bind("click", function(){
         rentBook(this.id);
         bookAlerts()
     });
 
 
     //allows the return button to do two functions hopefully
-    $(".employee-Return").unbind().bind('click', function(){
+    $(".rentTableReturn").unbind().bind('click', function(){
+        console.log("pls work idk");
         returnBook(this.id);
         removeAlert(this.id);
     });
@@ -457,12 +492,15 @@ function bookAlerts() {
 
     console.log(rentedOut);
 
+    //console.log("booksArray");
+    //console.log(booksArray);
+
     //this function adds an event listener to each div on the page
     init();
 
 
     //grabs all of the divs on the page and puts them into an array
-    addDivsToArray();
+    addRowsToArray();
 
     //console.log(booksArray);
     //loops through the array and passes the id to the process function
@@ -485,6 +523,7 @@ $(document).ready(function(){
 
     //calls bookAlerts when the page is loaded
     bookAlerts();
+
 
 
 

@@ -8,19 +8,19 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 $passwordHash = "";
 
-echo "Password: " . $password . "<br>";
-echo "Email: " . $email . "<br>";
+//echo "Password: " . $password . "<br>";
+//echo "Email: " . $email . "<br>";
 
 
 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-echo "Password Hash: " . $passwordHash . "<br><br>";
+//echo "Password Hash: " . $passwordHash . "<br><br>";
 
 $passwordMatch = password_verify($password, $passwordHash);
 
 if($passwordMatch === TRUE) {
 
-    echo "The Same";
+    //echo "The Same";
 
 
     $sql = "UPDATE bookinfo 
@@ -34,7 +34,7 @@ if($passwordMatch === TRUE) {
 
 
     if($pdoQuery->execute()){
-        echo "success";
+        //echo "success";
 
         $sql = "SELECT * FROM bookinfo WHERE email=:email";
 
@@ -45,14 +45,21 @@ if($passwordMatch === TRUE) {
         if($pdoQuery->execute()){
 
             $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
-            var_dump($row);
 
-            setcookie("bookLoggedIn", $row["displayId"], 0, "/");
+
+            //var_dump($row);
+
+            //.setcookie("bookLoggedIn", $row["displayId"], 0, "/");
+
+            $_SESSION["bookLoggedIn"] = $row["displayId"];
 
             $displayId = $row["displayId"];
+
+            //echo "DisplayId: " . $displayId;
             //here is where we know that it is a valid user, all his credentials are in order, and he is logged in
             //This shouldnt usually be a problem but we will go ahead and log out other people just for the sake of being careful
 
+            /*
             if(isset($_COOKIE['admin'])) {
 
                 //if it is set we delete it
@@ -65,9 +72,21 @@ if($passwordMatch === TRUE) {
                 //if it is we delete it
                 setcookie("workerId", "", time()-3600, "/");
             }
+            */
+
+            if(isset($_SESSION["loggedInUser"])){
+                unset($_SESSION["loggedInUser"]);
+
+                $_SESSION["loggedInUser"] = "book";
+            }
 
 
-            header("Location: profile.php?displayId=$displayId");
+            header("Location: " . URL_ROOT . "/book/profile.php?displayId=" . $displayId);
+
+            //header("Location: " . URL_ROOT . "/signUp/index.php");
+
+        } else {
+            echo "Problem";
         };
 
 

@@ -2,47 +2,75 @@
 
 include_once '../_includes/config.php';
 
+include_once ABSOLUTE_PATH . '/cookies/cookies.php';
+
 include_once ABSOLUTE_PATH . '/_includes/connection.php';
 
 $firstName = $_POST["fName"];
 $lastName = $_POST["lName"];
 $email = $_POST["email"];
 
-echo "First Name: " . $firstName . "<br>";
-echo "Last Name: " . $lastName . "<br>";
-echo "Email: " . $email . "<br><br>";
+$setPass = "";
 
 
-$setPass = random_password(8);
+//first thing we need to do is check to see if the email is in the database
+$uniqueEmail = TRUE;
 
+$sql = "SELECT email FROM bookinfo";
+$pdoQuery = $conn->prepare($sql);
 
-function random_password($length) {
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@%";
-    $setPass = substr( str_shuffle( $chars ), 0, $length );
-    return $setPass;
+$pdoQuery->execute();
+
+$emails = $pdoQuery->fetchAll();
+
+//If the email is not unique do not add the stuff to the db and send them back
+//to the form with a cookie that tells them
+
+foreach($emails as $singleEmail){
+
+    if($singleEmail["email"] === $email){
+        $uniqueEmail = FALSE;
+
+    }
 }
 
-echo "Default Pass: " . $setPass . "<br><br>";
+if($uniqueEmail === TRUE) {
+
+    function random_password($length) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@%";
+        $setPass = substr(str_shuffle($chars), 0, $length);
+        return $setPass;
+    }
 
 
+    $setPass = random_password(8);
 
-$subject = "this is a subject";
 
-$message = "
+    $profileLink = "<a href='" . URL_ROOT . "/book/signUp.php?setPass=" . $setPass . "'>Set a Password<a/>";
+
+//SendTo will be the email that the user provided
+
+//Need to edit the the
+
+    $sendTo = "humanlibraryiu@gmail.com";
+
+    $subject = "To " . $firstName . " " . $lastName;
+
+    $message = "
 <html>
 <head>
 <title>HTML email</title>
 </head>
 <body>
-<p>This email contains HTML Tags!</p>
+<div>" . $profileLink . "</div>
 <table>
 <tr>
 <th>Firstname</th>
 <th>Lastname</th>
 </tr>
 <tr>
-<td>John</td>
-<td>Doe</td>
+<td>" . $firstName . "</td>
+<td>" . $lastName . "</td>
 </tr>
 </table>
 </body>
@@ -50,55 +78,52 @@ $message = "
 ";
 
 
+    $headers .= "Reply-To: The Sender <sender@domain.com>\r\n";
+    $headers .= "Return-Path: The Sender <sender@domain.com>\r\n";
+    $headers .= "From: The Sender <sender@domain.com>\r\n";
+    $headers .= "Organization: Sender Organization\r\n";
+    $headers .= "X-Priority: 3\r\n";
+    $headers .= "X-Mailer: PHP" . phpversion() . "\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+    if(mail($sendTo, $subject, $message, $headers)){
 
 
-$headers .= "Reply-To: The Sender <sender@domain.com>\r\n";
-$headers .= "Return-Path: The Sender <sender@domain.com>\r\n";
-$headers .= "From: The Sender <sender@domain.com>\r\n";
-$headers .= "Organization: Sender Organization\r\n";
-$headers .= "X-Priority: 3\r\n";
-$headers .= "X-Mailer: PHP". phpversion() ."\r\n" ;
-$headers .= "MIME-Version: 1.0\r\n";
-$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-
-
-
-mail("blaker1136@gmail.com", $subject, $message, $headers);
-
-
-
-//mail("blaker1136@gmail.com", "idk", "this is the message");
-
-//Need to check if the email is already in the db
-//Check if the email is in the
-
-/* =================================================================================
-This is a page that you would not see this is here because we cannot use the email function
-This would re rout back to the sign up page
-====================================================================================*/
-
-$sql = "INSERT INTO bookinfo (firstName, lastName, email, displayId, setPass) 
+        $sql = "INSERT INTO bookinfo (firstName, lastName, email, displayId, setPass) 
         VALUES(:firstName, :lastName, :email, NULL, :setPass)";
 
-$pdoQuery = $conn->prepare($sql);
+        $pdoQuery = $conn->prepare($sql);
 
-$pdoQuery->bindValue(":firstName", $firstName, PDO::PARAM_STR);
-$pdoQuery->bindValue(":lastName", $lastName, PDO::PARAM_STR);
-$pdoQuery->bindValue(":email", $email, PDO::PARAM_STR);
-$pdoQuery->bindValue(":setPass", $setPass, PDO::PARAM_STR);
+        $pdoQuery->bindValue(":firstName", $firstName, PDO::PARAM_STR);
+        $pdoQuery->bindValue(":lastName", $lastName, PDO::PARAM_STR);
+        $pdoQuery->bindValue(":email", $email, PDO::PARAM_STR);
+        $pdoQuery->bindValue(":setPass", $setPass, PDO::PARAM_STR);
 
-/*
-if($pdoQuery->execute()){
-    echo "success" . "<br>";
 
-    echo "Wouldnt usually see this page, but I dont have the email set up yet <br>";
+        if ($pdoQuery->execute()) {
+            header("Location: " . URL_ROOT . "/signUp/index.php");
 
-    echo "THIS IS THE LINK THAT WOULD BE IN THE EMAIL <br>";
+        };
 
-    echo "<a href='" . URL_ROOT . "/book/signUp.php?setPass=" . $setPass . "'>Click Here<a/>";
-};
-*/
+    } else {
+        echo "shit";
+    };
+
+
+} else {
+
+
+
+    //this runs id the email has already been used, this just lets the user know they need to pick
+    //a new email to use
+    if(!isset($_SESSION["bookSignUpMessage"])) {
+        $_SESSION["bookSignUpMessage"] = "This is a session var";
+    }
+
+    header("Location: " . URL_ROOT . "/signUp/index.php");
+}
+
 
 
 

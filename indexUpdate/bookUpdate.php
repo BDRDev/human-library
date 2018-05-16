@@ -11,4 +11,3 @@ $bookSearch->lookup($displayId);
 
 echo json_encode($bookSearch->lookup($displayId));
 
-//echo json_encode(array("zip" => $zip));

@@ -1,9 +1,12 @@
 <?php
 
 //checks to see if the admin cookie is set
-if (isset($_COOKIE['admin'])) {
 
-    include_once '../_includes/config.php';
+include_once '../_includes/config.php';
+
+if ($_SESSION["loggedInUser"] === "admin" || $_SESSION["loggedInUser"] === "employee") {
+
+
 
     include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
 
@@ -31,18 +34,57 @@ if (isset($_COOKIE['admin'])) {
     ?>
 
     <div class="rentBooksWrapper">
-        <div class="rent-BooksWrapper">
+
+        <div class="bookTableWrapper">
+
+            <table class="rentTable">
+                <tr>
+                    <th class="rentTableHeader">Title</th>
+                    <th class="rentTableHeader">Available</th>
+                    <th class="rentTableHeader">Time Back</th>
+                    <th class="rentTableHeader">Rent/Return</th>
+                </tr>
             <?php
 
             foreach ($books as $book) {
+
+
                 if ($book["available"] === "yes") {
-                    echo "<div class='rent-BookWrapper employee-yes' id='" . $book["displayId"] . "'>";
+                    echo "<tr class='tableRow rowAvail' id='" . $book["displayId"] . "'>";
                 } else if ($book["available"] === "no") {
-                    echo "<div class='rent-BookWrapper employee-no' id='" . $book["displayId"] . "'>";
-                } else {
-                    echo "<div class='rent-BookWrapper' id='" . $book["displayId"] . "'>";
+                    echo "<tr class='tableRow' id='" . $book["displayId"] . "'>";
                 }
 
+
+                    echo "<td class='bookTitle'>";
+                        echo $book["title"];
+                    echo "</td>";
+
+                    echo "<td class='bookAvailability'>";
+                        echo $book["available"];
+                    echo "</td>";
+
+                    echo "<td class='bookTimeBack'>";
+                        echo $book["timeBack"];
+                    echo "</td>";
+
+
+                    if ($book["available"] === "yes") {
+                        echo "<td class='rentTableRent' id='" . $book["displayId"] . "' >RENT</td>";
+
+
+                    } else if ($book["available"] === "no") {
+
+                        echo "<div class='employee-Return' id='" . $book["displayId"] . "'>RETURN</div>";
+
+                    }
+
+
+                echo "</tr>";
+
+
+
+                /*
 
                 echo "<div class='employee-bookInformation'>";
                 echo "<div>";
@@ -81,9 +123,12 @@ if (isset($_COOKIE['admin'])) {
                 echo "</div>";
 
                 echo "</div>";
+                */
             } //ends foreach
 
             ?>
+            </table>
+
         </div>
 
         <div class="rentedBooks">

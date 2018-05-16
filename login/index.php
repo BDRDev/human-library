@@ -6,12 +6,7 @@ include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
 
 include_once '../_includes/main_nav.inc.php';
 
-if(isset($_COOKIE["loginError"])) {
-    //echo $_COOKIE["loginError"];
 
-    //delete the cookie
-    setcookie("loginError", "", time()-3600, "/");
-}
 ?>
 
 <div class="formContainer">

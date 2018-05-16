@@ -1,5 +1,7 @@
 <?php
 
+include_once '../_includes/config.php';
+
 //collects information from the form
 $email = $_POST["email"];
 $password = $_POST["password"];
@@ -28,16 +30,21 @@ $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
 if(is_array($row)) {
 
     //set a cookie that contains the workerId
-    setcookie("workerId", $row['workerId'], 0, "/");
+    //setcookie("workerId", $row['workerId'], 0, "/");
 
     if ($row['admin'] === "yes") {
         //echo "is an admin";
-        setcookie("admin", "yes", 0, "/");
+        //setcookie("admin", "yes", 0, "/");
+
+        $_SESSION["loggedInUser"] = "admin";
 
         header("Location: ../admin/index.php");
+
     } else if ($row['admin'] === "no") {
         //echo "is not an admin";
-        setcookie("admin", "no", 0, "/");
+        //setcookie("admin", "no", 0, "/");
+
+        $_SESSION["loggedInUser"] = "employee";
 
         header("Location: ../employee/index.php");
     }
@@ -80,7 +87,10 @@ if(is_array($row)) {
 
             $displayId = $row["displayId"];
 
-            setcookie("bookLoggedIn", $displayId, 0, "/");
+            //setcookie("bookLoggedIn", $displayId, 0, "/");
+
+            $_SESSION["loggedInUser"] = "book";
+            $_SESSION["bookLoggedIn"] = $displayId;
 
             header("Location: ../book/profile.php?displayId=$displayId");
 
@@ -97,7 +107,7 @@ if(is_array($row)) {
         //re rout the user back to the login page
 
 
-        echo "Fuck";
+        echo "Shoot";
         //set an error cookie
         //setcookie("loginError", "Your username or password was incorrect", 0, "/");
 

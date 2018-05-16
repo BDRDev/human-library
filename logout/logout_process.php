@@ -1,6 +1,9 @@
 <?php
 
+include_once '../_includes/config.php';
+
 //checks if the admin cookie is set
+/*
 if(isset($_COOKIE['admin'])) {
 
     //if it is set we delete it
@@ -21,4 +24,12 @@ if(isset($_COOKIE['bookLoggedIn'])) {
 }
 
 header("Location: ../#homeSection");
+*/
+
+if(isset($_SESSION["loggedInUser"])){
+    unset($_SESSION["loggedInUser"]);
+
+
+    header("Location: ../index.php");
+}
 

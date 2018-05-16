@@ -175,6 +175,37 @@ class BookLookup {
         return $result_array;
     }
 
+
+    public function bookAttendEvent($sliderId){
+
+        $sql = "UPDATE bookinfo SET attendNextEvent=:attendNextEvent WHERE displayId=:sliderId";
+
+        $pdoQuery = $this->conn->prepare($sql);
+
+        $pdoQuery->bindValue(":attendNextEvent", "yes", PDO::PARAM_STR);
+        $pdoQuery->bindValue(":sliderId", $sliderId, PDO::PARAM_INT);
+
+        $pdoQuery->execute();
+    }
+
+    public function bookNotAttendEvent($sliderId){
+
+        $sql = "UPDATE bookinfo SET attendNextEvent=:attendNextEvent WHERE displayId=:sliderId";
+
+        $pdoQuery = $this->conn->prepare($sql);
+
+        $pdoQuery->bindValue(":attendNextEvent", "no", PDO::PARAM_STR);
+        $pdoQuery->bindValue(":sliderId", $sliderId, PDO::PARAM_INT);
+
+        if($pdoQuery->execute()) {
+            $result_array = "something";
+        } else {
+            $result_array = ["hey"];
+        }
+
+        return $result_array;
+    }
+
 }
 
 

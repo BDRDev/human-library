@@ -1,13 +1,13 @@
 <?php
 
 $displayId = $_GET["displayId"];
-
+include_once '../_includes/config.php';
 
 //Here we check to see if the cookie set when the user logs in matches the
-if($displayId === $_COOKIE["bookLoggedIn"]){
+if($displayId === $_SESSION["bookLoggedIn"]){
     //echo "Display user data <br>";
 
-    include_once '../_includes/config.php';
+
 
     include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
     include_once ABSOLUTE_PATH . "/_includes/main_nav.inc.php";
@@ -26,11 +26,13 @@ if($displayId === $_COOKIE["bookLoggedIn"]){
         $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
 
 
+
         //Below is where we will put the form so the book can edit things
         ?>
 
         <div class="bookProfileHolder">
         <form class="signUpForm" action="<?= URL_ROOT ?>/book/Update_process.php" method="post">
+
 
             <div class="signUpTop">
 
@@ -70,6 +72,8 @@ if($displayId === $_COOKIE["bookLoggedIn"]){
             if($pdoQuery->execute()) {
 
                 $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
+
+
 
                 if ($row === FALSE) {
 
@@ -114,6 +118,94 @@ if($displayId === $_COOKIE["bookLoggedIn"]){
             <input type="submit" value="submit">
 
         </form>
+
+
+            <!-- Here is where we will list all of the next event info and we will let the user
+             select if they are attending or not-->
+
+            <?php
+
+            $sql = "SELECT * FROM libraryevent";
+
+            $pdoQuery = $conn->prepare($sql);
+            $pdoQuery->execute();
+
+            $event = $pdoQuery->fetch(PDO::FETCH_ASSOC);
+
+
+
+            ?>
+
+            <div class="userNextEventHolder">
+
+                <table class="userNextEvent">
+                    <tr>
+                        <th>Name</th>
+                        <th>Time</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Attending?</th>
+                    </tr>
+                    <tr>
+                        <td><?= $event["name"] ?></td>
+                        <td><?= $event["time"] ?></td>
+                        <td><?= $event["location"] ?></td>
+                        <td><?= $event["date"] ?></td>
+
+                        <?php
+
+                        $sql = "SELECT * FROM bookinfo WHERE displayId=:displayId";
+
+                        $pdoQuery = $conn->prepare($sql);
+
+                        $pdoQuery->bindValue(":displayId", $displayId, PDO::PARAM_INT);
+
+                        if($pdoQuery->execute()){
+
+                            $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
+
+                            echo $row["attendNextEvent"];
+
+                            if($row["attendNextEvent"] === "no"){
+                                ?>
+
+                                <td class="holder">
+                                    <div class="jsSliderContainer">
+
+                                        <div class="jsSlider" id="<?= $displayId ?>"></div>
+
+                                    </div>
+
+                                </td>
+
+                                <?php
+
+                            } else if($row["attendNextEvent"]){
+
+                                ?>
+
+
+                                <td class="holder">
+                                    <div class="jsSliderContainer">
+
+                                        <div class="jsSlider positionTwo" id="<?= $displayId ?>"></div>
+
+                                    </div>
+
+                                </td>
+                                <?php
+                            }
+                        }
+
+                        ?>
+
+
+                    </tr>
+                </table>
+
+
+
+            </div>
         </div>
 
         <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
@@ -130,11 +222,15 @@ if($displayId === $_COOKIE["bookLoggedIn"]){
                 about.value = quill.getContents();
             };
         </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<?= URL_ROOT ?>/js/slider.js"></script>
+
 
 
 
 
         <?php
+
 
     }
 

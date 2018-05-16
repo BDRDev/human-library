@@ -12,7 +12,7 @@ $validUser = FALSE;
 
 //echo "This is the setPass from the link: $setPass <br>";
 
-$sql = "SELECT setPass FROM bookInfo";
+$sql = "SELECT setPass FROM bookinfo";
 
 
 
@@ -29,14 +29,7 @@ foreach($conn->query($sql) as $row){
 if($validUser === TRUE) {
     //this is where we put all of the stuff to change their password
 
-    $sql = "SELECT * FROM bookInfo WHERE setPass = '$setPass' LIMIT 1";
-
-
-
-    //echo "This is the cookie gone: " . $_COOKIE["bookSignUp"] . "<br>";
-
-    //echo $sql;
-
+    $sql = "SELECT * FROM bookinfo WHERE setPass = '$setPass' LIMIT 1";
 
     foreach($conn->query($sql) as $row){
 
@@ -59,21 +52,7 @@ if($validUser === TRUE) {
 
         <h3 class="signUpHeader">Set Password</h3>
 
-        <div class="fakeInput">
-
-        <div class="fakeLabel">First</div>
-        <div class="fakeData"><?= $firstName ?></div>
-        </div>
-
-        <div class="fakeInput">
-        <div class="fakeLabel">Last</div>
-        <div class="fakeData"><?= $lastName ?></div>
-        </div>
-
-        <div class="fakeInput">
-        <div class="fakeLabel">Email</div>
-        <div class="fakeData"><?= $email ?></div>
-        </div>
+        <p>Before we take you to your profile, Set up a password for your account</p>
 
 
         <form id="bookSignUpForm" class="signUpForm" action="<?= URL_ROOT ?>/book/signUp_process.php" method="post">
@@ -97,28 +76,29 @@ if($validUser === TRUE) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <script>
-        $(".btn").bind("click", function(e){
-            //e.preventDefault();
+
+        $(document).ready(function(){
+            console.log("hey")
         });
+
+
 
         $("#bookSignUpForm").validate({
 
-            invalidHandler: function(event, validator) {
-                // 'this' refers to the form
-                console.log("errors");
-                var errors = validator.numberOfInvalids();
-                if (errors) {
-                    $(".text-muted").hide();
-                }
-            },
-
             rules: {
 
-                password: "required",
+                password: {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 15
+                },
                 confirmPassword: {
                     required: true,
                     equalTo: "#password"
                 }
+            }
+
+
         });
 
     </script>
