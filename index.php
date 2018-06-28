@@ -1,11 +1,12 @@
 <?php
 
 include '_includes/config.php';
-include '_includes/connection.php';
 
-include_once '_includes/header.inc.php';
+include ABSOLUTE_PATH .  '/_includes/connection.php';
 
-include_once '_includes/main_nav.inc.php';
+include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
+
+include_once ABSOLUTE_PATH . '/_includes/main_nav.inc.php';
 
 //sql to get all of the books
 $sql = "SELECT * FROM bookdisplay ORDER BY title";
@@ -79,6 +80,7 @@ $books = $pdoQuery->fetchAll();
 <?php
     include_once ABSOLUTE_PATH . '/_includes/footer.inc.php';
 ?>
-
+<script type="module" src="js/functions/availCheck.js"></script>
 <script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/indexUpdate.js"></script>
+<script type="module" src="js/indexUpdate.js"></script>
+<script type="module" src="js/objects/timeConvert_Class.js"></script>

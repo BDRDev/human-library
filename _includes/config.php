@@ -1,7 +1,7 @@
 <?php
 
 
-    define("ABSOLUTE_PATH", "/home/users/web/b2088/ipg.blaker113699836/humanlibrary");
+    define("ABSOLUTE_PATH", "C:/wamp/www/humanLibrary");
 
     // /home/users/web/b2088/ipg.blaker113699836
 
@@ -13,9 +13,11 @@
 
     //path for dusty: "dustytome.net"
 
-    define("URL_ROOT", "http://www.humanlibrary.us");
+///home/users/web/b2088/ipg.blaker113699836/humanlibrary
 
-    // http://blaker113699836.ipage.com/humanlibrary
+    define("URL_ROOT", "http://localhost/humanLibrary");
+
+    //http://www.humanlibrary.us
 
 
     //Root for Muj: http://localhost/human-library/humanLibrary

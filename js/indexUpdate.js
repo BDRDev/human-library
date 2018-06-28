@@ -1,13 +1,17 @@
+import { checkAvail } from './functions/availCheck';
+
+
 
 //JQuery Code for scrolling up and down
 
 $("nav a").click(function(e) {
-    var btnID = e.currentTarget.id + "Section";
+    let btnID = e.currentTarget.id + "Section";
     $("html, body").animate({
         scrollTop: $("#" + btnID).offset().top
     }, 700);
 
 });
+
 
 //this function creates an HmlHttpRequest Object.
 function createXmlHttpRequestObject()
@@ -23,14 +27,14 @@ function createXmlHttpRequestObject()
 
 }
 
-var booksArray = [];
+let booksArray = [];
 
 //grabs each div with the class 'books' and adds them to an array
 function addDivsToArray(){
     $("div.books").each(function(){
         //console.log($(this).attr('id'));
 
-        var value = $(this).attr('id');
+        let value = $(this).attr('id');
 
         booksArray.push(value);
 
@@ -41,7 +45,7 @@ function addDivsToArray(){
 //gets all of the information of the book based off the bookId
 function process(displayId) {
     //creates a new XmlHttpRequest Object.
-    var xmlHttp = new createXmlHttpRequestObject();
+    let xmlHttp = new createXmlHttpRequestObject();
 
     xmlHttp.open("GET", "indexUpdate/bookUpdate.php?displayId=" + displayId, true);
 
@@ -51,9 +55,27 @@ function process(displayId) {
         if(xmlHttp.readyState === 4 && xmlHttp.status === 200) {
             //console.log(xmlHttp.responseText);
 
-            var resultJSON = JSON.parse(xmlHttp.responseText);
+            let resultJSON = JSON.parse(xmlHttp.responseText);
 
+            //This should get all the data from the db and print it out
             //console.log(resultJSON);
+
+
+            //what we need to do here is get the current time and if the current time is earlier or later than the
+            //time provided for the book then we need to set available to null and set a css class to indicate that
+            //it is unavailable
+
+
+            //This is where we check to see if a book is avail or not
+            //check availCheck.js
+            //returns an object
+            checkAvail(resultJSON);
+
+
+            //here is where we will parse the object and change the book div and information
+            //info needed to be returned: isAvail, class to be added, maybe book id,
+
+            //now we have the current, and two time slots in military time
 
             display(resultJSON, displayId);
         }
@@ -65,7 +87,7 @@ function process(displayId) {
 function display(bookResults, bookId){
     //give the bookId a css ID
     //console.log("from display: " + bookId);
-    var id = "#" + bookId;
+    let id = "#" + bookId;
 
     //console.log(id);
 
@@ -111,7 +133,7 @@ function updateIndex(){
     //to the process function
 
     //when it works for sure, change i < 1 to < booksArray.length
-    for(var i = 0; i < booksArray.length; i++) {
+    for(var i = 0; i < 1; i++) {
         //console.log(booksArray[i]);
         var bookId = booksArray[i];
         process(bookId);
@@ -129,12 +151,13 @@ $(document).ready(function(){
 
 
    //for one test
-   //updateIndex();
+   updateIndex();
 
 
    //updates the index page every 5 seconds
+
    setInterval(function(){
-       updateIndex();
+       //updateIndex();
    }, 5000)
 
 });
