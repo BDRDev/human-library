@@ -1,7 +1,7 @@
 <?php
 
 
-    define("ABSOLUTE_PATH", "C:/wamp/www/humanLibrary");
+    define("ABSOLUTE_PATH", "C:/wamp64/www/humanLibrary");
 
     // /home/users/web/b2088/ipg.blaker113699836
 
@@ -15,7 +15,7 @@
 
 ///home/users/web/b2088/ipg.blaker113699836/humanlibrary
 
-    define("URL_ROOT", "http://localhost/humanLibrary");
+    define("URL_ROOT", "http://localhost:8383/humanLibrary");
 
     //http://www.humanlibrary.us
 

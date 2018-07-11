@@ -1,4 +1,6 @@
 import { checkAvail } from './functions/availCheck';
+import { updateDivContent } from './functions/updateDivContent';
+import { updateDivCss } from './functions/updateDivCss';
 
 
 
@@ -60,22 +62,155 @@ function process(displayId) {
             //This should get all the data from the db and print it out
             //console.log(resultJSON);
 
-
-            //what we need to do here is get the current time and if the current time is earlier or later than the
-            //time provided for the book then we need to set available to null and set a css class to indicate that
-            //it is unavailable
-
-
             //This is where we check to see if a book is avail or not
             //check availCheck.js
             //returns an object
-            checkAvail(resultJSON);
+            let returnedObject = checkAvail(resultJSON);
+
+            //console.log(returnedObject);
 
 
-            //here is where we will parse the object and change the book div and information
-            //info needed to be returned: isAvail, class to be added, maybe book id,
+            //this shows that the book is available based on their time slot
+            if(returnedObject.available){
 
-            //now we have the current, and two time slots in military time
+                //this handles if the book is available
+                //we need to do a check to see if the resultJSON.available is == 'not here'
+                //if thats true we need to set it to 'yes' and take away the class associated with the book not being there
+
+                console.log("book is here")
+
+                
+
+                if(resultJSON.available === 'away'){
+
+                    //set it in the db to here
+                    console.log("this is where the request goes");
+
+                    let displayId = resultJSON.displayId;
+                    let colChange = 'available';
+                    let value = 'yes';
+
+                    const siteUrl = "http://localhost:8383/humanLibrary/ajax/updateBookDisplay.php";
+                    //updateBookDisplay(displayId, colChange, value)
+
+                     $.ajax({
+                        type: 'GET',
+                        url: siteUrl,
+                        data: { displayId : displayId, colChange : colChange, value : value },
+                        success: function(result){
+
+                            console.log("ajax was successful");
+
+                            result = JSON.parse(result);
+
+                            //now we have the available col changed in the db and we have
+                            //the new data returned to us
+
+                            let passAvail = '<strong>Available</strong>: ' + result.available;
+
+                            //pass the div ID, class that needs to be changed, content that is
+                            //being replaced
+                            updateDivContent(displayId, 'bookAva', passAvail);
+
+                            //next we want to have add a class that changes the background
+                            //color of the main div
+                            //Id of the div, class to add class to? , class to be added
+
+                            //NOTE
+
+                            //if we leave the divClass argument blank, it means that we are
+                            //targeting the parent id
+                            //The divClass is if we need to add a class to a child element
+                            updateDivCss(displayId, ' ', 'bookAway');
+
+                        },
+                        error: function(){
+                            console.log("youre an idiot");
+                            
+                        }
+
+                    })//ends ajax
+
+
+
+                    //take away the class associated with 'not here'
+                }    
+            }
+
+            //this shows that the book is not available based on their time
+            if(!returnedObject.available){
+
+                //this handles if the book is un available
+                //we need to check to see if the resultJSON !== 'away'
+                //if thats true we need to set it to 'not here' then add the class 
+                //that is associated with not here
+
+
+                //this needs to be 'away' but we need to set up the index.php page to handle 'away' first
+                if(resultJSON.available !== 'not here'){
+
+                    //set db to 'away'
+                    //this function is for updating any single value in the bookDisplay table
+                    //pass the displayId, the column you want to change, and the new value
+
+                    let displayId = resultJSON.displayId;
+                    let colChange = 'available';
+                    let value = 'away';
+
+                    const siteUrl = "http://localhost:8383/humanLibrary/ajax/updateBookDisplay.php";
+                    //updateBookDisplay(displayId, colChange, value)
+
+                     $.ajax({
+                        type: 'GET',
+                        url: siteUrl,
+                        data: { displayId : displayId, colChange : colChange, value : value },
+                        success: function(result){
+
+                            console.log("ajax was successful");
+
+                            result = JSON.parse(result);
+
+                            //now we have the available col changed in the db and we have
+                            //the new data returned to us
+
+                            let passAvail = '<strong>Available</strong>: ' + result.available;
+
+                            //pass the div ID, class that needs to be changed, content that is
+                            //being replaced
+                            updateDivContent(displayId, 'bookAva', passAvail);
+
+                            //next we want to have add a class that changes the background
+                            //color of the main div
+                            //Id of the div, class to add class to? , class to be added
+
+                            //NOTE
+
+                            //if we leave the divClass argument blank, it means that we are
+                            //targeting the parent id
+                            //The divClass is if we need to add a class to a child element
+                            updateDivCss(displayId, ' ', 'bookAway');
+
+                        },
+                        error: function(){
+                            console.log("youre an idiot");
+                            
+                        }
+
+                    })//ends ajax
+
+
+                    //we have the response in the updateBookDisplay function, I want to 
+                    //get it back here
+
+                    function testReturn(){
+                        console.log("come on")
+                    }
+
+                    //add class associated with 'not here'
+
+                }
+                
+            }
 
             display(resultJSON, displayId);
         }
@@ -87,38 +222,36 @@ function process(displayId) {
 function display(bookResults, bookId){
     //give the bookId a css ID
     //console.log("from display: " + bookId);
-    let id = "#" + bookId;
+    
+    //let id = "#" + bookId;
 
-    //console.log(id);
+    
+    //using the new function, pretty aparent but the bottom is the old code incase something breaks
 
-    //var currentDiv = $(id);
+    updateDivContent(bookId, 'storyTitle', bookResults.title);
+    //$(id).find(".storyTitle").html(bookResults.title);
 
-    //console.log($(id).children().children("div.bookAva"));
-    //console.log("available: " + bookResults.available);
+    let passHours = '<strong>Time</strong>: ' + bookResults.time;
+    updateDivContent(bookId, 'bookHours', passHours);
+    //$(id).find(".bookHours").html("<strong>Time</strong>: " + bookResults.time);
 
-    //firstName, lastName, story, timeBack
-
-    $(id).children().children("div.story").html(bookResults.story);
-
-    $(id).children().children("div.name").html(bookResults.firstName + " " + bookResults.lastName);
-
-    $(id).children().children("div.avaHolder").children("div.bookAva").html("<strong>Available</strong>: " + bookResults.available);
+    //this is already being done above
+    //$(id).find(".bookAva").html("<strong>Available</strong>: " + bookResults.available);
 
 
-    //console.log($(id).children().children("div.avaHolder").children("div.bookAva").html());
-
-    //console.log(bookResults.timeBack);
 
     if(bookResults.timeBack === null) {
-        $(id).children().children("div.avaHolder").children("div.time").html(" ");
+
+        updateDivContent(bookId, 'time', ' ');
+        //$(id).find(".time").html(" ");
     } else {
-        $(id).children().children("div.avaHolder").children("div.time").html("<strong>Time Back</strong>: " + bookResults.timeBack);
+
+        let passTime = '<strong>Time Back</strong>: ' + bookResults.timeBack;
+        updateDivContent(bookId, 'time', passTime);
+        //$(id).find(".time").html("<strong>Time Back</strong>: " + bookResults.timeBack);
     }
 
-    if(bookResults.timeBack === null){
-        $(id).css({
-        })
-    }
+
 
 
 }
@@ -147,7 +280,7 @@ function updateIndex(){
 
 
 $(document).ready(function(){
-   console.log("connected w jQuery");
+   //console.log("connected w jQuery");
 
 
    //for one test
@@ -157,7 +290,10 @@ $(document).ready(function(){
    //updates the index page every 5 seconds
 
    setInterval(function(){
-       //updateIndex();
+       //
+       .
+
+       updateIndex();
    }, 5000)
 
 });

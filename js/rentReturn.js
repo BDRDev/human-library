@@ -1,5 +1,7 @@
 //console.log("connected");
 
+//This page is for the rent return page
+
 function createXmlHttpRequestObject()
 {
     // add your code here to create a XMLHttpRequest object compatible to most browsers
@@ -66,15 +68,15 @@ function returnBook(bookId){
 }
 
 
-//the display function displays the time that book is going ot be back
+//the display function displays the time that book is going to be back
 //it also changes the button from rent to return
 function display(bookId, JSON){
     var id = "#" + bookId;
 
-    $(id).children("div.employee-bookInformation").children("div.indexAva").html("Available: " + JSON.available);
+    $(id).find(".indexAva").html("Available: " + JSON.available);
 
     if(JSON.timeBack !== null) {
-        $(id).children("div.employee-bookInformation").children("div.employee-TimeBack").html("Time Back: " + JSON.timeBack);
+        $(id).find(".employee-TimeBack").html("Time Back: " + JSON.timeBack);
     } else {
        $(id).children("div.employee-bookInformation").children("div.employee-TimeBack").html("");
 

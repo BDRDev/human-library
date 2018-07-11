@@ -32,7 +32,9 @@ $books = $pdoQuery->fetchAll();
             $available = "unavailable";
         }
 
-        echo "<div class='books " . $available . "' id='" . $book["displayId"] . "'>";
+        echo "<div class='books' id='" . $book["displayId"] . "'>";
+
+        //this went after books ' - " . $available . "
 
         //echo $book["bookImage"];
 
@@ -40,14 +42,14 @@ $books = $pdoQuery->fetchAll();
 
         echo "<div class='bookContent'>";
         echo "<span class='storyTitle'>" . $book["title"] . "</span>";
-        echo "<span class=''><strong>Time</strong>: ". $book["time"] . "</span>";
+        echo "<span class='bookHours'><strong>Time</strong>: ". $book["time"] . "</span>";
         echo "<div class='avaHolder' style='padding: 50px 0;'>";
         echo "<div class='bookAva'>" . "<strong>Available</strong>: " . $book["available"] . "</div>";
 
         if ($book["timeBack"] !== NULL) {
             echo "<div class='bookAva time'><strong>Time Back</strong>: " . $book["timeBack"] . "</div>";
         } else {
-            echo "<div class='bookAva time'></div>";
+            echo "<div class='time'></div>";
         }
         echo "</div>";
 
@@ -81,6 +83,7 @@ $books = $pdoQuery->fetchAll();
     include_once ABSOLUTE_PATH . '/_includes/footer.inc.php';
 ?>
 <script type="module" src="js/functions/availCheck.js"></script>
+<script type="module" src="js/functions/updateDivContent.js"></script>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script type="module" src="js/indexUpdate.js"></script>
 <script type="module" src="js/objects/timeConvert_Class.js"></script>

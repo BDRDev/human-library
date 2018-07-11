@@ -115,6 +115,7 @@ class BookLookup {
 
             $pdoQuery = $this->conn->prepare($sql);
 
+            //this was no
             $pdoQuery->bindValue(":available", "no", PDO::PARAM_STR);
             $pdoQuery->bindValue(":timeBack", $timeBack, PDO::PARAM_STR);
             $pdoQuery->bindValue(":displayId", $displayId, PDO::PARAM_INT);
