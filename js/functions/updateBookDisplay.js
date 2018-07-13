@@ -1,3 +1,6 @@
+import { updateDivContent } from './updateDivContent';
+import { updateDivCss } from './updateDivCss';
+
 export function updateBookDisplay(displayId, colChange, value) {
 
 
@@ -18,11 +21,41 @@ export function updateBookDisplay(displayId, colChange, value) {
 
             console.log("idk ajax was success?");
 
-            return(JSON.parse(result));
+            result = JSON.parse(result);
+            console.log(result);
 
-            //we could change the val here but I do not want to
+            
+
+            switch(colChange){
+
+            	case 'available':
+
+            		//now we have the available col changed in the db and we have
+            		//the new data returned to us
+	            	let passAvail = '<strong>Available</strong>: ' + result.available;
+
+		            updateDivContent(displayId, 'bookAva', passAvail);
+		            
+		            //next we want to have add a class that changes the background
+		            //color of the main div
+		            //Id of the div, class to add class to? , class to be added
+
+		            //NOTE
+
+		            //if we leave the divClass argument blank, it means that we are
+		            //targeting the parent id
+		            //The divClass is if we need to add a class to a child element
+		            let action = '';
+
+		            if(result.available === 'away'){ action = 'add' };
+		            if(result.available === 'yes'){ action = 'remove' };
 
 
+		            updateDivCss(displayId, ' ', 'bookAway', action);
+	            		
+	 				break;
+            }
+           
         },
         error: function(){
             console.log("youre an idiot");

@@ -87,3 +87,5 @@ $books = $pdoQuery->fetchAll();
 <script src="js/jquery-3.2.1.min.js"></script>
 <script type="module" src="js/indexUpdate.js"></script>
 <script type="module" src="js/objects/timeConvert_Class.js"></script>
+
+<script type="module" src="js/app.js"></script>
