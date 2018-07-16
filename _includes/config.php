@@ -1,21 +1,28 @@
 <?php
 
+    //Blake: Desktop
+    //define("ABSOLUTE_PATH", "C:/wamp64/www/humanLibrary");
 
-    define("ABSOLUTE_PATH", "C:/wamp64/www/humanLibrary");
+    //Blake: Laptop
+    define("ABSOLUTE_PATH", "C:/wamp/www/humanLibrary");
 
     // /home/users/web/b2088/ipg.blaker113699836
 
     //Path for Muj: /Applications/MAMP/htdocs/human-library/humanLibrary
 
-    //Path for Blake: "C:/wamp64/www/humanLibrary"
+    
 
     // "/home/students/bldrober/public_html/humanLibrary"
 
     //path for dusty: "dustytome.net"
 
-///home/users/web/b2088/ipg.blaker113699836/humanlibrary
+    ///home/users/web/b2088/ipg.blaker113699836/humanlibrary
 
-    define("URL_ROOT", "http://localhost:8383/humanLibrary");
+    //Blake: Desktop
+    //define("URL_ROOT", "http://localhost:8383/humanLibrary");
+
+    //Blake: Laptop
+    define("URL_ROOT", "http://localhost/humanLibrary");
 
     //http://www.humanlibrary.us
 

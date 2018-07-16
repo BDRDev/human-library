@@ -1,12 +1,11 @@
 <?php
 
 include '_includes/config.php';
-
 include ABSOLUTE_PATH .  '/_includes/connection.php';
-
 include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
-
 include_once ABSOLUTE_PATH . '/_includes/main_nav.inc.php';
+
+
 
 //sql to get all of the books
 $sql = "SELECT * FROM bookdisplay ORDER BY title";
@@ -32,14 +31,11 @@ $books = $pdoQuery->fetchAll();
             $available = "unavailable";
         }
 
-        echo "<div class='books' id='" . $book["displayId"] . "'>";
+        if($book["available"] == 'away') { $class_to_add = "bookAway";}
+        else if($book["available"] == 'no') { $class_to_add = "bookRented"; }
+        else { $class_to_add = ""; }
 
-        //this went after books ' - " . $available . "
-
-        //echo $book["bookImage"];
-
-
-
+        echo "<div class='books " . $class_to_add . "' id='" . $book["displayId"] . "'>";
         echo "<div class='bookContent'>";
         echo "<span class='storyTitle'>" . $book["title"] . "</span>";
         echo "<span class='bookHours'><strong>Time</strong>: ". $book["time"] . "</span>";
@@ -56,7 +52,9 @@ $books = $pdoQuery->fetchAll();
         echo "</div>";
 
         echo "</div>";
-    }
+
+
+    } //ends the for loop
     ?>
 </div>
 

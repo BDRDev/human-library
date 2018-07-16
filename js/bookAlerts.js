@@ -1,3 +1,12 @@
+//Functions imported
+import { updateBookDisplay } from './functions/updateBookDisplay';
+import { updateDivContent } from './functions/updateDivContent';
+import { updateDivCss } from './functions/updateDivCss';
+
+//Variables Imported
+//import { } from './global_vars';
+
+
 //this function creates an HmlHttpRequest Object.
 function createXmlHttpRequestObject()
 {
@@ -375,33 +384,69 @@ function removeAlert(divId){
 
 
 function rentBook(displayId){
-    var xmlHttp = new createXmlHttpRequestObject();
+    //var xmlHttp = new createXmlHttpRequestObject();
 
-    xmlHttp.open("GET", "../indexUpdate/rentBook.php?displayId=" + displayId, true);
-    xmlHttp.onreadystatechange = function(){
+    console.log("RENT");
 
-        if(xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-            var resultJSON = JSON.parse(xmlHttp.responseText);
-            display(displayId, resultJSON);
-        }
-    };
-    xmlHttp.send(null);
+    
+    let colChange = 'available';
+    let value = 'no';
+    let update_case = 'rent';
+
+    //we pass parameters, success function handles the response
+    //use the updateDivContent, and updateDivCss function in the call
+    //did this just to clean up the code
+
+    //see js/functions/updateBookDisplay.js
+    updateBookDisplay(displayId, colChange, value, update_case);
+
+
+    // xmlHttp.open("GET", "../indexUpdate/rentBook.php?displayId=" + displayId, true);
+    // xmlHttp.onreadystatechange = function(){
+
+    //     if(xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+    //         var resultJSON = JSON.parse(xmlHttp.responseText);
+    //         display(displayId, resultJSON);
+    //     }
+    // };
+    // xmlHttp.send(null);
 } //////////////////////END rentBook FUNCTION
 
 //the returnBook function sets the timeBack to NULL in the database
 function returnBook(displayId){
-    var xmlHttp = new createXmlHttpRequestObject();
+    
+    console.log("RETURN");
 
-    xmlHttp.open("GET", "../indexUpdate/returnBook.php?displayId=" + displayId, true);
+    
+    let colChange = 'available';
+    let value = 'yes';
+    let update_case = 'return';
 
-    xmlHttp.onreadystatechange = function(){
+    //we pass parameters, success function handles the response
+    //use the updateDivContent, and updateDivCss function in the call
+    //did this just to clean up the code
 
-        if(xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-            var resultJSON = JSON.parse(xmlHttp.responseText);
-            display(displayId, resultJSON);
-        }
-    };
-    xmlHttp.send(null);
+    //see js/functions/updateBookDisplay.js
+    updateBookDisplay(displayId, colChange, value, update_case);
+
+
+
+
+
+    // var xmlHttp = new createXmlHttpRequestObject();
+
+    // console.log("RETURN");
+
+    // xmlHttp.open("GET", "../indexUpdate/returnBook.php?displayId=" + displayId, true);
+
+    // xmlHttp.onreadystatechange = function(){
+
+    //     if(xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+    //         var resultJSON = JSON.parse(xmlHttp.responseText);
+    //         display(displayId, resultJSON);
+    //     }
+    // };
+    // xmlHttp.send(null);
 
 } /////////////////////END returnBook FUNCTION
 
@@ -446,8 +491,6 @@ function display(bookId, JSON){
 
         }
 
-
-        //$(id).children("div.rentReturn").html("<div class='employee-Return' id='" + bookId + "'>RETURN</div>");
     } else {
 
         var clickedDiv = $(id).children("td.rentTableReturn");

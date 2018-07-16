@@ -100,9 +100,9 @@ function init(){
         rentBook(this.id);
     });
 
-    $(".employee-Return").unbind().bind('click', function(){
-        returnBook(this.id);
-    })
+    // $(".employee-Return").unbind().bind('click', function(){
+    //     returnBook(this.id);
+    // })
 }
 
 

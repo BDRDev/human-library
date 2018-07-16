@@ -7,20 +7,21 @@ include_once '../_includes/config.php';
 if ($_SESSION["loggedInUser"] === "admin" || $_SESSION["loggedInUser"] === "employee") {
 
 
+    //all of the comments I have are for saying hi to the user logged in, dont tjink its necessary
 
     include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
 
-        //loads in the users data from the database based off of the workerId
-        include_once ABSOLUTE_PATH . '/_includes/connection.php';
-        $sql = "SELECT * FROM worker WHERE workerId=:workerId LIMIT 1";
-        $pdoQuery = $conn->prepare($sql);
-        $pdoQuery->bindValue(":workerId", $workerId, PDO::PARAM_INT);
-        $pdoQuery->execute();
-        $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
+    // //loads in the users data from the database based off of the workerId
+    include_once ABSOLUTE_PATH . '/_includes/connection.php';
+    // $sql = "SELECT * FROM worker WHERE workerId=:workerId LIMIT 1";
+    // $pdoQuery = $conn->prepare($sql);
+    // $pdoQuery->bindValue(":workerId", $workerId, PDO::PARAM_INT);
+    // $pdoQuery->execute();
+    // $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
 
     include_once ABSOLUTE_PATH . '/_includes/main_nav.inc.php';
 
-    echo "<h2 class='adminName'>" . "<span class='welcome'>" . "Welcome " . "</span>" . $row['firstName'] . " " . $row['lastName'] . "</h2>";
+    // echo "<h2 class='adminName'>" . "<span class='welcome'>" . "Welcome " . "</span>" . $row['firstName'] . " " . $row['lastName'] . "</h2>";
 
     $sql = "SELECT * FROM bookdisplay ORDER BY title";
     $books = $conn->query($sql);
@@ -70,7 +71,7 @@ if ($_SESSION["loggedInUser"] === "admin" || $_SESSION["loggedInUser"] === "empl
 
                     } else if ($book["available"] === "no") {
 
-                        echo "<div class='employee-Return' id='" . $book["displayId"] . "'>RETURN</div>";
+                         echo "<td class='rentTableReturn' id='" . $book["displayId"] . "' >RETURN</td>";
 
                     }
 
@@ -94,7 +95,7 @@ if ($_SESSION["loggedInUser"] === "admin" || $_SESSION["loggedInUser"] === "empl
     </div>
 
     <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/bookAlerts.js"></script>
+    <script type='module' src="../js/bookAlerts.js"></script>
     <?php
 }
 

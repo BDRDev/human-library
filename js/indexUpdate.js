@@ -1,7 +1,14 @@
+
+//Functions Imported
 import { checkAvail } from './functions/availCheck';
 import { updateBookDisplay } from './functions/updateBookDisplay';
 import { updateDivContent } from './functions/updateDivContent';
 import { updateDivCss } from './functions/updateDivCss';
+
+//Variables Imported
+import { process_function_url } from './global_vars';
+
+console.log(process_function_url);
 
 
 let booksArray = [];
@@ -27,7 +34,7 @@ function process(displayId) {
 
     $.ajax({
     type: 'GET',
-    url: 'http://localhost:8383/humanLibrary/indexUpdate/bookUpdate.php',
+    url: process_function_url,
     data: { displayId : displayId },
 
     success: function(result){
@@ -46,18 +53,20 @@ function process(displayId) {
 
                 console.log("book is here")
 
-                console.log(resultJSON);
+                console.log(result);
 
-                if(resultJSON.available === 'away'){
+                if(result.available === 'away'){
 
                     //set it in the db to here
                     console.log("this is where the request goes");
 
-                    let displayId = resultJSON.displayId;
+                    let displayId = result.displayId;
                     let colChange = 'available';
                     let value = 'yes';
-                    
-                    updateBookDisplay(displayId, colChange, value)
+                    let update_case = 'away';
+
+
+                    updateBookDisplay(displayId, colChange, value, update_case);
 
                 }    
             }
@@ -81,13 +90,14 @@ function process(displayId) {
                     let displayId = result.displayId;
                     let colChange = 'available';
                     let value = 'away';
+                    let update_case = 'away';
 
                     //we pass parameters, success function handles the response
                     //use the updateDivContent, and updateDivCss function in the call
                     //did this just to clean up the code
 
                     //see js/functions/updateBookDisplay.js
-                    updateBookDisplay(displayId, colChange, value)
+                    updateBookDisplay(displayId, colChange, value, update_case);
 
                 }
                 
@@ -127,7 +137,7 @@ function updateIndex(){
     //to the process function
 
     //when it works for sure, change i < 1 to < booksArray.length
-    for(var i = 0; i < booksArray.length; i++) {
+    for(var i = 0; i < 1; i++) {
         //console.log(booksArray[i]);
         var bookId = booksArray[i];
         process(bookId);

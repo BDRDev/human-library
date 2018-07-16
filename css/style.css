@@ -997,3 +997,10 @@ svg:hover #facebook {
   -webkit-box-direction: reverse;
   -ms-flex-direction: column-reverse;
   flex-direction: column-reverse; }
+
+.rentBooksWrapper {
+  margin-top: 100px;
+  padding-bottom: 30px; }
+
+.rentedBooks {
+  margin-right: 20px; }
