@@ -4,10 +4,12 @@
 //mostly urls so far but for whatever
 
 //Blake: Laptop Base
-let base = 'http://localhost/humanLibrary/';
+//let base = 'http://localhost/humanLibrary/';
 
 //Blake: Desktop Base
-//let base = 'https://localhost:8383/humanLibrary/';
+//
+//Blake: Server Base
+let base = 'http://humanLibrary.us/';
 
 //need one for the server_base as well
 

@@ -1,7 +1,8 @@
 //Functions imported
-import { updateBookDisplay } from './functions/updateBookDisplay';
-import { updateDivContent } from './functions/updateDivContent';
-import { updateDivCss } from './functions/updateDivCss';
+import { updateBookDisplay } from 'http://humanlibrary.us/js/functions/updateBookDisplay.js';
+import { updateDivContent } from 'http://humanlibrary.us/js/functions/updateDivContent.js';
+import { updateDivCss } from 'http://humanlibrary.us/js/functions/updateDivCss.js';
+import { setTimeBack } from 'http://humanlibrary.us/js/functions/setTimeBack.js';
 
 //Variables Imported
 //import { } from './global_vars';
@@ -23,7 +24,7 @@ function createXmlHttpRequestObject()
 
 var booksArray = [];
 var rentedOut = [];
-//var rentedBooks = $(".rentedBooks");
+
 
 
 function addRowsToArray(){
@@ -44,6 +45,8 @@ function process(displayId) {
     //creates a new XmlHttpRequest Object.
     var xmlHttp = new createXmlHttpRequestObject();
 
+    console.log("this is an ajax request");
+
     //gets all of the information about the user based off of the div id
     xmlHttp.open("GET", "../indexUpdate/bookUpdate.php?displayId=" + displayId, true);
 
@@ -60,22 +63,28 @@ function process(displayId) {
             //if they dont have a time back nothing happens
             //if they do, runs the checkAlert function
             if(resultJSON.timeBack === null) {
-
+                console.log("the timeBack is null");
             } else {
                 //if there is a timeback run check time function
+                console.log(resultJSON);
                 checkTime(resultJSON, displayId);
             }
 
         }
+
+
+
     };
 
     xmlHttp.send(null);
+
+   
 }
 
 //checkTime gets the amount of time that the book has left
 function checkTime(result, bookId) {
     var timeBack = result.timeBack;
-    //console.log("timeBack: " + timeBack);
+    console.log("timeBack: " + timeBack);
 
     var date = new Date(Date.now());
     //console.log("date.getHours: " + date.getHours());
@@ -108,7 +117,8 @@ function checkTime(result, bookId) {
     //console.log("Current Time In Minutes: " + currentTimeMin);
 
     var difference = timeBackMin - currentTimeMin;
-    //console.log("They will be back in " + difference + " minutes");
+    //here is where were having issues
+    console.log("They will be back in " + difference + " minutes");
 
     updateRented(result, bookId, difference)
 }
@@ -168,7 +178,7 @@ function updateRented(result, bookId, difference){
 
         //rentedOut is the array we are adding too
 
-        console.log(rentedOut);
+       //console.log(rentedOut);
 
         //sorts the array in order by the time remaining
         if(addTo === true){
@@ -228,10 +238,10 @@ function updateRented(result, bookId, difference){
 
 
         }
-    }
+    } //ends else statement
 
     //we will see
-    //console.log("print");
+    console.log("print");
     printAlert(rentedOut);
     init();
     initBtn();
@@ -376,79 +386,49 @@ function removeAlert(divId){
     $(removeId).remove();
 }
 
-////////////////////////THIS IS THE NEW JS FROM THE SECOND FILE/////////////////////
-////////////This all has to do with changing the database for renting an returning
 
 //The rentBook function gets the current time and sets that
 //time in the database for the book to be returned
 
 
 function rentBook(displayId){
-    //var xmlHttp = new createXmlHttpRequestObject();
-
-    console.log("RENT");
-
-    
-    let colChange = 'available';
-    let value = 'no';
-    let update_case = 'rent';
-
     //we pass parameters, success function handles the response
     //use the updateDivContent, and updateDivCss function in the call
     //did this just to clean up the code
 
+    
+
+    //here is where were going to call the setTimeBack function
+    let timeBack = setTimeBack();
+
+    //need to have another update here because were updating the timeBack
+     updateBookDisplay(displayId, 'timeBack', timeBack, 'timeBack');
+
     //see js/functions/updateBookDisplay.js
-    updateBookDisplay(displayId, colChange, value, update_case);
+    //parameters: displayId, colChange, value, update_case
+    updateBookDisplay(displayId, 'available', 'no', 'rent');
 
 
-    // xmlHttp.open("GET", "../indexUpdate/rentBook.php?displayId=" + displayId, true);
-    // xmlHttp.onreadystatechange = function(){
+    
 
-    //     if(xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-    //         var resultJSON = JSON.parse(xmlHttp.responseText);
-    //         display(displayId, resultJSON);
-    //     }
-    // };
-    // xmlHttp.send(null);
-} //////////////////////END rentBook FUNCTION
+    
+
+
+} //End rentBook()
 
 //the returnBook function sets the timeBack to NULL in the database
 function returnBook(displayId){
-    
-    console.log("RETURN");
-
-    
-    let colChange = 'available';
-    let value = 'yes';
-    let update_case = 'return';
 
     //we pass parameters, success function handles the response
     //use the updateDivContent, and updateDivCss function in the call
     //did this just to clean up the code
 
     //see js/functions/updateBookDisplay.js
-    updateBookDisplay(displayId, colChange, value, update_case);
+    //parameters: displayId, colChange, value, update_case
+    updateBookDisplay(displayId, 'available', 'yes', 'return');
 
-
-
-
-
-    // var xmlHttp = new createXmlHttpRequestObject();
-
-    // console.log("RETURN");
-
-    // xmlHttp.open("GET", "../indexUpdate/returnBook.php?displayId=" + displayId, true);
-
-    // xmlHttp.onreadystatechange = function(){
-
-    //     if(xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-    //         var resultJSON = JSON.parse(xmlHttp.responseText);
-    //         display(displayId, resultJSON);
-    //     }
-    // };
-    // xmlHttp.send(null);
-
-} /////////////////////END returnBook FUNCTION
+    updateBookDisplay(displayId, 'timeBack', 'NULL', 'timeBack');
+} //End returnBook()
 
 //the display function displays the time that book is going ot be back
 //it also changes the button from rent to return
@@ -508,11 +488,13 @@ function display(bookId, JSON){
     }
 
     init();
-}  /////////////////////////END display FUNCTION
+}  
 
 //.unbind.bind is very crucial
-function init(){
+export function init(){
     //console.log('other init');
+
+    //console.log("this is the init");
 
     $(".rentTableRent").unbind().bind("click", function(){
         rentBook(this.id);
@@ -528,7 +510,7 @@ function init(){
     });
 
 
-}
+};
 
 //this is the main function that does all the work
 function bookAlerts() {
@@ -570,14 +552,15 @@ $(document).ready(function(){
 
 
 
-    $(".employee-Rent").bind("click", function(){
-        bookAlerts();
-    });
+    // $(".employee-Rent").bind("click", function(){
+    //     console.log("this calls bookAlerts");
+    //     bookAlerts();
+    // });
 
 
     //runs bookAlerts every 5 sec
     setInterval(function(){
-        bookAlerts();
+        //bookAlerts();
     }, 5000)
 
 });

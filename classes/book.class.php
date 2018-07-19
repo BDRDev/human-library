@@ -59,26 +59,24 @@ class Book {
         $user = $pdoQuery->fetch(PDO::FETCH_ASSOC);
 
         return($user);
-        
-
-    }
+    } //ends getAllDisplayData
     
 
 
     public function updateSingleValue($displayId, $colChange, $value){
 
-        $sql = "UPDATE bookdisplay SET " . $colChange . " = :value WHERE displayId=:displayId";
+        if($value === 'NULL'){
+            $value = NULL;
+        }
 
+        $sql = "UPDATE bookdisplay SET " . $colChange . " = :value WHERE displayId=:displayId";
         
         $pdoQuery = $this->conn->prepare($sql);
         
-        //$pdoQuery->bindParam(':colChange', $colChange, PDO::PARAM_STR);
         $pdoQuery->bindParam(':value', $value, PDO::PARAM_STR);
         $pdoQuery->bindParam(':displayId', $displayId, PDO::PARAM_INT);
-        
 
         if($pdoQuery->execute()){
-
             
             return($this->getAllDisplayData($displayId));
 
@@ -87,6 +85,6 @@ class Book {
         } else {
             echo "idk";
         };
-    }
+    } //ends updateSingleValue
 
 }

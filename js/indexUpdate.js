@@ -1,12 +1,12 @@
 
 //Functions Imported
-import { checkAvail } from './functions/availCheck';
-import { updateBookDisplay } from './functions/updateBookDisplay';
-import { updateDivContent } from './functions/updateDivContent';
-import { updateDivCss } from './functions/updateDivCss';
+import { checkAvail } from 'http://humanlibrary.us/js/functions/availCheck.js';
+import { updateBookDisplay } from 'http://humanlibrary.us/js/functions/updateBookDisplay.js';
+import { updateDivContent } from 'http://humanlibrary.us/js/functions/updateDivContent.js';
+import { updateDivCss } from 'http://humanlibrary.us/js/functions/updateDivCss.js';
 
 //Variables Imported
-import { process_function_url } from './global_vars';
+import { process_function_url } from 'http://humanlibrary.us/js/global_vars.js';
 
 console.log(process_function_url);
 
@@ -43,7 +43,7 @@ function process(displayId) {
 
         let returnedObject = checkAvail(result);
 
-        console.log(returnedObject);
+        //console.log(returnedObject);
 
         if(returnedObject.available){
 
@@ -137,7 +137,7 @@ function updateIndex(){
     //to the process function
 
     //when it works for sure, change i < 1 to < booksArray.length
-    for(var i = 0; i < 1; i++) {
+    for(var i = 0; i < 2; i++) {
         //console.log(booksArray[i]);
         var bookId = booksArray[i];
         process(bookId);

@@ -10,3 +10,6 @@ $book = new Book();
 
 echo json_encode($book->updateSingleValue($displayId, $colChange, $value));
 
+
+
+

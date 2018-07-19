@@ -6,7 +6,7 @@
 
 export function updateDivContent(divId, divClass, content){
 
-	console.log("update div content");
+	//console.log("update div content");
 
 	divClass = "." + divClass;
 	divId = "#" + divId;

@@ -1,10 +1,11 @@
 
 //Functions Imported
-import { updateDivContent } from './updateDivContent';
-import { updateDivCss } from './updateDivCss';
+import { updateDivContent } from 'http://humanlibrary.us/js/functions/updateDivContent.js';
+import { updateDivCss } from 'http://humanlibrary.us/js/functions/updateDivCss.js';
+import { init } from 'http://humanlibrary.us/js/bookAlerts.js';
 
 //Variables Imported
-import { update_book_display_function_url } from '../global_vars';
+import { update_book_display_function_url } from 'http://humanlibrary.us/js/global_vars.js';
 
 
 export function updateBookDisplay(displayId, colChange, value, update_case) {
@@ -21,14 +22,14 @@ export function updateBookDisplay(displayId, colChange, value, update_case) {
 	 	url: update_book_display_function_url,
 	 	data: { displayId : displayId, colChange : colChange, value : value },
 
-	 	//data: 'displayId=52&colChange=available&value=yes',
-	 	//data: `displayId=${displayId}&colChange=${colChange}&value=${value}`,
         success: function(result){
 
-            console.log("idk ajax was success?");
+            //console.log("idk ajax was success?");
 
             result = JSON.parse(result);
             console.log(result);
+
+
 
             
             //Below is how we handle the data we get in return as well as update the DOM
@@ -65,7 +66,7 @@ export function updateBookDisplay(displayId, colChange, value, update_case) {
  				case 'rent': 
 
 
- 					console.log('RENT');
+ 					//console.log('RENT');
 
  					//We have the database changed from yes to no.
  					//Now we need to have the row say: Available - no, TimeBack, and RETURN
@@ -73,34 +74,50 @@ export function updateBookDisplay(displayId, colChange, value, update_case) {
  					//This changes available from yes -> no
  					updateDivContent(displayId, 'bookAvailability', result.available);
  					//This changes TimeBack from " " -> "time"
- 					//Need to simplify the time process?
- 					updateDivContent(displayId, 'bookTimeBack', result.timeBack);
+
+ 					
  					//This changes Rent -> Return
  					updateDivContent(displayId, 'rentTableRent', 'RETURN');
+
+
+ 					updateDivCss(displayId, 'rentTableRent', 'rentTableReturn', 'switch');
+
 
 
 
  					//need to change classes for the rent/return row
  					//when rent - rentTableRent
  					//when return - rentTableReturn
+ 					init();
  					break;
 
  				case 'return':
 
- 					console.log("RETURN"); 
+ 					//console.log("RETURN"); 
 
  					//We have the database changed from yes to no.
  					//Now we need to have the row say: Available - no, TimeBack, and RETURN
 
  					//This changes available from no -> yes
  					updateDivContent(displayId, 'bookAvailability', result.available);
- 					//This changes TimeBack from "time" -> " "
- 					//Need to simplify the time process?
- 					updateDivContent(displayId, 'bookTimeBack', ' ');
  					//This changes Return -> Rent
  					updateDivContent(displayId, 'rentTableReturn', 'RENT');
 
+ 					updateDivCss(displayId, 'rentTableReturn', 'rentTableRent', 'switch');
+
+ 					init();
  					break;
+
+
+				case 'timeBack':
+
+					//console.log('change the timeBack');
+
+					//Need to simplify the time process?
+ 					updateDivContent(displayId, 'bookTimeBack', result.timeBack);
+
+
+					break;
  					
             }
            

@@ -4,9 +4,12 @@
     //define("ABSOLUTE_PATH", "C:/wamp64/www/humanLibrary");
 
     //Blake: Laptop
-    define("ABSOLUTE_PATH", "C:/wamp/www/humanLibrary");
+    //define("ABSOLUTE_PATH", "C:/wamp/www/humanLibrary");
 
-    // /home/users/web/b2088/ipg.blaker113699836
+    //Blake: Server
+    //define("ABSOLUTE_PATH", "/home/users/web/b2088/ipg.blaker113699836");
+
+    define("ABSOLUTE_PATH", "/home/users/web/b2088/ipg.blaker113699836/humanlibrary");
 
     //Path for Muj: /Applications/MAMP/htdocs/human-library/humanLibrary
 
@@ -16,15 +19,16 @@
 
     //path for dusty: "dustytome.net"
 
-    ///home/users/web/b2088/ipg.blaker113699836/humanlibrary
+    //
 
     //Blake: Desktop
     //define("URL_ROOT", "http://localhost:8383/humanLibrary");
 
     //Blake: Laptop
-    define("URL_ROOT", "http://localhost/humanLibrary");
+    //define("URL_ROOT", "http://localhost/humanLibrary");
 
-    //http://www.humanlibrary.us
+    //Blake: Server
+    define("URL_ROOT", "http://www.humanlibrary.us");
 
 
     //Root for Muj: http://localhost/human-library/humanLibrary

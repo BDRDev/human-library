@@ -1,32 +1,37 @@
+<script type='module'>
 export function updateDivCss(divId, divClass, classToAdd, action){
 
 	divId = "#" + divId;
 	classToAdd = classToAdd;
 
-	console.log('updateDivCss');
+	//console.log('updateDivCss');
 	
-	if(action === 'add'){
-		console.log('add');
+	switch(action){
 
-		if(divClass === ' '){
+			case('add'):
+			console.log('add');
 
-			//checks if the div has the class. If it doesnt, add it
-			if(!$(divId).hasClass(classToAdd)) { $(divId).addClass(classToAdd) }
+			if(divClass === ' '){
+
+				//checks if the div has the class. If it doesnt, add it
+				if(!$(divId).hasClass(classToAdd)) { $(divId).addClass(classToAdd) }
+				
+
+			} else if(divClass !== ' '){
+				divClass = "." + divClass;
+
+
+				if( !$(divId).find(divClass).hasClass(classToAdd)) {
+
+					$(divId).find(divClass).addClass(classToAdd);
+				}
 			
-
-		} else if(divClass !== ' '){
-			divClass = "." + divClass;
-
-
-			if( !$(divId).find(divClass).hasClass(classToAdd)) {
-
-				$(divId).find(divClass).addClass(classToAdd);
 			}
 		
-		}
-		
-	} //ends add
-	if(action === 'remove'){
+		break;
+	 	//ends add
+	case('remove'): 
+
 		console.log('remove');
 
 		if(divClass === ' '){
@@ -45,7 +50,32 @@ export function updateDivCss(divId, divClass, classToAdd, action){
 			}
 		
 		}
+
+		break;
+
+	case('switch'): 
+
+		//console.log('switch classes');
+
+		//here there is no reason to check to see if there is a class being
+		//targeted. We already know that there is
+
+		//classToAdd = classToAdd;
+		let testClass = divClass;
+		divClass = '.' + divClass;
+
+
+		// console.log('divId: ' + divId)
+		// console.log('classToAdd: ' + classToAdd);
+		// console.log('divClass: ' + divClass);
+
+		$(divId).find(divClass).addClass(classToAdd);
+
+		$(divId).find(divClass).removeClass(testClass);
+
+	break;
 		
 
-	} //ends remove
+	} //ends switch
 } //ends function
+</script>
