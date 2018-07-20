@@ -4,7 +4,7 @@ export function checkAvail(resultJSON) {
     let now  = new Date (Date.now());
     let formattedTime = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
-    //console.log("Current Time: " + formattedTime);
+    console.log("Current Time: " + formattedTime);
 
     //the next thing we need to do is to get the time string into variables
     //I am thinking about having two arrays that will hold the start and end time
@@ -52,12 +52,12 @@ export function checkAvail(resultJSON) {
 
     //this for loop is to take the first time slot and set the two times to military time
     for(let x = 0; x < timeSplit.length; x++){
-        //console.log(timeSlotOne[x]);
+        console.log(timeSlotOne[x]);
         //checks to see if the time is am, if so we handle it and turn it to military time
         if(timeSlotOne[x].includes("am")) {
             var holder = (timeSlotOne[x].split("am", 1));
 
-            //console.log("Holder: " + holder[0]);
+            console.log("Holder: " + holder[0]);
 
             //turns the 12:00 am to 0
             if(holder[0].includes('12')){
@@ -81,7 +81,7 @@ export function checkAvail(resultJSON) {
         } else if(timeSlotOne[x].includes("pm")){
             var holder = (timeSlotOne[x].split("pm", 1));
 
-            //console.log("Holder: " + holder[0]);
+            console.log("Holder: " + holder[0]);
 
             //Adds 12 to all numbers other than 12
             if(!holder[0].includes('12')){
@@ -103,21 +103,26 @@ export function checkAvail(resultJSON) {
     } //ends timeChange for loop
 
     //timeSlotOne is the time that the users gave, but in military time
-    //console.log(timeSlotOne);
+    console.log(timeSlotOne);
     //down here is where we are going to do the check to see if the book is available or not
     //could do the check above but I want to split it up a little, too clustered up there
 
 
     let bookAvail = 0;
 
+    console.log(formattedTime);
+
+
     if(formattedTime >= timeSlotOne[0]){
-        bookAvail += 1;
+        console.log("one run");
+        bookAvail += 2;
     }
     if(formattedTime <= timeSlotOne[1]){
+        console.log('two run');
         bookAvail += 1;
     } 
 
-    //console.log("BookAvail: " + bookAvail);
+    console.log("BookAvail: " + bookAvail);
 
     //down here we are going to get all of the information that we need from up top
     //and return it as an object to the indexUpdate function

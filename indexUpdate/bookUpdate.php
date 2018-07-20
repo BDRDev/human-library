@@ -1,13 +1,22 @@
 <?php
 
+// $displayId = (int)($_GET['displayId']);
+
+
+// include_once 'bookLookup.class.php';
+
+// $bookSearch = new BookLookup();
+
+// //$bookSearch->lookup($displayId);
+
+// echo json_encode($bookSearch->lookup($displayId));
+
+
 $displayId = (int)($_GET['displayId']);
 
 
-include_once 'bookLookup.class.php';
+include_once "../classes/book.class.php";
 
-$bookSearch = new BookLookup();
+$book = new Book();
 
-$bookSearch->lookup($displayId);
-
-echo json_encode($bookSearch->lookup($displayId));
-
+echo json_encode($book->getAllDisplayData($displayId));

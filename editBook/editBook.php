@@ -9,40 +9,44 @@ if ($_SESSION["loggedInUser"] === "admin") {
 
     include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
 
-//checks to see if the workerId cookie is set
-    if (isset($_COOKIE['workerId'])) {
+    include_once ABSOLUTE_PATH .  '/_includes/connection.php';
 
-        //sets the workerId cookie to the workerId variable
-        $workerId = $_COOKIE['workerId'];
+// //checks to see if the workerId cookie is set
+//     if (isset($_COOKIE['workerId'])) {
 
-        //loads in the users data from the database based off of the workerId
-        include_once ABSOLUTE_PATH . '/_includes/connection.php';
-        $sql = "SELECT * FROM worker WHERE workerId=:workerId LIMIT 1";
-        $pdoQuery = $conn->prepare($sql);
-        $pdoQuery->bindValue(":workerId", $workerId, PDO::PARAM_INT);
-        $pdoQuery->execute();
-        $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
-    }
+//         //sets the workerId cookie to the workerId variable
+//         $workerId = $_COOKIE['workerId'];
+
+//         //loads in the users data from the database based off of the workerId
+//         include_once ABSOLUTE_PATH . '/_includes/connection.php';
+//         $sql = "SELECT * FROM worker WHERE workerId=:workerId LIMIT 1";
+//         $pdoQuery = $conn->prepare($sql);
+//         $pdoQuery->bindValue(":workerId", $workerId, PDO::PARAM_INT);
+//         $pdoQuery->execute();
+//         $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
+//     }
 
 //displays the nav bar
     include_once ABSOLUTE_PATH . "/_includes/main_nav.inc.php";
 
-    echo "<h2 class='bookName'>" . "<span class='welcome'>" . "Edit " . "</span>" . "Book" . "</h2>";
-}
+
+
 
 ?>
 
 <?php
 
-if(!empty($_GET['displayId'])) {
-    $displayId = filter_input(INPUT_GET, "displayId", FILTER_SANITIZE_NUMBER_INT);
-}
+// if(!empty($_GET['displayId'])) {
+//     $displayId = filter_input(INPUT_GET, "displayId", FILTER_SANITIZE_NUMBER_INT);
+// }
+
 
 $sql = "SELECT * 
         FROM bookdisplay bd
         INNER JOIN bookinfo bi
         ON bd.displayId = bi.displayId
         WHERE bd.displayId=:displayId";
+
 $pdoQuery = $conn->prepare($sql);
 
 $pdoQuery->bindValue(":displayId", $displayId, PDO::PARAM_INT);

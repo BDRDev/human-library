@@ -1,8 +1,8 @@
 //Functions imported
-import { updateBookDisplay } from 'http://humanlibrary.us/js/functions/updateBookDisplay.js';
-import { updateDivContent } from 'http://humanlibrary.us/js/functions/updateDivContent.js';
-import { updateDivCss } from 'http://humanlibrary.us/js/functions/updateDivCss.js';
-import { setTimeBack } from 'http://humanlibrary.us/js/functions/setTimeBack.js';
+import { updateBookDisplay } from './functions/updateBookDisplay';
+import { updateDivContent } from './functions/updateDivContent';
+import { updateDivCss } from './functions/updateDivCss';
+import { setTimeBack } from './functions/setTimeBack';
 
 //Variables Imported
 //import { } from './global_vars';

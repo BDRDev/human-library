@@ -7,10 +7,10 @@
 //let base = 'http://localhost/humanLibrary/';
 
 //Blake: Desktop Base
-//
-//Blake: Server Base
-let base = 'http://humanLibrary.us/';
+let base = 'http://localhost:8383/humanLibrary/';
 
+//Blake: Server Base
+//
 //need one for the server_base as well
 
 export const process_function_url = base + 'indexUpdate/bookUpdate.php';

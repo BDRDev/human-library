@@ -10,25 +10,12 @@ if ($_SESSION["loggedInUser"] === "admin") {
     include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
 
 //checks to see if the workerId cookie is set
-    if (isset($_COOKIE['workerId'])) {
-
-        //sets the workerId cookie to the workerId variable
-        $workerId = $_COOKIE['workerId'];
-
-        //loads in the users data from the database based off of the workerId
-        include_once ABSOLUTE_PATH . '/_includes/connection.php';
-        $sql = "SELECT * FROM worker WHERE workerId=:workerId LIMIT 1";
-        $pdoQuery = $conn->prepare($sql);
-        $pdoQuery->bindValue(":workerId", $workerId, PDO::PARAM_INT);
-        $pdoQuery->execute();
-        $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
-    }
+  
 
 //displays the nav bar
     include_once ABSOLUTE_PATH . "/_includes/main_nav.inc.php";
 
-    echo "<h2 class='bookName'>" . "<span class='welcome'>" . "Edit " . "</span>" . "Books" . "</h2>";
-}
+    include_once ABSOLUTE_PATH .  '/_includes/connection.php';
 
 ?>
 
@@ -42,21 +29,7 @@ $books = $conn->query($sql);
 
 ?>
 
-<div class="editBookMessage">
-    <?php
-        if(isset($_COOKIE["imageMessage"])){
-        echo $_COOKIE["imageMessage"];
 
-        setcookie("imageMessage", "", time()-3600, "/");
-        }
-
-    if(isset($_COOKIE["editMessage"])){
-        echo $_COOKIE["editMessage"];
-
-        setcookie("editMessage", "", time()-3600, "/");
-        }
-    ?>
-</div>
 
 <table class="edit bookEdit">
 
@@ -66,7 +39,8 @@ $books = $conn->query($sql);
         <th>Story</th>
         <th>Book Image</th>
     </tr>
-    <?php
+
+    <?php}=
 
     foreach ($books as $book) {
 
@@ -81,7 +55,7 @@ $books = $conn->query($sql);
         echo "</tr>";
     }
 
+?>
+    
 
-    ?>
 </table>
-

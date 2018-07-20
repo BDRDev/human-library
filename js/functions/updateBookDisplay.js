@@ -1,11 +1,11 @@
 
 //Functions Imported
-import { updateDivContent } from 'http://humanlibrary.us/js/functions/updateDivContent.js';
-import { updateDivCss } from 'http://humanlibrary.us/js/functions/updateDivCss.js';
-import { init } from 'http://humanlibrary.us/js/bookAlerts.js';
+import { updateDivContent } from './updateDivContent';
+import { updateDivCss } from './updateDivCss';
+import { init } from '../bookAlerts';
 
 //Variables Imported
-import { update_book_display_function_url } from 'http://humanlibrary.us/js/global_vars.js';
+import { update_book_display_function_url } from '../global_vars';
 
 
 export function updateBookDisplay(displayId, colChange, value, update_case) {
@@ -15,7 +15,7 @@ export function updateBookDisplay(displayId, colChange, value, update_case) {
 	//into everyfile, that way for stuff like this I dont need to go into each individual file and
 	//change them I can just change one and it will change them all
 
-	const siteUrl = "http://localhost/humanLibrary/ajax/updateBookDisplay.php";
+	//const siteUrl = "http://localhost/humanLibrary/ajax/updateBookDisplay.php";
 
 	 $.ajax({
 	 	type: 'GET',
@@ -25,6 +25,7 @@ export function updateBookDisplay(displayId, colChange, value, update_case) {
         success: function(result){
 
             //console.log("idk ajax was success?");
+
 
             result = JSON.parse(result);
             console.log(result);

@@ -1,4 +1,3 @@
-<script type='module'>
 export function updateDivCss(divId, divClass, classToAdd, action){
 
 	divId = "#" + divId;
@@ -78,4 +77,3 @@ export function updateDivCss(divId, divClass, classToAdd, action){
 
 	} //ends switch
 } //ends function
-</script>
