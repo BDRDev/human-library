@@ -1,3 +1,4 @@
+
 .bookProfileHolder {
   height: 100%;
   width: 100%;
@@ -49,3 +50,41 @@
 .positionTwo {
   left: 40px;
 }
+
+.profile_holder {
+  min-height: 800px;
+  width: 100%;
+  padding-top: 100px;
+  background-color: rgba(0,255,255, 0.4)
+}
+
+.bookSignUpHolder {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.set_passwordHeader {
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 16px;
+  color: #75AD59;
+  font-family: Roboto Slab, "sans-serif";
+}
+
+.set_passwordHolder {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formError {
+  margin-top: 5px;
+  padding-left: 5px;
+  font-size: 12px;
+  color: red;
+  height: 15px;
+}
+

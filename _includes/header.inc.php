@@ -1,9 +1,10 @@
 <?php
 
-include_once 'config.php';
+include_once './config.php';
 
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
     <title>Human Library</title>

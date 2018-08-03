@@ -1,10 +1,10 @@
 <?php
 
-//checks to see if the admin cookie is set
+//checks to see if the admin session is set
 
 include_once '../_includes/config.php';
 
-if ($_SESSION["loggedInUser"] === "admin" || $_SESSION["loggedInUser"] === "employee") {
+
 
 
     //all of the comments I have are for saying hi to the user logged in, dont tjink its necessary
@@ -94,10 +94,9 @@ if ($_SESSION["loggedInUser"] === "admin" || $_SESSION["loggedInUser"] === "empl
 
     </div>
 
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script type='module' src="../js/bookAlerts.js"></script>
+    <script> let page='rent'</script>
+    <script src="../build/main.bundle.js"></script>
     <?php
-}
 
 
 

@@ -10,11 +10,9 @@
 //let base = 'http://localhost:8383/humanLibrary/';
 
 //Blake: Server Base
-let base = 'http://www.humanlibrary.us/';
+let base = 'www.humanlibrary.us/';
 
 
 export const process_function_url = base + 'indexUpdate/bookUpdate.php';
 
 export const update_book_display_function_url = base + 'ajax/updateBookDisplay.php';
-
-export const get_book_data_function_url = base + 'ajax/getBookData.php';

@@ -8,18 +8,18 @@
 
 
 
-$serverName = "localhost";
-$database = "humanlib";
-$dbusername = "phpuser";
-$dbpassword = "phpuser";
+// $serverName = "localhost";
+// $database = "humanlib";
+// $dbusername = "phpuser";
+// $dbpassword = "phpuser";
 
 
 
  //This is for the iPage acct
-        // $serverName = "blaker113699836.ipagemysql.com";
-        // $database = "humanlib";
-        // $dbusername = "blaker113699836";
-        // $dbpassword = "@Yoyoyo55";
+        $serverName = "blaker113699836.ipagemysql.com";
+        $database = "humanlib";
+        $dbusername = "blaker113699836";
+        $dbpassword = "@Yoyoyo55";
 
 
 

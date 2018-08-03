@@ -1,27 +1,7 @@
-import { testPls } from './functions/testFunction';
+//This page is to get all other js pages 
 
-console.log("HEY THIS IS WORKING");
-
-testPls();
-
-
-
-import { updateIndex } from './functions/indexUpdate'
-
-//This is for updating the index page
-$(document).ready(function(){
-
-   //for one test
-   updateIndex();
-
-   console.log("hey");
-
-   //updates the index page every 5 seconds
-   setInterval(function(){
-       
-
-   //updateIndex();
-
-   }, 5000)
-
-});
+import * as IndexUpdate from './indexUpdate';
+import * as BookAlerts from './bookAlerts';
+import * as editBook from './edit_book';
+import * as validateForm from './validate_form';
+import * as profile from './profile';

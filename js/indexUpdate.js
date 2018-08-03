@@ -15,7 +15,6 @@ let booksArray = [];
 //grabs each div with the class 'books' and adds them to an array
 function addDivsToArray(){
     $("div.books").each(function(){
-        //console.log($(this).attr('id'));
 
         let value = $(this).attr('id');
 
@@ -25,9 +24,6 @@ function addDivsToArray(){
 
 } //ends addDivsToArray
 
-
-
-
 //gets all of the information of the book based off the bookId
 function process(displayId) {
 
@@ -35,11 +31,13 @@ function process(displayId) {
     type: 'GET',
     url: process_function_url,
     data: { displayId : displayId },
-
+    dataType: "json",
     success: function(result){
         
-        
-        result = JSON.parse(result);
+        console.log(result);
+
+        //result = JSON.parse(result);
+
         console.log(result);
 
         let returnedObject = checkAvail(result);
@@ -54,7 +52,7 @@ function process(displayId) {
 
                 console.log("book is here")
 
-                console.log(result);
+                //console.log(result);
 
                 if(result.available === 'away'){
 
@@ -103,30 +101,14 @@ function process(displayId) {
                 }
                 
             }
-
-            display(result, displayId);
+        },
+        error: function(error){
+            console.log("ERROR");
+            console.log(error);
         }
     });
 }//ends process Function
 
-function display(bookResults, bookId){
-    
-    updateDivContent(bookId, 'storyTitle', bookResults.title);
-
-    let passHours = '<strong>Time</strong>: ' + bookResults.time;
-    updateDivContent(bookId, 'bookHours', passHours);
-
-
-    if(bookResults.timeBack === null) {
-
-        updateDivContent(bookId, 'time', ' ');
-    } else {
-
-        let passTime = '<strong>Time Back</strong>: ' + bookResults.timeBack;
-        updateDivContent(bookId, 'time', passTime);
-    }
-
-}
 
 function updateIndex(){
     //grabs all the books from the page and puts them in an array
@@ -137,8 +119,10 @@ function updateIndex(){
     //loops through the books array and passes each bookId
     //to the process function
 
-    //when it works for sure, change i < 1 to < booksArray.length
-    for(var i = 0; i < 1; i++) {
+    let books = 1;
+    //let books = booksArray.length;
+
+    for(var i = 0; i < books; i++) {
         //console.log(booksArray[i]);
         var bookId = booksArray[i];
         process(bookId);
@@ -149,20 +133,20 @@ function updateIndex(){
     booksArray = [];
 }
 
-
 $(document).ready(function(){
+    
+    if(page == 'home'){
 
-   //for one test
-   updateIndex();
+        console.log(page);
 
-   console.log("hey");
+        console.log('Only runs on home')
 
-   //updates the index page every 5 seconds
-   setInterval(function(){
-       
+        //runs initial updateFunction
+        updateIndex();
 
-   //updateIndex();
-
-   }, 5000)
-
+        //updates the index page every 5 seconds
+        setInterval(function(){
+            //updateIndex();
+        }, 5000)
+    }
 });

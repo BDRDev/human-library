@@ -16,7 +16,7 @@ $setPass = "";
 //first thing we need to do is check to see if the email is in the database
 $uniqueEmail = TRUE;
 
-$sql = "SELECT email FROM bookinfo";
+$sql = "SELECT email FROM user";
 $pdoQuery = $conn->prepare($sql);
 
 $pdoQuery->execute();
@@ -30,6 +30,8 @@ foreach($emails as $singleEmail){
 
     if($singleEmail["email"] === $email){
         $uniqueEmail = FALSE;
+
+        break;
 
     }
 }
@@ -46,13 +48,13 @@ if($uniqueEmail === TRUE) {
     $setPass = random_password(8);
 
 
-    $profileLink = "<a href='" . URL_ROOT . "/book/signUp.php?setPass=" . $setPass . "'>Set a Password<a/>";
+    $profileLink = "<a href='" . URL_ROOT . "/profile/set_password.php?setPass=" . $setPass . "'>Set a Password<a/>";
 
 //SendTo will be the email that the user provided
 
 //Need to edit the the
 
-    $sendTo = "humanlibraryiu@gmail.com";
+    $sendTo = "blaker1136@gmail.com";
 
     $subject = "To " . $firstName . " " . $lastName;
 
@@ -90,7 +92,7 @@ if($uniqueEmail === TRUE) {
     if(mail($sendTo, $subject, $message, $headers)){
 
 
-        $sql = "INSERT INTO bookinfo (firstName, lastName, email, displayId, setPass) 
+        $sql = "INSERT INTO user (firstName, lastName, email, userId, setPass) 
         VALUES(:firstName, :lastName, :email, NULL, :setPass)";
 
         $pdoQuery = $conn->prepare($sql);
@@ -101,24 +103,35 @@ if($uniqueEmail === TRUE) {
         $pdoQuery->bindValue(":setPass", $setPass, PDO::PARAM_STR);
 
 
+        //This will run if the user has selected a unique id and the message was
+        //successfully sent
         if ($pdoQuery->execute()) {
+
+            $_SESSION["sign_up_message"] = "Sign up was successful, you will be receiving an email shortly";
+
             header("Location: " . URL_ROOT . "/signUp/index.php");
 
         };
 
     } else {
         echo "shit";
+
+        //here is where I would put the error system
+
+        //My thought foe now is I would have apage that just I can see that will have a list of errors, what page they were on, time, number of them, ect.
+
+        //could be a cool little thing to add.
     };
 
 
 } else {
 
 
-
+    //echo "un unique";
     //this runs id the email has already been used, this just lets the user know they need to pick
     //a new email to use
-    if(!isset($_SESSION["bookSignUpMessage"])) {
-        $_SESSION["bookSignUpMessage"] = "This is a session var";
+    if(!isset($_SESSION["sign_up_message"])) {
+        $_SESSION["sign_up_message"] = "That email has already been used, please pick another one";
     }
 
     header("Location: " . URL_ROOT . "/signUp/index.php");

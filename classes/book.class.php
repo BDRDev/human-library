@@ -14,18 +14,18 @@ class Book {
     public function __construct() {
 
         //for localhost
-        $serverName = "localhost";
-        $database = "humanlib";
-        $dbusername = "phpuser";
-        $dbpassword = "phpuser";
+        // $serverName = "localhost";
+        // $database = "humanlib";
+        // $dbusername = "phpuser";
+        // $dbpassword = "phpuser";
 
 
-/*      This is for the iPage acct
+      //This is for the iPage acct
         $serverName = "blaker113699836.ipagemysql.com";
         $database = "humanlib";
         $dbusername = "blaker113699836";
         $dbpassword = "@Yoyoyo55";
-*/
+
 
 
 
@@ -86,5 +86,22 @@ class Book {
             echo "idk";
         };
     } //ends updateSingleValue
+
+
+    public function getBookData($displayId){
+
+        if($displayId == 'all'){
+            $sql = "Select bd.title as title, bd.time as time, bd.available as available 
+                    FROM bookdisplay bd
+                    INNER JOIN bookinfo bi ON bd.displayId = bi.displayId";
+
+            $pdoQuery = $this->conn->query($sql);
+
+            $books = $pdoQuery->fetchAll();
+
+            return($books);
+        }
+
+    }
 
 }

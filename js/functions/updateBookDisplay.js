@@ -28,7 +28,7 @@ export function updateBookDisplay(displayId, colChange, value, update_case) {
 
 
             result = JSON.parse(result);
-            console.log(result);
+            //console.log(result);
 
 
 

@@ -81,18 +81,6 @@ $books = $pdoQuery->fetchAll();
     include_once ABSOLUTE_PATH . '/_includes/footer.inc.php';
 ?>
 
-
-<!-- <script src="build/main.bundle.js"></script> -->
-
-
-
-<script  src="js/jquery-3.2.1.min.js"></script>
-
-<script type="module" src="js/functions/updateDivContent.js"></script>
-
-<script type="module" src="js/indexUpdate.js"></script>
-<script type="module" src="js/functions/availCheck.js"></script>
-<script type="module" src="js/objects/timeConvert_Class.js"></script>
-
-<script type="module" src="js/app.js"></script>
+<script> let page='home'</script>
+<script src="build/main.bundle.js"></script>
 

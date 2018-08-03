@@ -10,15 +10,15 @@ include_once '../_includes/config.php';
     ?>
 
 
-    <div class="SignUpWrapper">
+    <div class="signUpWrapper">
 
         <?php
 
-        if(isset($_SESSION["bookSignUpMessage"])){
+        if(isset($_SESSION["sign_up_message"])){
 
-            echo $_SESSION["bookSignUpMessage"];
+            echo $_SESSION["sign_up_message"];
 
-            unset($_SESSION["bookSignUpMessage"]);
+            unset($_SESSION["sign_up_message"]);
         }
 
         ?>

@@ -8,6 +8,7 @@ import { setTimeBack } from './functions/setTimeBack';
 //import { } from './global_vars';
 
 
+
 //this function creates an HmlHttpRequest Object.
 function createXmlHttpRequestObject()
 {
@@ -546,21 +547,26 @@ function bookAlerts() {
 
 $(document).ready(function(){
 
-    //calls bookAlerts when the page is loaded
-    bookAlerts();
+    if(page == 'rent'){
+
+        console.log('Only runs on the rent page');
+
+        //calls bookAlerts when the page is loaded
+        bookAlerts();
 
 
 
 
-    // $(".employee-Rent").bind("click", function(){
-    //     console.log("this calls bookAlerts");
-    //     bookAlerts();
-    // });
+        // $(".employee-Rent").bind("click", function(){
+        //     console.log("this calls bookAlerts");
+        //     bookAlerts();
+        // });
 
 
-    //runs bookAlerts every 5 sec
-    setInterval(function(){
-        //bookAlerts();
-    }, 5000)
+        //runs bookAlerts every 5 sec
+        setInterval(function(){
+            //bookAlerts();
+        }, 5000)
+    }
 
 });
