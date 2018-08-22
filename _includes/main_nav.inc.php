@@ -37,7 +37,7 @@ switch($_SESSION["user_role"]){
                          src="<?= URL_ROOT ?>/assets/images/whiteLogo.svg"></a>
              <div class="links">
                  <a id="book" href="<?= URL_ROOT ?>/#bookSection">Books</a>
-                 <a href="<?= URL_ROOT ?>/book/profile.php?displayId=<?= $_SESSION["user_id"] ?>">Profile</a>
+                 <a href="<?= URL_ROOT ?>/profile/profile.php?displayId=<?= $_SESSION["user_id"] ?>">Profile</a>
                  <a class="logout" href="<?= URL_ROOT ?>/logout/logout_process.php">Log Out</a>
              </div>
              <div>
