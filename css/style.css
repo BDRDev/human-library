@@ -594,6 +594,9 @@ svg:hover #facebook {
   display: flex;
   justify-content: center; }
 
+.hey {
+  color: red; }
+
 .addBook {
   margin: auto 20px;
   width: 40%;
@@ -818,6 +821,7 @@ svg:hover #facebook {
   flex-direction: column-reverse; }
 
 .rentBooksWrapper {
+  padding-top: 100px;
   padding-bottom: 30px; }
 
 .rentedBooks {
@@ -842,3 +846,7 @@ svg:hover #facebook {
 
 .positionTwo {
   left: 145px; }
+
+.small_slider_container {
+  margin-top: 75px;
+  margin-left: 40px; }

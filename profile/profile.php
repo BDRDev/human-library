@@ -132,8 +132,8 @@ include_once ABSOLUTE_PATH . '/_includes/main_nav.inc.php';
 </form>
 </div>
 
-<!-- <script>let page = 'profile'</script>
-<script src='../build/main.bundle.js'></script> -->
+<script>let page = 'profile'</script>
+<script src='../build/main.bundle.js'></script>
 
 <?php include_once ABSOLUTE_PATH . '/_includes/footer.inc.php'; ?>
 

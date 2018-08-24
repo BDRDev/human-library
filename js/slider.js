@@ -1,5 +1,7 @@
 //This section is for the slider mechanic
 
+console.log("This is the slider mechanics file");
+
 //grabs all of the sliders on the page
 var slider = $(".jsSlider");
 

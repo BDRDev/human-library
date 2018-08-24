@@ -29,10 +29,6 @@ slider.bind("click", function(){
     var sliderContainerWidth = $(".jsSliderContainer").width();
     var sliderWidth = $(".jsSlider").width();
 
-    //this is for the amount of padding on the container
-    //the way you calc this is take the padding you have and
-    //multiply it by 2
-
     var sliderMargin = 2 * (parseInt($(".jsSlider").css("margin-left")));
 
     //console.log(sliderContainerWidth);

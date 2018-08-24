@@ -4,13 +4,13 @@
 //mostly urls so far but for whatever
 
 //Blake: Laptop Base
-//let base = 'http://localhost/humanLibrary/';
+let base = 'http://localhost/humanLibrary/';
 
 //Blake: Desktop Base
 //let base = 'http://localhost:8383/humanLibrary/';
 
 //Blake: Server Base
-let base = 'http://www.humanlibrary.us/';
+// let base = 'http://www.humanlibrary.us/';
 
 
 export const process_function_url = base + 'indexUpdate/bookUpdate.php';

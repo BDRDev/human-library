@@ -7,6 +7,7 @@ import { updateDivCss } from './functions/updateDivCss';
 
 import { process_function_url } from './global_vars';
 
+console.log("process_function_url");
 console.log(process_function_url);
 
 
