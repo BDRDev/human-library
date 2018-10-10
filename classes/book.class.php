@@ -104,4 +104,58 @@ class Book {
 
     }
 
+    public function addToAttending($userId, $eventId){
+
+        $sql = "INSERT INTO attending VALUES (null, :event_id, :user_id)";
+
+        $pdoQuery = $this->conn->prepare($sql);
+
+        $pdoQuery->bindParam(':user_id', $userId, PDO::PARAM_STR);
+        $pdoQuery->bindParam(':event_id', $eventId, PDO::PARAM_STR);
+
+        if($pdoQuery->execute()){
+            return("User was successfully added");
+        }
+    }
+
+    public function removeFromAttending($userId, $eventId){
+
+        $sql = "DELETE FROM attending WHERE user_id=:userId AND event_id=:eventId";
+
+        $pdoQuery = $this->conn->prepare($sql);
+
+        $pdoQuery->bindParam(':userId', $userId, PDO::PARAM_STR);
+        $pdoQuery->bindParam(':eventId', $eventId, PDO::PARAM_STR);
+
+        if($pdoQuery->execute()){
+            return("User was successfully removed");
+        }
+
+    }
+
+    public function getAllEvents(){
+
+        $sql = "SELECT * FROM events";
+
+        $pdoQuery = $this->conn->query($sql);
+
+        $events = $pdoQuery->fetchAll();
+
+        return($events);
+    }
+
+    public function getOneAttendee($userId){
+
+        $sql = "SELECT * FROM attending WHERE user_id=:userId";
+
+        $pdoQuery = $this->conn->prepare($sql);
+
+        $pdoQuery->execute([':userId' => $userId]);
+
+        $attendees = $pdoQuery->fetchAll();
+
+        return($attendees);
+
+    }
+
 }

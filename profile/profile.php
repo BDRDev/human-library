@@ -36,7 +36,6 @@ include_once ABSOLUTE_PATH . '/_includes/main_nav.inc.php';
 
     $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
     //var_dump($row);
-    //not too sure what will go here
     }
 
     //here is where want to try to get their displayInfo
@@ -132,8 +131,11 @@ include_once ABSOLUTE_PATH . '/_includes/main_nav.inc.php';
 </form>
 </div>
 
-<script>let page = 'profile'</script>
+<script>let page = 'profile'; let currentUserId = '<?php echo $_SESSION["user_id"] ?>'</script>
+
 <script src='../build/main.bundle.js'></script>
+
+
 
 <?php include_once ABSOLUTE_PATH . '/_includes/footer.inc.php'; ?>
 

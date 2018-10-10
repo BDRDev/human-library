@@ -45,10 +45,13 @@ if(is_array($row)) {
         $_SESSION["user_id"] = $userId;
         $_SESSION["user_role"] = $userRole;
 
+       
+
         header("Location: " . URL_ROOT . "/profile/profile.php");
 
 
     } else {
+        
         
 
         $_SESSION['login_message'] = "Wrong email or password";

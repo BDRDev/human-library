@@ -829,7 +829,7 @@ svg:hover #facebook {
 
 .small_slider_container {
   width: 100px;
-  height: 40px;
+  height: 45px;
   background-color: #2a2a2a;
   border-radius: 60px;
   display: flex;
@@ -840,12 +840,12 @@ svg:hover #facebook {
   width: 35px;
   background-color: white;
   border-radius: 45px;
-  margin-left: 10px;
+  margin-left: 6px;
   cursor: pointer;
   position: absolute; }
 
 .positionTwo {
-  left: 145px; }
+  left: 94px; }
 
 .small_slider_container {
   margin-top: 75px;
