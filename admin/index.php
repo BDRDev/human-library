@@ -5,64 +5,45 @@
 
 include_once '../_includes/config.php';
 
-if ($_SESSION['loggedInUser'] === "admin") {
+if ($_SESSION['user_role'] === "admin") {
 
 
 
     include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
+    
 
-    //checks to see if the workerId cookie is set
-    if (isset($_COOKIE['workerId'])) {
+    include_once('../_includes/constants.php');
 
-        //sets the workerId cookie to the workerId variable
-        $workerId = $_COOKIE['workerId'];
+    //gets the title from the constants page
+    $current_page = $admin_page;
+    $page_name = 'admin';
 
-        //loads in the users data from the database based off of the workerId
-        include_once ABSOLUTE_PATH . '/_includes/connection.php';
-        $sql = "SELECT * FROM worker WHERE workerId=:workerId LIMIT 1";
-        $pdoQuery = $conn->prepare($sql);
-        $pdoQuery->bindValue(":workerId", $workerId, PDO::PARAM_INT);
-        $pdoQuery->execute();
-        $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
-    }
+    include_once('../_includes/head.php');
+    include_once('../_includes/header.php');
+    include_once('../_includes/test_nav.php');
 
-    //displays the nav bar
-    include_once ABSOLUTE_PATH . "/_includes/main_nav.inc.php";
-
-    echo "<h2 class='adminName'>" . "<span class='welcome'>" . "Welcome " . "</span>" . $row['firstName'] . " " . $row['lastName'] . "</h2>";
     ?>
 
-    <div class="adminMessage">
-        <?php
-        if (isset($_COOKIE['addEmployee'])) {
-
-            echo $_COOKIE['addEmployee'];
-
-            setcookie('addEmployee', "", -1);
-        }
-
-        if (isset($_COOKIE['addBook'])) {
-            echo $_COOKIE['addBook'];
-            setcookie("addBook", "", time() - 3600, "/");
-        }
-
-        if (isset($_COOKIE['imageMessage'])) {
-            echo $_COOKIE['imageMessage'];
-            setcookie("imageMessage", "", time() - 3600, "/");
-        }
-        ?>
-    </div>
-
     <div class="adminSection">
-        <?php
+        
+        <div id="addEventSection"></div>
 
+        <div id='attendeeListSection'></div>
 
-        //loads the add workers form
-        include_once ABSOLUTE_PATH . '/addWorkers/addWorkers.php';
+        <div id='pendingBookSection'></div>
 
-        include_once ABSOLUTE_PATH . "/addBook/addBook.php";
-        ?>
+        <div id='pendingLibrarianSection'></div>
+
+        <div id="massEmailSection"></div>
+
+        <div id="listUsersSection"></div>
+        
     </div>
+
+
+    <script>let page = 'admin';</script>
+
+    <script src='../build/main.bundle.js'></script>
 
     <?php
 

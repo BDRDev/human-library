@@ -13,6 +13,8 @@ if(!isset($_SESSION["user_role"])){
                 <a class="login" href="<?= URL_ROOT ?>/login/index.php">Login</a>
             </div>
     </nav>
+
+    <script> let forNav = 'showing'</script>
 <?php
 
 //This is if there is a user logged in
@@ -30,8 +32,8 @@ if(!isset($_SESSION["user_role"])){
                              src="<?= URL_ROOT ?>/assets/images/whiteLogo.svg"></a>
                  <div class="links">
                      <a id="book" href="<?= URL_ROOT ?>/#bookSection">Books</a>
-                     <a href="<?= URL_ROOT ?>/profile/profile.php?displayId=<?= $_SESSION["user_id"] ?>">Profile</a>
-                     <a class="logout" href="<?= URL_ROOT ?>/logout/logout_process.php">Log Out</a>
+                     <a href="<?= URL_ROOT ?>/profile/profile.php">Profile</a>
+                     <a class="logout">Log Out</a>
                  </div>
                  <div>
                  </div>
@@ -48,14 +50,13 @@ if(!isset($_SESSION["user_role"])){
              <nav>
                  <a href="<?= URL_ROOT ?>/index.php"><img src="<?= URL_ROOT ?>/assets/images/whiteLogo.svg"></a>
                  <div class="links">
-                     <a href="<?= URL_ROOT ?>/employee/index.php">Rent Books</a>
-                     <a href="<?= URL_ROOT ?>/editBook/index.php">Edit Books</a>
-                     <a href="<?= URL_ROOT ?>/editEmployee/edit.php">Edit Workers</a>
+                     <a href="<?= URL_ROOT ?>/employee/index.php">Loan Books</a>
                      <a href="<?= URL_ROOT ?>/signUp/index.php">Sign Up</a>
+                     <a href="<?= URL_ROOT ?>/profile/profile.php">Profile</a>
                      <a href="<?= URL_ROOT ?>/admin/index.php">Admin Page</a>
 
 
-                     <a class="logout" href="<?= URL_ROOT ?>/logout/logout_process.php">Log Out</a>
+                     <a class="logout">Log Out</a>
                  </div>
              </nav>
              <?php
@@ -63,13 +64,14 @@ if(!isset($_SESSION["user_role"])){
              break;
         }
 
-        case "worker": {
+        case "librarian": {
             ?>
              <nav>
                  <a href="<?= URL_ROOT ?>/index.php"><img src="<?= URL_ROOT ?>/assets/images/whiteLogo.svg"></a>
                  <div class="links">
-                     <a href="<?= URL_ROOT ?>/employee/index.php">Employee Page</a>
-                     <a class="logout" href="<?= URL_ROOT ?>/logout/logout_process.php">Log Out</a>
+                     <a href="<?= URL_ROOT ?>/employee/index.php">Loan Books</a>
+                     <a href="<?= URL_ROOT ?>/profile/profile.php">Profile</a>
+                     <a class="logout">Log Out</a>
                  </div>
              </nav>
              <?php
@@ -78,7 +80,14 @@ if(!isset($_SESSION["user_role"])){
         }
 
 
-    }
+    } //ends the switch statement
+
+    ?>
+
+    <!-- needed to change this up, this is just for nav bar stuff -->
+    <script> let forNav = 'showing'</script>
+
+    <?php
 }
 
 

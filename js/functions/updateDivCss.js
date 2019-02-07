@@ -8,7 +8,7 @@ export function updateDivCss(divId, divClass, classToAdd, action){
 	switch(action){
 
 			case('add'):
-			console.log('add');
+			//console.log('add');
 
 			if(divClass === ' '){
 
@@ -31,7 +31,7 @@ export function updateDivCss(divId, divClass, classToAdd, action){
 	 	//ends add
 	case('remove'): 
 
-		console.log('remove');
+		//console.log('remove');
 
 		if(divClass === ' '){
 

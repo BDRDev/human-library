@@ -7,13 +7,11 @@ import { updateDivCss } from './functions/updateDivCss';
 
 import { process_function_url } from './global_vars';
 
-console.log("process_function_url");
-console.log(process_function_url);
-
 
 let booksArray = [];
 
 //grabs each div with the class 'books' and adds them to an array
+//adds the id to the array, id is the book id
 function addDivsToArray(){
     $("div.books").each(function(){
 
@@ -28,22 +26,26 @@ function addDivsToArray(){
 //gets all of the information of the book based off the bookId
 function process(displayId) {
 
+    //we want this to not be asyn because we want it done in a certain order
     $.ajax({
     type: 'GET',
     url: process_function_url,
     data: { displayId : displayId },
     dataType: "json",
+    asyn: false,
     success: function(result){
         
-        console.log(result);
+        //result is a book object of the id we passed
+        //console.log("result", result);
 
-        //result = JSON.parse(result);
-
-        console.log(result);
 
         let returnedObject = checkAvail(result);
 
-        console.log(returnedObject);
+        //console.log("returnedObject", returnedObject);
+
+        //This just updates the div with the time in the db
+        //probably wont get used very often but it just updates, might do this for every piece of content
+        updateDivContent(displayId, "bookTime", result.time);
 
         if(returnedObject.available){
 
@@ -51,9 +53,11 @@ function process(displayId) {
                 //we need to do a check to see if the resultJSON.available is == 'not here'
                 //if thats true we need to set it to 'yes' and take away the class associated with the book not being there
 
-                console.log("book is here")
+                console.log("book is here");
 
-                //console.log(result);
+                //console.log("------------------------------------------------")
+
+                console.log(result);
 
                 if(result.available === 'away'){
 
@@ -115,7 +119,7 @@ function updateIndex(){
     //grabs all the books from the page and puts them in an array
     addDivsToArray();
 
-    console.log(booksArray);
+    //console.log("booksArray", booksArray);
 
     //loops through the books array and passes each bookId
     //to the process function
@@ -134,13 +138,13 @@ function updateIndex(){
     booksArray = [];
 }
 
+
+
 $(document).ready(function(){
-    
+    //This is so these functions only run on the home page, this is set on the index.php page
     if(page == 'home'){
 
         console.log(page);
-
-        console.log('Only runs on home')
 
         //runs initial updateFunction
         updateIndex();

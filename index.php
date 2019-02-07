@@ -1,69 +1,38 @@
 <?php
 
 include './_includes/config.php';
-include ABSOLUTE_PATH .  '/_includes/connection.php';
-include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
-include_once ABSOLUTE_PATH . '/_includes/main_nav.inc.php';
+// include ABSOLUTE_PATH .  '/_includes/connection.php';
+// include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
+// include_once ABSOLUTE_PATH . '/_includes/main_nav.inc.php';
 
+  include_once('./_includes/constants.php');
 
+  //gets the title from the constants page
+  $current_page = $home;
+  $page_name = "home";
 
-//sql to get all of the books
-$sql = "SELECT * FROM bookdisplay ORDER BY title";
-
-//stores the books in a variable
-$pdoQuery = $conn->prepare($sql);
-$pdoQuery->execute();
-
-$books = $pdoQuery->fetchAll();
+  include_once('./_includes/head.php');
+  include_once('./_includes/header.php');
+  include_once('./_includes/test_nav.php');
 ?>
 
-<div id="bookSection" class="book">
-    <?php
+
+<!-- <div id='bookSection' class='book'>
+    
+    <div class="bookDisplayBtns">
+        <span class="displayBtns" id="available">Available Books</span>
+        <span class="displayBtns" id="all">All Books</span>
+    </div>
+    <div class='bookDisplay'></div>
+</div> -->
 
 
 
-    foreach ($books as $book) {
-
-
-
-        $available = "available";
-        if ($book["timeBack"] !== NULL) {
-            $available = "unavailable";
-        }
-
-        if($book["available"] == 'away') { $class_to_add = "bookAway";}
-        else if($book["available"] == 'no') { $class_to_add = "bookRented"; }
-        else { $class_to_add = ""; }
-
-        echo "<div class='books " . $class_to_add . "' id='" . $book["displayId"] . "'>";
-        echo "<div class='bookContent'>";
-        echo "<span class='storyTitle'>" . $book["title"] . "</span>";
-        echo "<span class='bookHours'><strong>Time</strong>: ". $book["time"] . "</span>";
-        echo "<div class='avaHolder' style='padding: 50px 0;'>";
-        echo "<div class='bookAva'>" . "<strong>Available</strong>: " . $book["available"] . "</div>";
-
-        if ($book["timeBack"] !== NULL) {
-            echo "<div class='bookAva time'><strong>Time Back</strong>: " . $book["timeBack"] . "</div>";
-        } else {
-            echo "<div class='time'></div>";
-        }
-        echo "</div>";
-
-        echo "</div>";
-
-        echo "</div>";
-
-
-    } //ends the for loop
-    ?>
-</div>
-
-
-<div id="aboutSection" class="about">
+<!-- <div id="aboutSection" class="about">
     <h1>IUPUI HUMAN LIBRARY PROJECT</h1>
-</div>
+</div> -->
 
-<div id="contactSection" class="contact">
+<!-- <div id="contactSection" class="contact">
     <a target="_blank" href="https://soic.iupui.edu/">IUPUI SCHOOL OF INFORMATICS & COMPUTING</a>
 
     <a href="https://facebook.com/iupuihumanlibrary" target="_blank">
@@ -74,7 +43,7 @@ $books = $pdoQuery->fetchAll();
   </svg>
 
     </a>
-</div>
+</div> -->
 
 
 <?php

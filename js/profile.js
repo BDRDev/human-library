@@ -1,181 +1,225 @@
-//This page would be like if the user linked a profile.js file at the end of their page
-	
-import { get_events_list_url, get_specific_attend_list_url } from './global_vars.js';
 
-//This imports the create_slider function .. here is where I need to insert how to use it
-import { create_slider } from './functions/create_slider.js';
+//the dataCalls file will hold all of our ajax calls
+import { getUserData, getBookData, getLibrarianData, updateUnverifiedUser, 
+		 sendUnverifiedEmail, updateVerifiedUser, updateVerifiedLibrarian, 
+		 getUpcomingEvent, checkIfAttending } from './functions/dataCalls';
 
-import { Slider } from './functions/create_slider.js';
+import { printUnverifiedForm, printVerifiedBookForm, printVerifiedLibrarianForm } from './functions/buildForms';
+import { printSliders } from './functions/slider';
+import { getUserSessions, setUserSessions, sendEmail } from './functions/dataCalls';
 
+import { adminEmail } from './global_vars';
 
-//I think I will need to add another argument where we see if attending the event
-//is true or false, then based on that if we need to pass positionTwo to the
-//slider or not
+//I think I may need checks to see if a user is logged in
 
-//A lot of this is going to be based off of the events table, and the user event column
+if(page === 'profile'){
 
+	let userData = {};
+	let bookData = {};
 
-//for now I am just going to have it showing but eventually it will be conditional if it shows up or not
-//based on the event table
+	let librarianData = {};
 
-//This is actually going to be easier then I thought
-
-//explanation of the create_slider function
-
-//argument 1: This is for the size of the slider you want small, medium, large, custom
-//(If I ever think about deploying this to npm or something make a css file for custom)
-
-//argument 2: This is the location where you want the slider
-
-//argument 3: This is going to be the id given to the slider
-//(This should come as pretty obvious but it needs to be unique)
-
-//argument 4: This is going to be the position of the slider.
-//Ither 'position_one' or 'position_two'
-
-//argument 5: This will be the id of the event that we get from the table
-
-//argument 6: This is going to be the usersId, this will come from the for loop
-//or we can just pass the session variable, idk not too woried ab this rn
-
-//NOT SURE ABOUT THE BOTTOM 
-
-//(These next two will be added eventually, still need to think about how its going to work)
-//argument 4: This is going to be the first function the slider calls
-//(Moving from left to right, position 1 -> position 2)
-
-//argument 5: This is going to be the second function the slider calls
-//(Moving from right to left, position 2 -> position 1)
-
-if(page == 'profile'){
-
-	
+	let upcomingEvent = {};
+	let attendingEvent = {};
 
 
-	//I am thinking the way to do this is to make a for loop
-	//since this is going to be conditional get the data from
-	//the events table and however many results we get do that many
-	//loops then on the last loop give the sliders their functionality
+	const displayMessage = (message) => {
+		$(".profileMessage").html(message);
 
-	//Still have a couple of kinks to work out but I think it is going to work
-	//the best that way
-
-	
-	//this will be conditional once I get the events table up and running
-
-	//basically there will be an event slider for each event that the date of the event is greater than the current date.
-	//Need to have a way for the admin to "turn the slider off"
-	//this is so like maybe they can only change if they are attending or not up until the event is three days away
-	//potentially be a form field for creating an event //dont need to worry about now, I can ask this is the meeting
-
-
-
-	//This is going to be for getting an array of events, this will tell the profile page how many sliders to add
-
-	//I think I will need to generate my own array since I will be pulling data from two different tables
-	//Will need to tailor this to the the events and such, ugh
-
-	//The following block of code is going to get a list of events, this will let us know how many
-	//sliders we need to put on the page.
-	//Next we get a list of all of the events the user is attending, we will be able to tell this
-	//by their id which we will get from the session var.
-
-	//Then I will make an array that will list each event, and whether the user is attending or not.
-	//This will tell us if the slider should be in position two or one.
-
-	//Then we should be done with this.
-
-
-	function bigTest(){
-		console.log("BIG TEST");
+		setTimeout(() => {
+			clearMessage();
+		}, 8000);
 	}
 
-	console.log("currentUserId", currentUserId);
-
-	//console.log(myTest);
-
-
-
-	var events = $.ajax({
-		url: get_events_list_url,
-		dataType: 'json',
-		async: false,
-		success: function(result){
-			console.log("Get Events List")
-			//console.log(result);
-
-			//console.log(test.responseJSON);
-		}
-	})
+	const clearMessage = () => {
+		$(".profileMessage").html("");
+	}
 
 
-	//NEED TO DO THIS \/
+	const displayVerifiedForm = async () => {
 
-	console.log("get_specific_attend_list_url")
+		console.log("bookData", bookData);
+		console.log("userData", userData);
+		console.log("upcomingEvent", upcomingEvent);
 
-	var attending = $.ajax({
-		url: get_specific_attend_list_url,
-		dataType: 'json',
-		async: false,
-		data: {
-			userId: currentUserId
-		},
-		success: function(result){
-			console.log("Get events user is attending")
-			console.log(result);
+		//look into re factoring this in the future
+		let attending = await checkIfAttending(userData.userId, upcomingEvent.eventId)
+		attendingEvent = {'att' : attending};
+		
+		let loop = 0;
+		let intervalId = setInterval(() => {
 
-		},
-		fail: function(){
-			console.log("get events failed");
-		}
-	})
-
-	//two arrays, one for the events and an array of the events the current user is attending
-	console.log("events", events.responseJSON);
-	console.log("attending", attending.responseJSON);
-
-	//need to mere this into one array that will give us all the parameters we need to conditionally load the sliders
-
-	
-
-	for(let event of events.responseJSON){
-		console.log(event);
-
-		let userAttend = 'false';
-		let sliderId = 'slider_' + event.eventId;
-
-		//tels if the user is attending said event
-		attending.responseJSON.find(function(element){
-
-			if(event.eventId === element.event_id){
-
-				console.log("event id: ", event.eventId);
-				console.log("from the attend table", element.event_id);
-
-				userAttend = 'true';
-
-			}
+			loop++;
 			
+			// console.log("bookData", bookData);
+			// console.log("userData", userData);
+			// console.log("upcomingEvent", upcomingEvent);
+			 //console.log("attendingEvent", attendingEvent);
 
-		})
+			if(userData.role === "book"){
 
-		console.log("userAttend", userAttend);
+				if(!jQuery.isEmptyObject(userData) && !jQuery.isEmptyObject(bookData) && 
+					!jQuery.isEmptyObject(upcomingEvent) && !jQuery.isEmptyObject(attendingEvent)){
 
-
-		//here we will need to append a section that will give details each event
-
-		//sliderSize, location, id, attending or not, event_id, user_id
+					clearInterval(intervalId);
 
 
-		var slider = new Slider('small', '.profile_holder', sliderId, userAttend, event.eventId, currentUserId );
+
+					//Here is where we print the form if all of the data we need is there
+					printVerifiedBookForm(bookData, upcomingEvent, attendingEvent.att, (bookData) => {
+
+						updateVerifiedUser(userData.userId, bookData, () => {
+							displayMessage("Your data was successfully updated");
+						});
+					})
+				}
+			} else if(userData.role === "librarian"){
+
+				if(!jQuery.isEmptyObject(userData) && !jQuery.isEmptyObject(librarianData) && 
+					!jQuery.isEmptyObject(upcomingEvent) && !jQuery.isEmptyObject(attendingEvent)){
+
+					clearInterval(intervalId);
+
+					//Here is where we print the form if all of the data we need is there
+					//console.log("PRINT THE VERIFIED LIBRARIAN BOOK");
+
+					console.log("it ran?")
+
+					printVerifiedLibrarianForm(librarianData, upcomingEvent, attendingEvent.att, (librarianData) => {
+						console.log("librarian form needs to be submitted", librarianData);
+
+						updateVerifiedLibrarian(userData.userId, librarianData, () => {
+							displayMessage("Your data was successfully updated");
+						});
+					})
+				}
+			}
+
+		}, 250);	
+	} //ends displayVerifiedBookForm
+
+	const displayUnverifiedPage = role => {
+		console.log("display unverified page for", role)
+		
+		printUnverifiedForm(userData, async (formData) => {
+
+			//whenever the form is submitted we will run this, call an ajax call, then 'refresh' the page
+			let result = await updateUnverifiedUser(userData.userId, formData);
+			
+			let emailData = {
+				first: userData.firstName,
+				last: userData.lastName,
+				email: userData.email,
+				role: role
+			}
+
+			//this is responsible for letting the admin know that there is a book that needs to 
+			//be reviewed for being a book
+			
+			sendEmail('adminUnverifiedNotice', adminEmail, emailData);
+			getInformation(userData.userId);
+			
+		});
+	}
+	
+
+	const displayPendingPage = role => {
+		console.log("display pending page for", role)
+
+		$("#unverifiedWrapper").empty();
+		$("#pendingWrapper").html("Thank you we will be in touch shortly with more information");
 	}
 
-	
+	const displayVerifiedPage = role => {
+		console.log("display verified page for", role)
 
-	// var slider = new Slider('small', '.profile_holder', 'slider_one', 'false', '1', '33');
-	// var slider = new Slider('small', '.profile_holder', 'slider_two', 'true', '2', '33');
+		if(role === 'book'){
+			//Gets the user's bookData
+			getBookData(userData.userId, (data) => {
+				bookData = data;
 
-	
+				//function that will print all of the sliders
+				printSliders(bookData.displayId, () => {
+					//this runs when the user clicks on the slider, either
+					console.log("A user clicked on the slider");
 
-	//This section is for the slider mechanic
+					//runs when a user clicks on the slider
+					displayVerifiedForm();
+				});
+
+				//function is self explanatory
+				displayVerifiedForm();
+			})
+		}
+
+		if(role === 'librarian'){
+
+			getLibrarianData(userData.userId, (data) => {
+				librarianData = data;
+				
+				//function that will print all of the sliders
+				printSliders(userData.userId, () => {
+					console.log("A user clicked on the slider");
+
+					//runs when a user clicks on the slider
+					displayVerifiedForm();
+				});
+
+				//function is self explanatory
+				displayVerifiedForm();
+				
+			});
+			
+		}
+	}
+
+
+	//this is a function that decides what to show the user, based on user_status and role
+	const displayUserInformation = () => {
+		switch(userData.user_status) {
+			case 'unverified':
+				console.log("unverified user");
+
+				displayUnverifiedPage(userData.role);
+
+				break;
+			case 'pending' :
+				console.log("pending user");
+
+				displayPendingPage(userData.role);
+
+				break;
+
+			case 'verified' :
+				console.log("verified user");
+
+				displayVerifiedPage(userData.role);
+
+				break;
+		}
+	}
+
+	const getInformation = async currentUserId => {
+		console.log("get the user information");
+
+		userData = await getUserData(currentUserId);
+
+		console.log("userData", userData);
+		displayUserInformation();			
+	}
+
+	$(document).ready(async () => {
+		console.log("the profile page is good to go");
+
+		//get the userId based off of the userId Session
+		let userId = await getUserSessions("userId");
+
+		console.log("userId", userId);
+
+		//gets us the next upcoming event
+		upcomingEvent = await getUpcomingEvent();
+
+		//Once we have the users userId we will go and get their book information base off of the userId
+		getInformation(userId);
+	})
 }

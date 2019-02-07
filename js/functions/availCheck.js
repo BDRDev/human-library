@@ -2,7 +2,12 @@ export function checkAvail(resultJSON) {
 
     //Current Time
     let now  = new Date (Date.now());
-    let formattedTime = now.getHours() + ":" + now.getMinutes();
+    let formattedTime = now.getHours() + ":";
+    if(now.getMinutes() < 10){
+        formattedTime += "0" + now.getMinutes();
+    } else {
+        formattedTime += now.getMinutes();
+    }
 
     //console.log("Current Time: " + formattedTime);
 
@@ -110,24 +115,24 @@ export function checkAvail(resultJSON) {
 
     let bookAvail = 0;
 
-    console.log(formattedTime);
-    console.log(timeSlotOne[0]);
+    //console.log("formattedTime", formattedTime);
+    //console.log(timeSlotOne[0]);
 
     if("20:00" > timeSlotOne[0]){
-        console.log("wtf")
+        //console.log("wtf")
     }
 
-    var str1 = "20:20:45",
-    str2 = "05:10:10";
+    // var str1 = "20:20:45",
+    // str2 = "05:10:10";
 
 
 
     if(formattedTime >= timeSlotOne[0]){
-        console.log("one run");
+        //console.log("one run");
         bookAvail += 1;
     }
     if(formattedTime <= timeSlotOne[1]){
-        console.log('two run');
+        //console.log('two run');
         bookAvail += 1;
     } 
 

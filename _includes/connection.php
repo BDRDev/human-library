@@ -5,44 +5,18 @@
 //variables for the database name, username, and password for the database
 
 
-
-
-
-$serverName = "localhost";
-$database = "humanlib";
-$dbusername = "phpuser";
-$dbpassword = "phpuser";
-
-
-
- //This is for the iPage acct
-// $serverName = "blaker113699836.ipagemysql.com";
+// $serverName = "localhost";
 // $database = "humanlib";
-// $dbusername = "blaker113699836";
-// $dbpassword = "@Yoyoyo55";
+// $dbusername = "phpuser";
+// $dbpassword = "phpuser";
 
 
 
-
-
-//for dustytome.net
-/*
-$serverName = "mysql.dustytome.net";
+//This is for the iPage acct
+$serverName = "blaker113699836.ipagemysql.com";
 $database = "humanlib";
-$dbusername = "hulib_user";
-$dbpassword = "whynotHL";
-*/
-
-//for web4
-/*
-$dsn = "mysql:dbname=bldrober_3_db";
-$dbUser = "bldrober";
-$dbPass = "bldrober";
-*/
-
-
-
-
+$dbusername = "blaker113699836";
+$dbpassword = "@Yoyoyo55";
 
 
 
@@ -60,4 +34,5 @@ try {
     echo $e->getMessage();
 }
 
+//jennifer johnson
 

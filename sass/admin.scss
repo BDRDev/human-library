@@ -30,8 +30,10 @@
 
 .adminSection {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  padding-top: 100px;
+  flex-direction: column;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .addWorker {
@@ -75,3 +77,58 @@
 
 .addWorker input[type="submit"]:hover { background-color: transparent; color: #D62839; }
 
+.addEvent {
+  height: 450px;
+  border: 1px black solid;
+}
+
+
+.pendingSection {
+  margin-top: 20px;
+
+  .pendingUserHeader {
+    min-width: 800px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .pendingUser {
+    width: 800px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .pendingUserName {
+    width: 100px;
+    margin-right: 5px;
+  }
+
+  .pendingUserWhy, .pendingUserOverview {
+    width: 300px;
+    margin-right: 5px;
+  }
+
+  .pendingUserButton {
+    height: 20px;
+  }
+}
+
+
+
+#addEventSection, #attendeeListSection, #pendingBookSection, #pendingLibrarianSection, #massEmailSection, #listUsersSection {
+  margin-bottom: 30px;
+}
+
+
+//for the list usersSection
+.userDisplayOptions {
+  display: flex;
+  flex-direction: row;
+}
+
+.displayOption {
+  margin: 0 20px;
+  cursor: pointer;
+}

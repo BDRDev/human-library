@@ -1,7 +1,15 @@
+#signUpContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
 .signUpWrapper {
   padding-top: 100px;
-  height: 100%;
-  width: 100%;
+  min-height: 80%;
+  width: 50%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -9,14 +17,13 @@
 
 .signUpHeader {
   text-align: center;
-  padding-top: 100px;
-  padding-bottom: 16px;
+  padding-top: 15px;
   color: #75AD59;
   font-family: Roboto Slab, "sans-serif";
 }
 
 .signUpForm {
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -33,7 +40,7 @@
 }
 
 .signUpForm input {
-  padding-left: 10px;
+  //padding-left: 10px;
   outline: none;
   height: 30px;
   border: none;
@@ -66,6 +73,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  min-height: 80px;
 }
 
 .nameInput {
@@ -74,4 +82,80 @@
 
 .signUpHalf {
   width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.signUpRole {
+     list-style-type:none;
+     margin:25px 0 0 0;
+     padding:0;
+     display: flex;
+     justify-content: space-between;
+
+     li {
+      float:left;
+      width: 48%;
+      height:40px;
+      position:relative;
+      border:1px solid #CCC;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+     }
+}
+
+
+.signUpRole input {
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+
+.signUpRole input[type="radio"] {
+    opacity:0.011;
+    z-index:100;
+}
+
+.signUpRole input[type="radio"]:checked + label {
+    background:#75AD59;
+    color: white;
+}
+
+.signUpRole label {
+     width: 100%;
+     height: 100%;
+     margin: 0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     
+     cursor:pointer;
+    z-index:90;
+}
+
+.signUpRole label:hover {
+     background:#75AD59;
+     color: white;
+}
+
+.errorWrapper {
+  height: 15px;
+  width: 100%;
+}
+
+.validation-error {
+  line-height: 12px;
+
+  .error {
+    color: red;
+    margin: 0 !important;
+    font-size: 10px;
+  }
 }

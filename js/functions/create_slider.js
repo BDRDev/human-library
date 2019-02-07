@@ -1,6 +1,6 @@
 import { add_to_attending_url, remove_from_attending_url } from '../global_vars';
 
-console.log(add_to_attending_url);
+
 
 //class for the Sliders, was having a problem with encapsulation so we're going to give this a try
 export class Slider {
@@ -9,7 +9,7 @@ export class Slider {
         
         //Constructor runs anytime a new object is instantiated
         //this will be used to put the slider on the page
-        constructor(size, appendTo, sliderId, position, eventId, userId){
+        constructor(size, appendTo, sliderId, position, eventId, userId, callback){
             console.log("Create The Slider");
             
             this.size = size;
@@ -18,6 +18,7 @@ export class Slider {
             this.position = position;
             this.eventId = eventId;
             this.userId = userId;
+            this.callback = callback;
 
 
 
@@ -37,14 +38,14 @@ export class Slider {
                 $("#" + this.sliderId).addClass('positionTwo');
             }
 
-            $("#" + this.sliderId).click(() => this.sliderClick(this.sliderId, this.eventId, this.userId));
+            $("#" + this.sliderId).click(() => this.sliderClick(this.sliderId, this.eventId, this.userId, this.callback));
 
         }
 
 
         //here is where will check the position, animate the slider
         //as well as call the correct function
-        sliderClick(sliderId, eventId, userId){
+        sliderClick(sliderId, eventId, userId, callback){
             console.log("The Slider was clicked");
 
             let slider = $("#" + sliderId);
@@ -55,7 +56,7 @@ export class Slider {
                 console.log("In position Two");
 
                 slider.animate({
-                    'left': '39'
+                    'left': '0'
                 }, 600, function(){
                     slider.removeClass("positionTwo");
 
@@ -64,13 +65,17 @@ export class Slider {
 
                     //console.log("From PositionTwo -> PositionOne");
 
-                    notAttend("not attending", eventId, userId);
+                    notAttend("not attending", eventId, userId, () => {
+                        callback()
+                    });
+
+                    callback();
 
                 });
             } else {
 
                 slider.animate({
-                    'left' : '94'
+                    'left' : '54'
                 }, 600, function(){
                     slider.addClass("positionTwo");
 
@@ -79,7 +84,11 @@ export class Slider {
 
                     //console.log("From PositionOne -> PositionTwo");
 
-                    attend("attending", eventId, userId);
+                    attend("attending", eventId, userId, () => {
+                        callback()
+                    });
+
+                    
                 })
             }   
 
@@ -92,7 +101,7 @@ export class Slider {
 
 
 
- function attend(word, eventId, userId){
+ function attend(word, eventId, userId, callback){
     console.log(word);
     console.log('eventId', eventId);
     console.log('userId', userId);
@@ -107,11 +116,13 @@ export class Slider {
         success: function(result){
             console.log("Adding was successful");
             console.log(result);
+
+            callback();
         }
     }) //ends ajax call
 }
 
-function notAttend(word, eventId, userId){
+function notAttend(word, eventId, userId, callback){
     console.log(word);
     console.log('eventId', eventId);
     console.log('userId', userId);
@@ -127,6 +138,8 @@ function notAttend(word, eventId, userId){
         success: function(result){
             console.log("removing was successful");
             console.log(result);
+
+            callback();
         }
     }) //ends ajax call
 }

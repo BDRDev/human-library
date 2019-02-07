@@ -171,3 +171,27 @@ svg:hover #facebook { fill: #ECC061; }
   color: #75AD59;
   font-family: Roboto Slab, "sans-serif";
 }
+
+.bookDisplay {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bookDisplayBtns {
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
+
+  .displayBtns {
+    height: 40px;
+    width: 140px;
+    background-color: #75AD59;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}

@@ -1,6 +1,7 @@
 .small_slider_container {
 	width: 100px;
 	height: 45px;
+  position: relative;
 	background-color: #2a2a2a;
 	border-radius: 60px;
 	display: flex;
@@ -18,11 +19,11 @@
 }
 
 .positionTwo {
-  left: 94px;
+  left: 54px;
 }
 
 
 .small_slider_container {
-  margin-top: 75px;
-  margin-left: 40px;
+  //margin-top: 10px;
+  //margin-left: 40px;
 }

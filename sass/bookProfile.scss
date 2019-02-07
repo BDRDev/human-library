@@ -52,9 +52,12 @@
 }
 
 .profile_holder {
-  min-height: 800px;
-  width: 100%;
-  padding-top: 100px;
+  min-height: 200px;
+  
+  //top right bottom left
+  padding: 0 35px 0 35px;
+
+
 }
 
 .bookSignUpHolder {
@@ -86,4 +89,117 @@
   color: red;
   height: 15px;
 }
+
+.slider {
+  height: 100px;
+}
+.profileMessage {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event_details {
+    font-family: Raleway, sans-serif;
+    font-size: 18px;
+}
+
+#fullProfileWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    #verifiedWrapper {
+        width: 80%;
+        //border: 1px black solid;
+
+
+
+    }
+
+    #eventWrapper {
+        width: 20%;
+        padding-left: 20px;
+        padding-top: 20px;
+        //border: 1px black solid;
+    }
+
+
+}
+
+
+#pendingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event_times {
+     list-style-type:none;
+     margin: 10px 0 0 0;
+     padding:0;
+     display: flex;
+     justify-content: space-between;
+
+     li {
+      float:left;
+      width: 48%;
+      height:40px;
+      position:relative;
+      border:1px solid #CCC;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+     }
+
+     input {
+      display:block;
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+    }
+
+    input[type="checkbox"] {
+      opacity:0.011;
+      z-index:100;
+    }
+
+    input[type="checkbox"]:checked + label {
+      background:#900;
+      color: white;
+  }
+
+   label {
+       width: 100%;
+       height: 100%;
+       margin: 0 !important;
+       margin-top: 0;
+       display: flex !important;
+       justify-content: center;
+       align-items: center;
+       font-size: 14px;
+
+       
+       cursor:pointer;
+      z-index:90;
+  }
+
+  label:hover {
+     background: #900;
+     color: white;
+}
+}
+
+.timeSlot_rules {
+  margin-top: 5px;
+  text-align: center;
+}
+
+
+
 

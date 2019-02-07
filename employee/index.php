@@ -1,27 +1,17 @@
 <?php
 
-//checks to see if the admin session is set
+
 
 include_once '../_includes/config.php';
 
 
-
-
-    //all of the comments I have are for saying hi to the user logged in, dont tjink its necessary
-
     include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
 
-    // //loads in the users data from the database based off of the workerId
+    
     include_once ABSOLUTE_PATH . '/_includes/connection.php';
-    // $sql = "SELECT * FROM worker WHERE workerId=:workerId LIMIT 1";
-    // $pdoQuery = $conn->prepare($sql);
-    // $pdoQuery->bindValue(":workerId", $workerId, PDO::PARAM_INT);
-    // $pdoQuery->execute();
-    // $row = $pdoQuery->fetch(PDO::FETCH_ASSOC);
+    
 
     include_once ABSOLUTE_PATH . '/_includes/main_nav.inc.php';
-
-    // echo "<h2 class='adminName'>" . "<span class='welcome'>" . "Welcome " . "</span>" . $row['firstName'] . " " . $row['lastName'] . "</h2>";
 
     $sql = "SELECT * FROM bookdisplay ORDER BY title";
     $books = $conn->query($sql);
@@ -37,7 +27,6 @@ include_once '../_includes/config.php';
                 <tr>
                     <th class="rentTableHeader">Title</th>
                     <th class="rentTableHeader">Available</th>
-                    <th class="rentTableHeader">Time Back</th>
                     <th class="rentTableHeader">Rent/Return</th>
                 </tr>
             <?php
@@ -46,9 +35,11 @@ include_once '../_includes/config.php';
 
 
                 if ($book["available"] === "yes") {
-                    echo "<tr class='tableRow rowAvail' id='" . $book["displayId"] . "'>";
+                    echo "<tr class='tableRow rowAvail' id='book_" . $book["displayId"] . "'>";
                 } else if ($book["available"] === "no") {
-                    echo "<tr class='tableRow' id='" . $book["displayId"] . "'>";
+                    echo "<tr class='tableRow rowNotAvail' id='book_" . $book["displayId"] . "'>";
+                } else if($book["available"] === "away") {
+                    echo "<tr class='tableRow rowAway' id='book_" . $book["displayId"] . "'>";
                 }
 
 
@@ -60,19 +51,18 @@ include_once '../_includes/config.php';
                         echo $book["available"];
                     echo "</td>";
 
-                    echo "<td class='bookTimeBack'>";
-                        echo $book["timeBack"];
-                    echo "</td>";
-
 
                     if ($book["available"] === "yes") {
-                        echo "<td class='rentTableRent' id='" . $book["displayId"] . "' >RENT</td>";
+                        echo "<td class='rentTableRent rent_" . $book["displayId"] . "' id='" . $book["displayId"] . "' >RENT</td>";
 
 
                     } else if ($book["available"] === "no") {
 
-                         echo "<td class='rentTableReturn' id='" . $book["displayId"] . "' >RETURN</td>";
+                         echo "<td class='rentTableReturn return_" . $book["displayId"] . "' id='" . $book["displayId"] . "' >RETURN</td>";
 
+                    } else if($book["available"] === "away"){
+
+                        echo "<td class='rentTableReturn'></td>";
                     }
 
 
@@ -87,9 +77,7 @@ include_once '../_includes/config.php';
         </div>
 
         <div class="rentedBooks">
-            <div class="rentedRed"></div>
-            <div class="rentedYellow"></div>
-            <div class="rentedGreen"></div>
+            
         </div>
 
     </div>

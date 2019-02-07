@@ -1,0 +1,93 @@
+
+
+//I am going to have very general styles so that going forward all of the form styles will use the same classes
+//This is where I am going to do that
+
+//general form will be the class for the whole form
+.generalForm {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	//padding: 20px;
+	font-family: Raleway, sans-serif;
+	font-weight: 700;
+
+	h3 {
+		text-align: center;
+	}
+
+	label {
+		margin-top: 20px;
+	}
+
+	input {
+		padding-left: 10px;
+		outline: none;
+		height: 30px;
+		border: none;
+		margin-top: 10px;
+		border-bottom: 2px #75AD59 solid;
+		background-color: transparent;
+		font-family: Roboto Slab, "sans-serif";
+		font-weight: 100;
+	}
+
+	input[type="submit"] {
+		background-color: #75AD59;
+		min-height: 7%;
+		margin-top: 50px;
+		cursor: pointer;
+		color: white;
+		border: 2px #75AD59 solid;
+		transition: all 0.2s ease-in-out;
+		font-family: Raleway, sans-serif;
+		font-weight: 700;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	input[type="submit"]:hover {
+		background-color: transparent;
+		color: #75AD59;
+	}
+}
+
+#unverifiedWrapper{
+	 	display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+}
+
+.unverifiedForm {
+	display: flex;
+	flex-direction: column;
+	width: 750px;
+
+	.submit {
+		width: 752px;
+		margin-top: 25px;
+		cursor: pointer;
+	}
+
+	.unverifiedTop{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		.unverifiedSection {
+			display: flex;
+			flex-direction: column;
+			width: 373px;
+
+		}
+	}
+
+	textarea {
+		height: 100px;
+		width: 100%;
+		resize: none;
+	}
+}

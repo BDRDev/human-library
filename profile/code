@@ -1,0 +1,42 @@
+<div class="row">
+                    <div class="layout">
+                        <div class="text">
+                            <h1>Register for an Event</h1>
+                            <form class="profile_user_info_form generalForm">
+                                <label for="book_display_title" class="">Title</label>
+                                <input type="text" name="book_title" id="book_display_title" class="" value="" '="">
+
+                                <label for="book_display_description" class="">Short Description</label>
+                                <input type="text" name="book_description" id="book_display_description" class="" value="" '="">
+
+                                <label for="book_display_ch_one" class="">Chapter One Topic</label>
+                                <input type="text" name="book_ch_one" id="book_display_ch_one" class="" value="">
+
+                                <label for="book_display_ch_two" class="">Chapter Two Topic</label>
+                                <input type="text" name="book_ch_two" id="book_display_ch_two" class="" value="" '="">
+
+                                <label for="book_display_ch_three" class="">Chapter Three Topic</label>
+                                <input type="text" name="book_ch_three" id="book_display_ch_three" class="" value="" '="">
+
+                                <h2>Events</h2>
+
+                                <input type="radio" name="" value="" id="2019-library" />
+                                <label for="2019-library">IUPUI Human Library: April 11, 2019</label>
+
+                                <p>Here is where you will select you time slot for the event. Make sure you select at least two consecutive time slots</p>
+                                <ul class="no-bullet event_times">
+                                    <li><input type="checkbox" id="0" name="event_time" value="0" data-start="11" data-end="12"><label for="0">11am - 12pm</label></li>
+                                    <li><input type="checkbox" id="1" name="event_time" value="1" data-start="12" data-end="13"><label for="1">12pm - 1pm</label></li>
+                                    <li><input type="checkbox" id="2" name="event_time" value="2" data-start="13" data-end="14"><label for="2">1pm - 2pm</label></li>
+                                    <li><input type="checkbox" id="3" name="event_time" value="3" data-start="14" data-end="15"><label for="3">2pm - 3pm</label></li>
+                                    <li><input type="checkbox" id="4" name="event_time" value="4" data-start="15" data-end="16"><label for="4">3pm - 4pm</label></li>
+                                    <li><input type="checkbox" id="5" name="event_time" value="5" data-start="16" data-end="17"><label for="5">4pm - 5pm</label></li>
+                                    <li><input type="checkbox" id="6" name="event_time" value="6" data-start="17" data-end="18"><label for="6">5pm - 6pm</label></li>
+                                    <li><input type="checkbox" id="7" name="event_time" value="7" data-start="18" data-end="19"><label for="7">6pm - 7pm</label></li>
+                                </ul>
+
+                                <input class="button" type="submit" value="Register">
+                            </form>
+                            </div>
+                        </div>
+                    </div>
