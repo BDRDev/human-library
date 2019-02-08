@@ -4,7 +4,13 @@
 //This object is going to be used for signing up and  logging in users
 //split it up because these functions are going to be looong
 
-class User {
+
+include 'connection.class.php';
+
+
+
+
+class User extends Connection {
     //define the database connection object
     private $conn;
     private $userId;
@@ -13,18 +19,12 @@ class User {
     //the constructor. It connects to the MySQL server and select the database for use.
     public function __construct() {
 
-        //for localhost
-        // $serverName = "localhost";
-        // $database = "humanlib";
-        // $dbusername = "phpuser";
-        // $dbpassword = "phpuser";
+        parent::__construct();
 
-
-      //This is for the iPage acct
-        $serverName = "blaker113699836.ipagemysql.com";
-        $database = "humanlib";
-        $dbusername = "blaker113699836";
-        $dbpassword = "@Yoyoyo55";
+        $serverName = $this->serverName;
+        $database = $this->database;
+        $dbusername = $this->username;
+        $dbpassword = $this->password;
 
         //try to connect to the database
         try {

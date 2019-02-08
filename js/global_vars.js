@@ -4,13 +4,13 @@
 
 
 //Blake: Laptop Base
-//export const base = 'http://localhost/humanLibrary/';
+export const base = 'http://localhost/humanLibrary/';
 
 //Blake: Desktop Base
 //let base = 'http://localhost:8383/humanLibrary/';
 
 //Blake: Server Base
-export const base = 'http://www.humanlibrary.us/';
+//export const base = 'http://www.humanlibrary.us/';
 
 
 //Admin Email

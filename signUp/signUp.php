@@ -9,7 +9,7 @@
 
     include_once('../_includes/head.php');
     include_once('../_includes/header.php');
-    include_once('../_includes/test_nav.php');
+    include_once('../_includes/navigation.php');
 
 ?>
 

@@ -1,7 +1,8 @@
 
 
 _includes/config.php
-_includes/connection.php
+
+classes/connection.class.php
 
 /node_modules
 /oldCode

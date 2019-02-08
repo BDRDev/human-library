@@ -1,23 +1,23 @@
-<?php
-    //need to get the class 'current' to get added to the correct page
-?>
+
 
 <nav role="navigation" aria-label="Main" id="nav-main" itemscope="itemscope"
      itemtype="http://schema.org/SiteNavigationElement" class="main show-for-large">
     <ul class="row pad">
-        <!-- <li class="show-on-sticky home"><a href="https://humanlibrary.soic.iupui.edu/" aria-label="Home">Home</a></li> -->
 
-        <li class="show-on-sticky home"><a href="/humanlibrary" aria-label="Home">Home</a></li>
 
-        <li class="first">
-            <a class="<?php if($page_name === 'home'){ echo 'current'; } ?>" href="/" aria-label="Home">
+        <li class="show-on-sticky first home">
+
+            <a class="<?php if($page_name === 'home'){ echo 'current'; } ?>" 
+               href="https://humanlibrary.soic.iupui.edu/" aria-label="Home">
+
                 <span itemprop="name">Home</span>
             </a>
         </li>
 
 
-        <li class="">
-            <a class="<?php if($page_name === 'about'){ echo 'current'; } ?>" href="/">
+        <li>
+            <a class="<?php if($page_name === 'about'){ echo 'current'; } ?>" 
+               href="https://humanlibrary.soic.iupui.edu/about/">
                 <span itemprop="name">About</span>
             </a>
         </li>
@@ -29,7 +29,9 @@
         ?>
 
         <li>
-            <a class="<?php if($page_name === 'volunteer'){ echo 'current'; } ?>" href="/signUp/signUp.php" itemprop="url">
+            <a class="<?php if($page_name === 'volunteer'){ echo 'current'; } ?>" 
+               href="<?= URL_ROOT ?>/signUp/signUp.php" itemprop="url">
+
                 <span itemprop="name">Volunteer</span>
             </a>
         </li>
@@ -43,7 +45,8 @@
         <!--li><a href="http://www.humanlibrary.us/#bookSection" itemprop="url"><span itemprop="name">Books</span></a>
         </li-->
         <li>
-            <a class="<?php if($page_name === 'contact'){ echo 'current'; } ?>" href="/" itemprop="url">
+            <a class="<?php if($page_name === 'contact'){ echo 'current'; } ?>" 
+               href="https://humanlibrary.soic.iupui.edu/contact/" itemprop="url">
                 <span itemprop="name">Contact Us</span>
             </a>
         </li>
@@ -54,7 +57,9 @@
         ?>
 
             <li>
-                <a class="<?php if($page_name === 'login'){ echo 'current'; } ?>" href="/login/login.php">
+                <a class="<?php if($page_name === 'login'){ echo 'current'; } ?>" 
+                   href="<?= URL_ROOT ?>/login/login.php">
+
                     <span itemprop="name">Login</span>
                 </a>
             </li>
@@ -69,7 +74,8 @@
         ?>
 
                 <li>
-                    <a class="<?php if($page_name === 'admin'){ echo 'current'; } ?>" href="/admin/index.php" itemprop="url">
+                    <a class="<?php if($page_name === 'admin'){ echo 'current'; } ?>" 
+                       href="<?= URL_ROOT ?>/admin/index.php" itemprop="url">
                         <span itemprop="name">Admin</span>
                     </a>
                 </li>
@@ -90,7 +96,9 @@
         ?>
 
             <li>
-                <a class="<?php if($page_name === 'profile'){ echo 'current'; } ?>" href="/profile/profile.php" itemprop="url">
+                <a class="<?php if($page_name === 'profile'){ echo 'current'; } ?>"
+                   href="/humanlibrary/profile/profile.php" itemprop="url">
+
                     <span itemprop="name">Profile</span>
                 </a>
             </li>
@@ -105,7 +113,8 @@
             }
         ?>
 
-
-
+    </ul>
 </nav>
+
+
 <script> let forNav = 'showing'</script>

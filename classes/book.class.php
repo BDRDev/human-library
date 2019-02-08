@@ -4,27 +4,21 @@
 //This object is to handle anythign that can be done with the book
 //retrieving data, adding data, updating data, adding a new book, deleting a book
 
-//want to retrieve all data, a single piece of data
+include 'connection.class.php';
 
-class Book {
+class Book extends Connection {
     //define the database connection object
     private $conn;
 
     //the constructor. It connects to the MySQL server and select the database for use.
     public function __construct() {
 
-        //for localhost
-        // $serverName = "localhost";
-        // $database = "humanlib";
-        // $dbusername = "phpuser";
-        // $dbpassword = "phpuser";
+        parent::__construct();
 
-
-      //This is for the iPage acct
-        $serverName = "blaker113699836.ipagemysql.com";
-        $database = "humanlib";
-        $dbusername = "blaker113699836";
-        $dbpassword = "@Yoyoyo55";
+        $serverName = $this->serverName;
+        $database = $this->database;
+        $dbusername = $this->username;
+        $dbpassword = $this->password;
 
 
         //try to connect to the database

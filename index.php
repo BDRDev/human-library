@@ -1,9 +1,6 @@
 <?php
 
-include './_includes/config.php';
-// include ABSOLUTE_PATH .  '/_includes/connection.php';
-// include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
-// include_once ABSOLUTE_PATH . '/_includes/main_nav.inc.php';
+  include './_includes/config.php';
 
   include_once('./_includes/constants.php');
 
@@ -13,7 +10,7 @@ include './_includes/config.php';
 
   include_once('./_includes/head.php');
   include_once('./_includes/header.php');
-  include_once('./_includes/test_nav.php');
+  include_once('./_includes/navigation.php');
 ?>
 
 
@@ -47,7 +44,7 @@ include './_includes/config.php';
 
 
 <?php
-    include_once ABSOLUTE_PATH . '/_includes/footer.inc.php';
+    include_once ABSOLUTE_PATH . '/_includes/footer.php';
 ?>
 
 <script> let page='home'</script>
