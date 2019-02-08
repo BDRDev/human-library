@@ -6,10 +6,6 @@
 include_once '../_includes/config.php';
 
 if ($_SESSION['user_role'] === "admin") {
-
-
-
-    // include_once ABSOLUTE_PATH . '/_includes/header.php';
     
 
     include_once('../_includes/constants.php');
