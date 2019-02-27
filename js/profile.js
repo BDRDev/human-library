@@ -51,10 +51,10 @@ if(page === 'profile'){
 
 			loop++;
 			
-			// console.log("bookData", bookData);
-			// console.log("userData", userData);
-			// console.log("upcomingEvent", upcomingEvent);
-			 //console.log("attendingEvent", attendingEvent);
+			console.log("bookData", bookData);
+			console.log("userData", userData);
+			console.log("upcomingEvent", upcomingEvent);
+			console.log("attendingEvent", attendingEvent);
 
 			if(userData.role === "book"){
 
@@ -81,7 +81,6 @@ if(page === 'profile'){
 					clearInterval(intervalId);
 
 					//Here is where we print the form if all of the data we need is there
-					//console.log("PRINT THE VERIFIED LIBRARIAN BOOK");
 
 					console.log("it ran?")
 
@@ -130,26 +129,25 @@ if(page === 'profile'){
 		$("#pendingWrapper").html("Thank you we will be in touch shortly with more information");
 	}
 
-	const displayVerifiedPage = role => {
+	const displayVerifiedPage = async role => {
 		console.log("display verified page for", role)
 
 		if(role === 'book'){
 			//Gets the user's bookData
-			getBookData(userData.userId, (data) => {
-				bookData = data;
+			bookData = await getBookData(userData.userId);
 
-				//function that will print all of the sliders
-				printSliders(bookData.displayId, () => {
-					//this runs when the user clicks on the slider, either
-					console.log("A user clicked on the slider");
+			//function that will print all of the sliders
+			printSliders(bookData.displayId, () => {
+				//this runs when the user clicks on the slider, either
+				console.log("A user clicked on the slider");
 
-					//runs when a user clicks on the slider
-					displayVerifiedForm();
-				});
-
-				//function is self explanatory
+				//runs when a user clicks on the slider
 				displayVerifiedForm();
-			})
+			});
+
+			//function is self explanatory
+			displayVerifiedForm();
+			
 		}
 
 		if(role === 'librarian'){
@@ -200,7 +198,7 @@ if(page === 'profile'){
 	}
 
 	const getInformation = async currentUserId => {
-		console.log("get the user information");
+		console.log("get the user information", currentUserId);
 
 		userData = await getUserData(currentUserId);
 

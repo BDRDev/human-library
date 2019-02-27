@@ -1,44 +1,62 @@
-<?php
-include '../_includes/config.php';
-include ABSOLUTE_PATH . '/_includes/connection.php';
+<?php 
+    
+    include_once('../_includes/config.php');
+    include_once('../_includes/constants.php');
 
-include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
+    //gets the title from the constants page
+    $current_page = $login;
+    $page_name = 'login';
 
-include_once '../_includes/main_nav.inc.php';
-
-
-
+    include_once('../_includes/head.php');
+    include_once('../_includes/header.php');
+    include_once('../_includes/navigation.php');
 
 ?>
 
-<div class="formContainer">
+<main class="no-section-nav" id="content" role="main">
+    <div class="bg-none section">
+        <div class="row">
+            <div class="layout">
+                <div class="text">
+                    <h1>Login</h1>
+                    <div class="formContainer">
 
-	<div class="login_message">
-	<?php
+                        <div class="login_message">
+                        </div>
 
-		if(isset($_SESSION['login_message'])){
+                        <form class="loginForm" method="post" >
 
-			echo $_SESSION['login_message'];
+                            <label for="email" class="formLabel">Email</label>
+                            <input type="email" name="email" minlength="3" id="email" required/>
 
-			unset($_SESSION['login_message']);
-		}
-	?>
-	</div>
+                            <label for="password" class="formLabel">Password</label>
+                            <input type="password" name="password" minlength="3" id="password" required>
 
+                            <input class="button" type="submit" value="Login" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
-	
+<?php
 
-    <form class="loginForm" method="post" >
+    include_once('../_includes/footer.php');
+    include_once('../_includes/mobile_nav.php') 
 
-        <label for="email" class="formLabel">Email</label>
-        <input type="email" name="email" minlength="3" id="email" required/>
+?>
 
-        <label for="password" class="formLabel">Password</label>
-        <input type="password" name="password" minlength="3" id="password" required>
-
-        <input class="submit" type="submit" value="Submit">
-    </form>
-</div>
+<!-- Include Javascript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://assets.iu.edu/web/3.x/js/iu-framework.min.js"></script>
+<script src="https://humanlibrary.soic.iupui.edu/assets/js/site.js"></script>
 
 <script> let page='login'</script>
 <script src='../build/main.bundle.js'></script>
+
+
+</body>
+</html>

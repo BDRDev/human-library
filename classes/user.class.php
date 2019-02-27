@@ -5,7 +5,7 @@
 //split it up because these functions are going to be looong
 
 
-include 'connection.class.php';
+include_once 'connection.class.php';
 
 
 

@@ -1,81 +1,96 @@
-<?php
-    include_once '../_includes/config.php';
-    include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
-    include_once ABSOLUTE_PATH . "/_includes/main_nav.inc.php";
+
+<?php 
+    
+    include_once('../_includes/config.php');
+    include_once('../_includes/constants.php');
+
+    //gets the title from the constants page
+    $current_page = $sign_up;
+    $page_name = 'volunteer';
+
+    include_once('../_includes/head.php');
+    include_once('../_includes/header.php');
+    include_once('../_includes/navigation.php');
 
 ?>
 
-    <div id="signUpContainer">
-    <div class="signUpWrapper">
+<main class="no-section-nav" id="content" role="main">
+    <div class="bg-none section">
+        <div class="row">
+            <div class="layout">
+                <div class="text">
+                    <h1>Sign-up</h1>
+                    <form class="signUpForm">
 
-        <div class="signUpMessage"></div>
+                        <div class="signUpTop">
 
-        <h3 class="signUpHeader">IUPUI Human Library Book Signup Form</h3>
+                            <span class="signUpHalf">
+                                <label for="fName" class="signUpName">First</label>
+                                <input type="text" value="" name="first" id="fName" class="nameInput" data-error="#first-name-error"/>
+                                <span class="validation-error" id="first-name-error"></span>
+                            </span>
 
-        <p class="signUpExplanitation">
-            The IUPUI Human Library is an event designed to create positive conversations that challenge stereotypes. During the event, real people are 'loaned' out to have these conversations with other, interested 'readers'. Difficult questions are expected and encouraged.
-        </p>
+                            <span class="signUpHalf">
+                                <label for="lName" class="signUpName">Last</label>
+                                <input type="text" value="" name="last" id="lName" class="nameInput" data-error="#last-name-error"/>
+                                <span class="validation-error" id="last-name-error"></span>
+                            </span>
 
-        <p class="signUpInformation">
-            For more infomation about the experience, you may want to take a look at 
-            <a target="_blank" href="https://humanlibrary.soic.iupui.edu/">humanlibrary.org</a> and reference some of the books at 
-            <a target="_blank" href="http://humanlibrary.org/meet-our-human-books/">humanlibrary.org/meet-our-human-books</a>
-        </p>
+                        </div>
 
-        <form class="signUpForm">
+                        <label for="email" class="">Email</label>
+                        <input value="" type="email" name="email" id="email" data-error="#email-error"/>
+                        <span class="validation-error" id="email-error"></span>
 
-            <div class="signUpTop">
+                        <label for="password" class="">Password</label>
+                        <input value="" type="password" name="password" id="password"
+                               data-error="#password-error"/>
+                        <span class="validation-error" id="password-error"></span>
+
+                        <label for="confirmPassword" class="">Confirm Password</label>
+                        <input value="" type="password" name="confirmPassword" id="confirmPassword"
+                               data-error="#confirm-password-error"/>
+                        <span class="validation-error" id="confirm-password-error"></span>
+
+                        <ul class="no-bullet signUpRole">
+                            <li>
+                                <input checked type="radio" id="roleBook" name="role" value="book"/>
+                                <label for="roleBook">Book</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="roleLibrarian" name="role" value="librarian"/>
+                                <label for="roleLibrarian">Librarian</label>
+                            </li>
+                        </ul>
 
 
-                <span class="signUpHalf">
-                    <label for="fName" class="signUpName">First</label>
-                    <input value="" name="fName" id="fName" class="nameInput" data-error="#first-name-error" />
-                    <span class="validation-error" id="first-name-error"></span>
-                </span>
+                        <input type="submit" value="Submit" class="button" name="submit"/>
 
-                <span class="signUpHalf">
-                    <label for="lName" class="signUpName">Last</label>
-                    <input value="" name="lName" id="lName" class="nameInput" data-error="#last-name-error" />
-                    <span class="validation-error" id="last-name-error"></span>
-                </span>
-
+                    </form>
+                </div>
             </div>
-
-            <label for="email" class="">Email</label>
-            <input value="" type="email" name="email" id="email" data-error="#email-error" />
-            <span class="validation-error" id="email-error"></span>
-
-            <label for="password" class="">Password</label>
-            <input value="" type="password" name="password" id="password" data-error="#password-error" />
-            <span class="validation-error" id="password-error"></span>
-
-            <label for="confirmPassword" class="">Confirm Password</label>
-            <input value="" type="password" name="confirmPassword" id="confirmPassword" data-error="#confirm-password-error" />
-            <span class="validation-error" id="confirm-password-error"></span>
-
-            <ul class="signUpRole">
-                <li>
-                    <input checked type="radio" id="roleBook" name="role" value="book" />
-                    <label for="roleBook">Book</label>
-                </li>
-                <li>
-                    <input type="radio" id="roleLibrarian" name="role" value="librarian" />
-                    <label for="roleLibrarian">Librarian</label>
-                </li>
-            </ul>
-
-
-
-
-            <input type="submit" value="Submit" name="submit" />
-
-        </form>
-
-
+        </div>
     </div>
+</main>
 
+
+
+<?php
+
+    include_once('../_includes/footer.php');
+    include_once('../_includes/mobile_nav.php') 
+
+?>
+
+<!-- Include Javascript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://assets.iu.edu/web/3.x/js/iu-framework.min.js"></script>
+<script src="https://humanlibrary.soic.iupui.edu/assets/js/site.js"></script>
 
 <script> let page='signUp'</script>
 <script src='../build/main.bundle.js'></script>
 
-</div>
+
+</body>
+</html>

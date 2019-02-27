@@ -79,6 +79,10 @@
   flex-direction: column;
   justify-content: center;
   padding-left: 5px;
+
+  .rentedStory, .rentedTime, .rentedReturn {
+    font-size: 1rem !important;
+  }
 }
 
 .rentedReturn {

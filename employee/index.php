@@ -1,86 +1,46 @@
 <?php
 
+    include_once '../_includes/config.php';
+    include_once ABSOLUTE_PATH . '/_includes/constants.php';
 
-
-include_once '../_includes/config.php';
-
-
-    include_once ABSOLUTE_PATH . '/_includes/header.inc.php';
-
+    $current_page = $rent;
+    $page_name = 'rent';
     
-    include_once ABSOLUTE_PATH . '/_includes/connection.php';
-    
+    include_once ABSOLUTE_PATH . '/_includes/head.php';
+    include_once ABSOLUTE_PATH . '/_includes/header.php';
+    include_once ABSOLUTE_PATH . '/_includes/navigation.php';
 
-    include_once ABSOLUTE_PATH . '/_includes/main_nav.inc.php';
+?>
+<main class="no-section-nav" id="content" role="main">
+    <div class="bg-none section">
+        <div class="row" style="max-width: 100rem" >
+           <!-- <div class="profileLayout layout"> -->
+                <div class="text">
+                <div class="rentBooksWrapper">
 
-    $sql = "SELECT * FROM bookdisplay ORDER BY title";
-    $books = $conn->query($sql);
+                    <div class="bookTableWrapper">
 
+                        <table class="rentTable">
+                            <tr>
+                                <th class="rentTableHeader">Title</th>
+                                <th class="rentTableHeader">Available</th>
+                                <th class="rentTableHeader">Rent/Return</th>
+                            </tr>
+                        </table>
 
-    ?>
+                    </div>
 
-    <div class="rentBooksWrapper">
+                    <div class="rentedBooks">
+                        
+                    </div>
 
-        <div class="bookTableWrapper">
+                </div>
 
-            <table class="rentTable">
-                <tr>
-                    <th class="rentTableHeader">Title</th>
-                    <th class="rentTableHeader">Available</th>
-                    <th class="rentTableHeader">Rent/Return</th>
-                </tr>
-            <?php
-
-            foreach ($books as $book) {
-
-
-                if ($book["available"] === "yes") {
-                    echo "<tr class='tableRow rowAvail' id='book_" . $book["displayId"] . "'>";
-                } else if ($book["available"] === "no") {
-                    echo "<tr class='tableRow rowNotAvail' id='book_" . $book["displayId"] . "'>";
-                } else if($book["available"] === "away") {
-                    echo "<tr class='tableRow rowAway' id='book_" . $book["displayId"] . "'>";
-                }
-
-
-                    echo "<td class='bookTitle'>";
-                        echo $book["title"];
-                    echo "</td>";
-
-                    echo "<td class='bookAvailability'>";
-                        echo $book["available"];
-                    echo "</td>";
-
-
-                    if ($book["available"] === "yes") {
-                        echo "<td class='rentTableRent rent_" . $book["displayId"] . "' id='" . $book["displayId"] . "' >RENT</td>";
-
-
-                    } else if ($book["available"] === "no") {
-
-                         echo "<td class='rentTableReturn return_" . $book["displayId"] . "' id='" . $book["displayId"] . "' >RETURN</td>";
-
-                    } else if($book["available"] === "away"){
-
-                        echo "<td class='rentTableReturn'></td>";
-                    }
-
-
-                echo "</tr>";
-
-
-            } //ends foreach
-
-            ?>
-            </table>
-
+                </div> <!-- -->
+                <!-- </div> -->
+            </div>
         </div>
-
-        <div class="rentedBooks">
-            
-        </div>
-
-    </div>
+</main>
 
     <script> let page='rent'</script>
     <script src="../build/main.bundle.js"></script>

@@ -4,7 +4,7 @@
 //This object is to handle anythign that can be done with the book
 //retrieving data, adding data, updating data, adding a new book, deleting a book
 
-include 'connection.class.php';
+include_once 'connection.class.php';
 
 class Book extends Connection {
     //define the database connection object

@@ -30,7 +30,7 @@
 
         <li>
             <a class="<?php if($page_name === 'volunteer'){ echo 'current'; } ?>" 
-               href="<?= URL_ROOT ?>/signUp/signUp.php" itemprop="url">
+               href="<?= URL_ROOT ?>/signUp/index.php" itemprop="url">
 
                 <span itemprop="name">Volunteer</span>
             </a>
@@ -58,7 +58,7 @@
 
             <li>
                 <a class="<?php if($page_name === 'login'){ echo 'current'; } ?>" 
-                   href="<?= URL_ROOT ?>/login/login.php">
+                   href="<?= URL_ROOT ?>/login/index.php">
 
                     <span itemprop="name">Login</span>
                 </a>
@@ -66,9 +66,19 @@
 
         <?php
             }
+
+            if( isset($_SESSION["user_role"]) && $_SESSION["user_role"] !== 'book' ){
         ?>
 
+                 <li>
+                    <a class="<?php if($page_name === 'rent'){ echo 'current'; } ?>" 
+                       href="<?= URL_ROOT ?>/employee/index.php" itemprop="url">
+                        <span itemprop="name">Rent / Return</span>
+                    </a>
+                </li>
+
         <?php
+            }
 
             if( isset($_SESSION["user_role"]) && $_SESSION['user_role'] === 'admin' ){
         ?>
@@ -97,7 +107,7 @@
 
             <li>
                 <a class="<?php if($page_name === 'profile'){ echo 'current'; } ?>"
-                   href="/humanlibrary/profile/profile.php" itemprop="url">
+                   href="<?= URL_ROOT ?>/profile/index.php" itemprop="url">
 
                     <span itemprop="name">Profile</span>
                 </a>

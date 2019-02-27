@@ -109,6 +109,110 @@
   margin: 0 20px;
   cursor: pointer; }
 
+.rentBooksWrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+.bookTableWrapper {
+  width: 78%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: Raleway, "sans-serif";
+  padding-left: 20px;
+  padding-right: 20px; }
+
+.rentedBooks {
+  width: 300px;
+  height: 100%;
+  border: 1px black solid; }
+
+.rent-BookWrapper {
+  width: 20%;
+  height: 20%;
+  margin: 10px 10px;
+  padding: 10px;
+  display: flex; }
+
+.employee-TimeBack {
+  color: #ECC061;
+  font-family: Roboto Slab, "sans-serif";
+  padding-top: 10px; }
+
+.employee-Rent {
+  margin-top: 30px;
+  color: #75AD59;
+  padding: 10px 15px;
+  border: 2px #75AD59 solid;
+  transition: 0.3s all ease-in-out; }
+
+.employee-Rent:hover {
+  color: white;
+  background-color: #75AD59; }
+
+.employee-Return {
+  margin-top: 30px;
+  color: #D62839;
+  padding: 10px 15px;
+  border: 2px #D62839 solid;
+  transition: 0.3s all ease-in-out; }
+
+.employee-Return:hover {
+  color: white;
+  background-color: #D62839; }
+
+.employee-yes a, .employee-no a {
+  text-decoration: none;
+  color: black; }
+
+.rentedBook {
+  height: 65px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5px; }
+  .rentedBook .rentedStory, .rentedBook .rentedTime, .rentedBook .rentedReturn {
+    font-size: 1rem !important; }
+
+.rentedReturn {
+  cursor: pointer; }
+
+.green {
+  background-color: #7fff7f; }
+
+.yellow {
+  background-color: #ffff7f; }
+
+.red {
+  background-color: #ff7f7f; }
+
+.rentTable {
+  width: 100%;
+  min-height: 100%;
+  border: 1px black solid;
+  border-collapse: collapse;
+  border-spacing: 5px; }
+
+.rentTableHeader {
+  text-align: left; }
+
+.tableRow {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px; }
+
+.rowAvail {
+  background-color: lightgreen; }
+
+.rowNotAvail {
+  background-color: #ff7f7f; }
+
+.rowAway {
+  background-color: #DCDCDC; }
+
 .bookProfileHolder {
   height: 100%;
   width: 100%;
@@ -260,6 +364,12 @@
 .timeSlot_rules {
   margin-top: 5px;
   text-align: center; }
+
+.rentBooksWrapper {
+  padding-bottom: 30px; }
+
+.rentedBooks {
+  margin-right: 20px; }
 
 .small_slider_container {
   width: 100px;

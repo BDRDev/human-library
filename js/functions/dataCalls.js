@@ -168,16 +168,15 @@ export const attemptLogin = async formData => {
 
 }
 
-export function getAllBooks(callback){
+export const getAllBooks = async () => {
 
-	$.ajax({
+	const books = await $.ajax({
 		type: 'GET',
 		url: get_all_books_url,
-		dataType: 'json',
-		success: (result) => {
-			callback(result);
-		} 
+		dataType: 'json'
 	})
+
+	return books;
 }
 
 export function getAvailableBooks(callback){
@@ -194,14 +193,19 @@ export function getAvailableBooks(callback){
 
 export const getUserData = async userId => {
 
+	console.log('getUserData dataCall', userId)
+
+
+
 	let result = await $.ajax({
 	        type: 'GET',
 	        url: get_user_data_url,
 	        data: {
-	        	userId: userId
+	        	userId: parseInt(userId)
 	        },
 	        dataType: 'json',
-	    })
+	    });
+
 	return result;
 
 }
@@ -276,23 +280,21 @@ export const librarianApprovedEmail = (email) => {
 	})
 }
 
-export function getBookData(userId, callback){
-	console.log("get users book data");
+export const getBookData = async userId => {
 
-	console.log("userId", userId);
 
-	$.ajax({
-	        type: 'GET',
-	        url: get_user_book_data_url,
-	        data: {
-	        	displayId: userId
-	        },
-	        dataType: 'json',
-	        success: function(result){
-	        	console.log("result", result);
-	            callback(result);
-	        }
-	    })
+	console.log("get users book data", userId);
+
+
+	const data = await $.ajax({
+        type: 'GET',
+        url: get_user_book_data_url,
+        data: {
+        	displayId: parseInt(userId)
+        },
+        dataType: 'json',
+    });
+    return data;
 
 }
 
@@ -533,7 +535,10 @@ export const getUserSessions = async session => {
 				action: 'retrieve',
 				session: session
 			}
-		})
+		});
+
+		result = result.replace(/(\r\n|\n|\r)/gm, "");
+
 		return result;
 	} catch(error) {
 
@@ -612,8 +617,6 @@ export const getAttendingUsers = async eventId => {
 
 //This is the check to see if the user is attending the next upcoming event
 export const checkIfAttending = async (userId, eventId) => {
-
-	console.log("This is the checkIfAttending function from dataCalls", userId, eventId);
 	
 	let result = await $.ajax({
 		type: 'GET',
@@ -624,12 +627,7 @@ export const checkIfAttending = async (userId, eventId) => {
 			eventId: eventId
 		}
 	});
-
-	console.log("RESULT", result);
 	return result;
-
-
-
 }
 
 export const getEmails = (role, callback) => {

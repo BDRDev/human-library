@@ -14,9 +14,9 @@ export const base = 'http://localhost/humanLibrary/';
 
 
 //Admin Email
-export const adminEmail = 'blaker1136@gmail.com';
+//export const adminEmail = 'blaker1136@gmail.com';
 
-//export const adminEmail = 'HLIUPUI@iupui.edu';
+export const adminEmail = 'HLIUPUI@iupui.edu';
 
 export const add_new_event_url = base + 'ajax/addNewEvent.php';
 
@@ -115,3 +115,7 @@ export const send_book_approved_email_url = base + 'email/sendBookApprovedEmail.
 
 export const send_librarian_approved_email_url = base + 'email/sendLibrarianApprovedEmail.php';
 
+
+//For admins
+
+export const admin_update_book_url = base + 'api/admin/updateBook.php';

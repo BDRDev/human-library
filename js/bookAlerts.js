@@ -26,18 +26,17 @@ import { get_checked_out_books_url, return_book_url, rent_book_url } from './glo
 
 //One thing I have to decide is if I want to run it when they get returned or if we just want to remove them from the array
 //probably just remove from the array
-function getCheckedOutBooks(){
+export const getCheckedOutBooks = async () => {
 
-    $.ajax({
+    console.log('getCheckedOutBooks');
+
+    const result = await $.ajax({
         type: 'GET',
         url: get_checked_out_books_url,
         dataType: 'json',
-        success: function(result){
-            //console.log("result from getCheckedOutBooks", result);
+    });
 
-            createAlertColumn(result);
-        }
-    })
+    createAlertColumn(result);
 
 }
 
@@ -101,34 +100,39 @@ function returnBook(bookId){
     })
 }
 
-function rentBook(bookId){
+const rentBook = async bookId => {
 
     //takes the current time and adds that many minutes to it as you pass
     let returnTime = getReturnTime(11);
 
     console.log("returnTime", returnTime);
 
-    $.ajax({
+    const result = await $.ajax({
         url: rent_book_url,
         data: {
             bookId: bookId,
             timeBack: returnTime
         },
         dataType: 'json',
-        success: function(result){
-           
-           console.log("result", result);
-           getCheckedOutBooks();
-        }
-    })
+    });
+
+    if(result === 'SUCCESS'){
+        getCheckedOutBooks();
+    }
+    
 
 }
 
 //we are targeting the rent and changing it to return
 function toReturn(bookId){
 
+    console.log('toReturn function', bookId);
+
     let rentClass = "rent_" + bookId;
     let returnClass = "return_" + bookId;
+
+    console.log('rentClass', rentClass);
+    console.log('returnClass', returnClass);
 
     $("." + rentClass).addClass(returnClass);
     $("." + returnClass).removeClass(rentClass);
@@ -137,9 +141,10 @@ function toReturn(bookId){
     $("." + returnClass).addClass("rentTableReturn");
     $("." + returnClass).removeClass("rentTableRent");
 
-    
-    $("#book_" + bookId).removeClass("rowAvail");
-    $("#book_" + bookId).addClass("rowNotAvail");
+    const targetId = `#book_${bookId}`;
+
+    $(targetId).removeClass("rowAvail");
+    $(targetId).addClass("rowNotAvail");
 
     console.log("#book_" + bookId + " .bookAvailability");
 
@@ -188,7 +193,9 @@ function toRent(bookId){
 
 }
 
-function initButtons(){
+export function initButtons(){
+
+    console.log('initButtons');
 
     $(".rentedReturn").unbind().bind("click", function(){
 
@@ -198,6 +205,7 @@ function initButtons(){
 
     $(".rentTableRent").unbind().bind("click", function(){
         
+        console.log('clicked the rent button');
 
         rentBook(this.id);
         toReturn(this.id);
@@ -226,7 +234,7 @@ $(document).ready(function(){
 
         //runs bookAlerts every 10 sec
         setInterval(function(){
-            getCheckedOutBooks();
+            //getCheckedOutBooks();
         }, 5000)
     }
 

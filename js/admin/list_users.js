@@ -46,12 +46,14 @@ const displayUsers = async role => {
 
 	$('.displayUsers').empty();
 
-	users.forEach(({ firstName, lastName, email, role, dateSignedUp }) => {
+	users.forEach(({ userId, firstName, lastName, email, role, dateSignedUp }) => {
 
 		if(!dateSignedUp){
 			dateSignedUp = '< 2019/01/28';
 		}
 
-		$('.displayUsers').append(`<div>${firstName} ${lastName} - Email: ${email} -- ${role} -- ${dateSignedUp}</div>`);
+		$('.displayUsers').append(`<div>${firstName} ${lastName} - Email: ${email} -- ${role} -- ${dateSignedUp}
+
+			${role === 'book' ? `<a href="/humanLibrary/admin/edit.php?userId=${userId}">Edit</a>` : '' }</div>`);
 	})
 }
