@@ -1,6 +1,7 @@
 //This file is responsible for getting a list of users that will be attending the next upcoming event
 
-import { getUpcomingEvent, getAttendingUsers } from '../functions/dataCalls';
+import { getUpcomingEvent } from '../functions/dataCalls';
+import { getAttendingUsers } from '../functions/adminCalls';
 
 import { attendeeListSection } from '../admin';
 

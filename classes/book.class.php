@@ -251,7 +251,7 @@ class Book extends Connection {
 
         //$sql = "SELECT * FROM attending where event_id=:eventId";
 
-        $sql = "Select user.firstName, user.lastName, user.email, attending.attendId, attending.event_id
+        $sql = "Select user.firstName, user.lastName, user.email, attending.attendId, attending.event_id, user.role
         from user 
         join attending
         on user.userId = attending.user_id
@@ -377,7 +377,7 @@ class Book extends Connection {
 
     }
 
-    public function updateVerifiedUser($userId, $title, $description, $chapter_one, $chapter_two, $chapter_three, $start_time, $end_time){
+    public function updateVerifiedBook($data, $userId){
 
         $sql = "UPDATE bookdisplay SET 
             title = :title, 
@@ -391,13 +391,13 @@ class Book extends Connection {
 
         $pdoQuery = $this->conn->prepare($sql);
 
-        $pdoQuery->bindParam(':title', $title, PDO::PARAM_STR);
-        $pdoQuery->bindParam(':description', $description, PDO::PARAM_STR);
-        $pdoQuery->bindParam(':chapter_one', $chapter_one, PDO::PARAM_STR);
-        $pdoQuery->bindParam(':chapter_two', $chapter_two, PDO::PARAM_STR);
-        $pdoQuery->bindParam(':chapter_three', $chapter_three, PDO::PARAM_STR);
-        $pdoQuery->bindParam(':start_time', $start_time, PDO::PARAM_STR);
-        $pdoQuery->bindParam(':end_time', $end_time, PDO::PARAM_STR);
+        $pdoQuery->bindParam(':title', $data['title'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':description', $data['description'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':chapter_one', $data['chapter_one'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':chapter_two', $data['chapter_two'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':chapter_three', $data['chapter_three'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':start_time', $data['start_time'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':end_time', $data['end_time'], PDO::PARAM_STR);
         $pdoQuery->bindParam(':userId', $userId, PDO::PARAM_INT);
 
         if($pdoQuery -> execute()){
@@ -405,7 +405,7 @@ class Book extends Connection {
         }
     }
 
-    public function updateVerifiedLibrarian($userId, $start_time, $end_time){
+    public function updateVerifiedLibrarian($data, $userId){
 
          $sql = "UPDATE librarian SET 
             start_time = :start_time,
@@ -414,48 +414,13 @@ class Book extends Connection {
 
         $pdoQuery = $this->conn->prepare($sql);
 
-        $pdoQuery->bindParam(':start_time', $start_time, PDO::PARAM_STR);
-        $pdoQuery->bindParam(':end_time', $end_time, PDO::PARAM_STR);
+        $pdoQuery->bindParam(':start_time', $data['start_time'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':end_time', $data['end_time'], PDO::PARAM_STR);
         $pdoQuery->bindParam(':userId', $userId, PDO::PARAM_INT);
 
          if($pdoQuery -> execute()){
             return 'success';
         }   
-    }
-
-    public function getPendingUsers(){
-
-        $sql = "SELECT * FROM user WHERE role = 'book' AND user_status = 'pending'";
-
-        $pdoQuery = $this->conn->query($sql);
-
-        $users = $pdoQuery->fetchAll();
-
-        return $users;
-    }
-
-    public function getPendingLibrarians(){
-        $sql = "SELECT * FROM user WHERE role = 'librarian' AND user_status = 'pending'";
-        $pdoQuery = $this->conn->query($sql);
-
-        $users = $pdoQuery->fetchAll();
-
-        return $users;
-    }
-
-    public function updatePendingUser($userId){
-
-        $sql = "UPDATE user SET user_status = 'verified' WHERE userId = :userId";
-
-        $pdoQuery = $this->conn->prepare($sql);
-
-        
-        $pdoQuery->bindParam(':userId', $userId, PDO::PARAM_INT);
-
-        if($pdoQuery->execute()){
-
-            return true;
-        }
     }
 
     public function createEmptyBook($displayId){

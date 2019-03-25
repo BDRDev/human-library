@@ -1,7 +1,7 @@
 
 //handles logging in the user
 
-import { base } from './global_vars';
+import { prefix } from './global_vars';
 import { attemptLogin, getUserSessions, setUserSessions } from './functions/dataCalls';
 
 if(page === 'login'){
@@ -30,9 +30,9 @@ if(page === 'login'){
 		setUserSessions("user_role", user.role);
 		
 		if(user.role === 'admin'){
-			window.location.href = base + "admin/index.php";
+			window.location.href = `${prefix}/admin/index.php`;
 		} else {
-			window.location.href = base + "profile/index.php";
+			window.location.href = `${prefix}/profile/index.php`;
 		}
 	}
 }

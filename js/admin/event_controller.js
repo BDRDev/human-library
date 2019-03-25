@@ -1,6 +1,8 @@
 
 
-import { getUpcomingEvent, getAttendingUsers } from '../functions/dataCalls';
+import { getUpcomingEvent } from '../functions/dataCalls';
+
+import { getAttendingUsers } from '../functions/adminCalls';
 
 
 import { eventControllerSection } from '../admin';
@@ -13,14 +15,70 @@ export const eventController = async () => {
 
 	console.log('event', event);
 
-	const users = await getAttendingUsers(event.eventId);
+	displayEventDetails(event);
+	displayDaysUntilEvent(event);
+	displayAttendingNumbers(event);
 
-	console.log('users', users);
+	
 
-	getDate(event.date);
+	
 }
 
-const getDate = (event) => {
+const displayAttendingNumbers = async ({ eventId }) => {
+
+	//number of users attending
+	const users = await getAttendingUsers(eventId);
+	const books = users.filter(({ role }) => role === 'book' );
+	const librarians = users.filter(({ role }) => role === 'librarian');
+
+	const attendingUsers = 
+		`<div>
+			<h4>Attending Numbers</h4>
+			<div class='numbers-total'>Total: ${users.length}</div>
+			<div class='numbers-books'>Books: ${books.length}</div>
+			<div class='numbers-librarians'>Librarians: ${librarians.length}</div>
+		</div>`
+
+
+	$('#attendingUsersWrapper').html(attendingUsers)
+}
+
+const displayDaysUntilEvent = ({ date }) => {
+
+	
+
+	//days until the event
+	const difference = getDate(date);
+
+	console.log('difference', difference);
+
+	const daysUntilEvent = 
+		`<div>
+			Days until next event: ${difference}
+		</div>`;
+
+	$('#daysUntilEventWrapper').html(daysUntilEvent);
+}
+
+const displayEventDetails = ({ name, date, address, city, state, room, event_start, event_end }) => {
+
+	//console.log('display event details');
+
+	const eventDetails = 
+		`<div class='eventDetails'>
+			<h4>Event Details</h4>
+			<div class='event-name'>${name}</div>
+			<div class='event-date'>${date}</div>
+			<div class='event-address-1'>${address}</div>
+			<div class='event-address-2'>${city}, ${state}</div>
+			<div class='event-room'>Room: ${room}</div>
+			<div class='event-time'>${event_start} - ${event_end}</div>
+		</div>`
+
+	$('#eventDetailsWrapper').html(eventDetails);
+}
+
+const getDate = event => {
 
 	var today = new Date();
 	var dd = today.getDate();
@@ -36,7 +94,7 @@ const getDate = (event) => {
 	}
 
 	today = yyyy + '/' + mm + '/' + dd;
-	console.log(today)
+	//console.log(today)
 
 	//console.log('days until', event - today);
 
@@ -56,7 +114,7 @@ const getDate = (event) => {
 	    b = new Date(event),
 	    difference = dateDiffInDays(a, b);
 
-	    console.log('difference', difference)
+	   return difference;
 }
 
 //this is going to have the name of the event / event locations / time etc

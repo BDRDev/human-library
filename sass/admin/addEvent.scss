@@ -1,0 +1,54 @@
+#addEventSection {
+
+	input{
+		margin-bottom: 0;
+	}
+
+	p {
+		margin-bottom: 4px !important;
+	}
+
+	.eventSection {
+		margin-bottom: 8px;
+	}
+
+	label {
+		color: red !important;
+		font-size: 11.5px !important;
+	}
+
+	.newEventTime {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 8px;
+
+		.timeSelection {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			height: 40px;
+
+			.time {
+				width: 59.5%;
+			}
+
+			.period {
+				width: 39.5%;
+			}
+		}
+	}
+
+	.cityState {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		.city {
+			width: 59.5%;
+		}
+
+		.state {
+			width: 39.5%;
+		}
+	}
+}

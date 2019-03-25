@@ -1,5 +1,7 @@
 
-import { getPendingBooks, approveUser, sendEmail, getUserData } from '../functions/dataCalls';
+import { sendEmail, getUserData } from '../functions/dataCalls';
+
+import { approveUser, declineUser, getPendingBooks } from '../functions/adminCalls';
 
 import { pendingBooksSection } from '../admin';
 
@@ -14,13 +16,31 @@ export const pendingBooks = async () => {
 	if(books.length > 0){
 
 		//next we need to print the headers
-		$(pendingBooksSection).append("<div><span>Name</span> <span>Why book</span> <span>Book Overview</span> </div>");
+		$(pendingBooksSection).append(
+			`<div class='pendingSubHeaders'>
+				<div class="subHeader">Why book</div> 
+				<div class="subHeader">Book Overview</div>
+				<div class="choice"></div>
+			</div>`
+		);
+
+		//<button id=${userId} class='pendingBook'>Approve</button>
+
 
 		//next we will loop through the books and print their information
 		books.forEach(({ userId, firstName, lastName, why_book, book_overview }) => {
 			$(pendingBooksSection).append(
-				`<div id='pendingBook${userId}'>${firstName} ${lastName} ${why_book}  ${book_overview} 
-					<button id=${userId} class='pendingBook'>Approve</button>
+				`<div class='pendingUser' id='pendingBook${userId}'>
+					<div class='name'>${firstName} ${lastName} </div>
+					<div class='contentSection'>
+						<div class='textSection'>${why_book}</div>
+						<div class='textSection'>${book_overview}</div> 
+
+						<div class='pendingChoice'>
+							<div id='${userId}' class='choice pendingBook approve'>Approve</div>
+							<div id='${userId}' class='choice pendingBook decline'>Decline</div>
+						</div>						
+					</div>
 				</div>`
 			);
 		});
@@ -30,15 +50,30 @@ export const pendingBooks = async () => {
 
 			//object destructuring, just taking id off event.target.id
 			const { id } = event.target;
-			//switch user from pending -> approved
+			
+			let result;
 
-			const approved = approveUser(id);
+			if($(event.target).hasClass('approve')){
+				//run approveUser
+				//switch user from pending -> approved
+				result = await approveUser(id);
+				
+			} else {
+				//run declineUser
+				//switch user from pending -> declined
+				result = await declineUser(id);
+				
+			}
+
 
 			//if we get true from the ajax call we will remove the book from the screen
-			if(approved){
+
+			if(result){
 				$(`#pendingBook${id}`).remove();
 
 				let result = await getUserData(id);
+
+				console.log('approve or decline was successful')
 
 				//sendEmail('bookAccountApproved', result.email);
 			}

@@ -95,4 +95,102 @@ class Admin extends Connection {
         }
     }
 
+    //adds a new event
+    public function addNewEvent($data){
+
+        $sql = "INSERT INTO events VALUES 
+        (null, :name, :edate, :event_start, :event_end, :address, :city, :state, :room, :date_added, 5)";
+
+        $pdoQuery = $this->conn->prepare($sql);
+
+        $pdoQuery->bindParam(':name', $data['eventName'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':edate', $data['date'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':event_start', $data['startTime'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':event_end', $data['endTime'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':address', $data['address'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':city', $data['city'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':state', $data['state'], PDO::PARAM_STR);
+        $pdoQuery->bindParam(':room', $data['room'], PDO::PARAM_STR);
+        $pdoQuery->bindValue(":date_added", date("y/m/d"), PDO::PARAM_STR);
+
+        if($pdoQuery->execute()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getPendingUsers(){
+
+        $sql = "SELECT * FROM user WHERE role = 'book' AND user_status = 'pending'";
+
+        $pdoQuery = $this->conn->query($sql);
+
+        $users = $pdoQuery->fetchAll();
+
+        return $users;
+    }
+
+    public function getPendingLibrarians(){
+        $sql = "SELECT * FROM user WHERE role = 'librarian' AND user_status = 'pending'";
+        $pdoQuery = $this->conn->query($sql);
+
+        $users = $pdoQuery->fetchAll();
+
+        return $users;
+    }
+
+    //approves users who's staus is pending
+    public function approveUser($userId){
+
+        $sql = "UPDATE user SET user_status = 'verified' WHERE userId = :userId";
+
+        $pdoQuery = $this->conn->prepare($sql);
+
+        
+        $pdoQuery->bindParam(':userId', $userId, PDO::PARAM_STR);
+
+        if($pdoQuery->execute()){
+
+            return true;
+        }
+    }
+
+    //declines users who's staus is pending
+    public function declineUser($userId){
+
+        $sql = "UPDATE user SET user_status = 'declined' WHERE userId = :userId";
+
+        $pdoQuery = $this->conn->prepare($sql);
+
+        
+        $pdoQuery->bindParam(':userId', $userId, PDO::PARAM_INT);
+
+        if($pdoQuery->execute()){
+
+            return true;
+        }
+    }
+
+    public function getEventUserList($eventId){
+
+        //$sql = "SELECT * FROM attending where event_id=:eventId";
+
+        $sql = "Select user.firstName, user.lastName, user.email, attending.attendId, attending.event_id, user.role
+        from user 
+        join attending
+        on user.userId = attending.user_id
+        where attending.event_id = :eventId";
+
+        $pdoQuery = $this->conn->prepare($sql);
+
+        $pdoQuery->execute([':eventId' => $eventId]);
+
+        $attendees = $pdoQuery->fetchAll();
+
+        return($attendees);
+    }
+
+
+
 }

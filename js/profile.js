@@ -51,7 +51,8 @@ if(page === 'profile'){
 
 			loop++;
 			
-			console.log("bookData", bookData);
+			//console.log("bookData", bookData);
+			console.log('lib data', librarianData);
 			console.log("userData", userData);
 			console.log("upcomingEvent", upcomingEvent);
 			console.log("attendingEvent", attendingEvent);
@@ -74,6 +75,8 @@ if(page === 'profile'){
 					})
 				}
 			} else if(userData.role === "librarian"){
+
+				console.log('librarian');
 
 				if(!jQuery.isEmptyObject(userData) && !jQuery.isEmptyObject(librarianData) && 
 					!jQuery.isEmptyObject(upcomingEvent) && !jQuery.isEmptyObject(attendingEvent)){
@@ -152,22 +155,18 @@ if(page === 'profile'){
 
 		if(role === 'librarian'){
 
-			getLibrarianData(userData.userId, (data) => {
-				librarianData = data;
-				
-				//function that will print all of the sliders
-				printSliders(userData.userId, () => {
-					console.log("A user clicked on the slider");
-
-					//runs when a user clicks on the slider
-					displayVerifiedForm();
-				});
-
-				//function is self explanatory
-				displayVerifiedForm();
-				
-			});
+			librarianData = await getLibrarianData(userData.userId);
 			
+			//function that will print all of the sliders
+			printSliders(userData.userId, () => {
+				console.log("A user clicked on the slider");
+
+				//runs when a user clicks on the slider
+				displayVerifiedForm();
+			});
+
+			//function is self explanatory
+			displayVerifiedForm();
 		}
 	}
 

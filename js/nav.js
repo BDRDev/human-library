@@ -4,7 +4,7 @@
 
 import { getUserSessions, destroyUserSession } from './functions/dataCalls';
 
-import { base } from './global_vars';
+import { prefix } from './global_vars';
 
 if(forNav === 'showing'){
 
@@ -28,7 +28,7 @@ if(forNav === 'showing'){
 			destroyUserSession("user_role");
 
 			//now we route the user back to the home page
-			window.location = base;
+			window.location = `${prefix}/`;
 		})
 	})
 }

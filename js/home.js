@@ -3,8 +3,6 @@
 
 import { getAllBooks, getAvailableBooks } from './functions/dataCalls';
 
-import { base } from './global_vars';
-
 
 if(page === 'home'){
 

@@ -115,7 +115,7 @@
   }
 }
 
-
+//new section, what I am for sure we are using
 
 #addEventSection, #attendeeListSection, #pendingBookSection, #pendingLibrarianSection, #massEmailSection, #listUsersSection {
   margin-bottom: 30px;
@@ -132,3 +132,183 @@
   margin: 0 20px;
   cursor: pointer;
 }
+
+.adminAddControlSection {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  #addEventSection{
+    width: 74.5%;
+    border: 1px black solid;
+
+    .sectionHeader {
+      width: 100%;
+      color: red;
+      text-align: center;
+    }
+  }
+
+  #eventControlSection {
+    width: 24.5%;
+    border: 1px black solid;
+    height: 600px;
+
+    .sectionHeader {
+      width: 100%;
+      color: red;
+      text-align: center;
+    }
+  }
+}
+
+.adminPendingSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  #pendingBookSection {
+    width: 49.5%;
+    border: 1px black solid;
+    min-height: 300px;
+
+    .sectionHeader {
+      width: 100%;
+      color: red;
+      text-align: center;
+    }
+  }
+
+  #pendingLibrarianSection {
+    width: 49.5%;
+    border: 1px black solid;
+    min-height: 300px;
+
+    .sectionHeader {
+      width: 100%;
+      color: red;
+      text-align: center;
+    }
+  }
+}
+
+#attendeeListSection {
+  width: 100%;
+  border: 1px black solid;
+
+  .sectionHeader {
+      width: 100%;
+      color: red;
+      text-align: center;
+    }
+}
+
+#massEmailSection {
+  width: 100%;
+  border: 1px black solid;
+
+  .sectionHeader {
+      width: 100%;
+      color: red;
+      text-align: center;
+    }
+}
+
+#listUsersSection{
+  width: 100%;
+  border: 1px black solid;
+
+  .sectionHeader {
+      width: 100%;
+      color: red;
+      text-align: center;
+    }
+}
+
+
+
+
+//THIS IS FOR THE PENDING SECTIONS FOR THE ADMIN PAGE
+
+.pendingSubHeaders {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+
+  .subHeader {
+    width: 40%;
+    margin-right: 8px;
+  }
+
+  .choice {
+    width: 20%;
+  }
+}
+
+
+
+@media only screen and (max-width: 1200px) {
+
+  .adminAddControlSection {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    #addEventSection{
+      width: 64.5%;
+      border: 1px black solid;
+    }
+
+    #eventControlSection {
+      width: 34.5%;
+      border: 1px black solid;
+      height: 600px;
+    }
+  }
+
+  .adminPendingSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    #pendingBookSection {
+      width: 100%;
+      border: 1px black solid;
+      min-height: 300px;
+    }
+
+    #pendingLibrarianSection {
+      width: 100%;
+      border: 1px black solid;
+      min-height: 300px;
+    }
+  }
+}
+
+@media only screen and (max-width: 850px) {
+
+  .adminAddControlSection {
+
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+
+    #addEventSection{
+      width: 100%;
+      border: 1px black solid;
+    }
+
+    #eventControlSection {
+      width: 100%;
+      border: 1px black solid;
+      height: 300px;
+      margin-bottom: 30px;
+    }
+  }
+
+  
+}
+

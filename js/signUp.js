@@ -8,7 +8,7 @@ import { signUp, getUserDataEmail, createEmptyBook, createEmptyLibrarian, checkF
 
 import _ from 'lodash';
 
-import { check_unique_email_url, base, adminEmail } from './global_vars';
+import { check_unique_email_url, adminEmail, prefix } from './global_vars';
 
 const jqueryValidation = require('jquery-validation');
 
@@ -27,7 +27,7 @@ if(page === 'signUp'){
 		$(".signUpMessage").html("");
 	}
 
-	const handleBookSignUp = (formData) => {
+	const handleBookSignUp = async formData => {
 		//here is where we will send all the emails, I might remove the password field for safety
 
 		//email one: A message to the user saying what to do next, as well as if they need anything contact the admin
@@ -38,25 +38,25 @@ if(page === 'signUp'){
 
 		//next thing we need to do is get the user data
 		//here is also where we will set the global user obj
-		getUserDataEmail(formData.email, (user) => {
+		const user = await getUserDataEmail(formData.email)
 			
-			//need to create an empty book entry
-			createEmptyBook(user.userId, () => {
+		//need to create an empty book entry
+		await createEmptyBook(user.userId)
 
-				//after this we can re direct the user to their profile page
-				setUserSessions("userId", user.userId);
-				setUserSessions("user_role", user.role);
-				
+		//after this we can re direct the user to their profile page
+		setUserSessions("userId", user.userId);
+		setUserSessions("user_role", user.role);
+		
 
-				window.location = base + "profile/index.php";
+		window.location =  `${prefix}/profile/index.php`;
 				
 				
-
-			});
-		});
+		
 	} //ends handleBookSignUp
 
-	const handleLibrarianSignUp = (formData) => {
+	const handleLibrarianSignUp = async formData => {
+
+		console.log('handleLibrarianSignUp');
 
 		//email one: A message to the user saying what to do next, as well as if they need anything contact the admin
 		sendEmail('userSignUpSuccess', formData.email, formData);
@@ -65,22 +65,19 @@ if(page === 'signUp'){
 		sendEmail('adminNewUserSignUp', adminEmail, formData);
 
 		//next thing we need to do is get the user data
-		getUserDataEmail(formData.email, (user) => {
+		const user = await getUserDataEmail(formData.email)
 
-			//now we have the user data
-			
-			//need to create an empty book entry
-			createEmptyLibrarian(user.userId, () => {
+		//now we have the user data
+		
+		//need to create an empty book entry
+		await createEmptyLibrarian(user.userId)
 
-				//after this we can re direct the user to their profile page
-				setUserSessions("userId", user.userId);
-				setUserSessions("user_role", user.role);
-				
-				window.location = base + "profile/index.php";
+		//after this we can re direct the user to their profile page
+		setUserSessions("userId", user.userId);
+		setUserSessions("user_role", user.role);
+		
+		window.location = `${prefix}/profile/index.php`;
 
-			});
-
-		});
 	}
 
 	const startSignUp = async formData => {
@@ -100,7 +97,7 @@ if(page === 'signUp'){
 			if(role === "book"){
 				handleBookSignUp(formData)
 			} else if(role === "librarian"){
-				//handleLibrarianSignUp(formData);
+				handleLibrarianSignUp(formData);
 			}
 		}
 		
@@ -110,6 +107,8 @@ if(page === 'signUp'){
 
 
 	$(document).ready(() => {
+
+		const prefix = '/humanlibrary';
 
 		$(".signUpForm").validate({
 			submitHandler: form => {
@@ -132,7 +131,7 @@ if(page === 'signUp'){
 				email: {
 					required: true,
 					email: true,
-					remote: `${check_unique_email_url}`
+					remote: `${prefix}/api/general/checkUniqueEmail.php`
 				},
 				password: {
 					required: true

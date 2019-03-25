@@ -1,0 +1,49 @@
+#listUsersSection {
+
+	.userDisplayOptions {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 8px;
+
+		.displayOption {
+			border: 1px black solid;
+			padding: 5px 20px;
+		}
+	}
+
+	.userDisplayHeaders {
+		display: flex;
+		flex-direction: row;
+
+		.header {
+			width: 20%;
+		}
+
+		.email {
+			width: 30%;
+		}
+
+		.role {
+			width: 15%;
+		}
+	}
+
+	.displayUsers {
+		.user {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.header {
+			width: 20%;
+		}
+
+		.email {
+			width: 30%;
+		}
+
+		.role {
+			width: 15%;
+		}
+	}
+}

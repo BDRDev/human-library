@@ -109,6 +109,121 @@
   margin: 0 20px;
   cursor: pointer; }
 
+.adminAddControlSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  .adminAddControlSection #addEventSection {
+    width: 74.5%;
+    border: 1px black solid; }
+    .adminAddControlSection #addEventSection .sectionHeader {
+      width: 100%;
+      color: red;
+      text-align: center; }
+  .adminAddControlSection #eventControlSection {
+    width: 24.5%;
+    border: 1px black solid;
+    height: 600px; }
+    .adminAddControlSection #eventControlSection .sectionHeader {
+      width: 100%;
+      color: red;
+      text-align: center; }
+
+.adminPendingSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  .adminPendingSection #pendingBookSection {
+    width: 49.5%;
+    border: 1px black solid;
+    min-height: 300px; }
+    .adminPendingSection #pendingBookSection .sectionHeader {
+      width: 100%;
+      color: red;
+      text-align: center; }
+  .adminPendingSection #pendingLibrarianSection {
+    width: 49.5%;
+    border: 1px black solid;
+    min-height: 300px; }
+    .adminPendingSection #pendingLibrarianSection .sectionHeader {
+      width: 100%;
+      color: red;
+      text-align: center; }
+
+#attendeeListSection {
+  width: 100%;
+  border: 1px black solid; }
+  #attendeeListSection .sectionHeader {
+    width: 100%;
+    color: red;
+    text-align: center; }
+
+#massEmailSection {
+  width: 100%;
+  border: 1px black solid; }
+  #massEmailSection .sectionHeader {
+    width: 100%;
+    color: red;
+    text-align: center; }
+
+#listUsersSection {
+  width: 100%;
+  border: 1px black solid; }
+  #listUsersSection .sectionHeader {
+    width: 100%;
+    color: red;
+    text-align: center; }
+
+.pendingSubHeaders {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px; }
+  .pendingSubHeaders .subHeader {
+    width: 40%;
+    margin-right: 8px; }
+  .pendingSubHeaders .choice {
+    width: 20%; }
+
+@media only screen and (max-width: 1200px) {
+  .adminAddControlSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
+    .adminAddControlSection #addEventSection {
+      width: 64.5%;
+      border: 1px black solid; }
+    .adminAddControlSection #eventControlSection {
+      width: 34.5%;
+      border: 1px black solid;
+      height: 600px; }
+  .adminPendingSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    .adminPendingSection #pendingBookSection {
+      width: 100%;
+      border: 1px black solid;
+      min-height: 300px; }
+    .adminPendingSection #pendingLibrarianSection {
+      width: 100%;
+      border: 1px black solid;
+      min-height: 300px; } }
+
+@media only screen and (max-width: 850px) {
+  .adminAddControlSection {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between; }
+    .adminAddControlSection #addEventSection {
+      width: 100%;
+      border: 1px black solid; }
+    .adminAddControlSection #eventControlSection {
+      width: 100%;
+      border: 1px black solid;
+      height: 300px;
+      margin-bottom: 30px; } }
+
 .rentBooksWrapper {
   min-height: 100%;
   display: flex;
@@ -212,6 +327,131 @@
 
 .rowAway {
   background-color: #DCDCDC; }
+
+#pendingBookSection .pendingUser .name {
+  font-weight: 900; }
+
+#pendingBookSection .pendingUser .contentSection {
+  display: flex;
+  flex-direction: row; }
+  #pendingBookSection .pendingUser .contentSection .textSection {
+    width: 40%;
+    margin-right: 8px; }
+  #pendingBookSection .pendingUser .contentSection .pendingChoice {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    #pendingBookSection .pendingUser .contentSection .pendingChoice .choice {
+      width: 100%;
+      height: 49%;
+      border: 1px black solid;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer; }
+    #pendingBookSection .pendingUser .contentSection .pendingChoice .approve:hover {
+      background-color: green;
+      color: white; }
+    #pendingBookSection .pendingUser .contentSection .pendingChoice .decline:hover {
+      background-color: red;
+      color: white; }
+
+#pendingLibrarianSection .pendingUser .name {
+  font-weight: 900; }
+
+#pendingLibrarianSection .pendingUser .contentSection {
+  display: flex;
+  flex-direction: row; }
+  #pendingLibrarianSection .pendingUser .contentSection .textSection {
+    width: 80%;
+    margin-right: 8px; }
+  #pendingLibrarianSection .pendingUser .contentSection .pendingChoice {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    #pendingLibrarianSection .pendingUser .contentSection .pendingChoice .choice {
+      width: 100%;
+      height: 49%;
+      border: 1px black solid;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer; }
+    #pendingLibrarianSection .pendingUser .contentSection .pendingChoice .approve:hover {
+      background-color: green;
+      color: white; }
+    #pendingLibrarianSection .pendingUser .contentSection .pendingChoice .decline:hover {
+      background-color: red;
+      color: white; }
+
+#listUsersSection .userDisplayOptions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px; }
+  #listUsersSection .userDisplayOptions .displayOption {
+    border: 1px black solid;
+    padding: 5px 20px; }
+
+#listUsersSection .userDisplayHeaders {
+  display: flex;
+  flex-direction: row; }
+  #listUsersSection .userDisplayHeaders .header {
+    width: 20%; }
+  #listUsersSection .userDisplayHeaders .email {
+    width: 30%; }
+  #listUsersSection .userDisplayHeaders .role {
+    width: 15%; }
+
+#listUsersSection .displayUsers .user {
+  display: flex;
+  flex-direction: row; }
+
+#listUsersSection .displayUsers .header {
+  width: 20%; }
+
+#listUsersSection .displayUsers .email {
+  width: 30%; }
+
+#listUsersSection .displayUsers .role {
+  width: 15%; }
+
+#addEventSection input {
+  margin-bottom: 0; }
+
+#addEventSection p {
+  margin-bottom: 4px !important; }
+
+#addEventSection .eventSection {
+  margin-bottom: 8px; }
+
+#addEventSection label {
+  color: red !important;
+  font-size: 11.5px !important; }
+
+#addEventSection .newEventTime {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px; }
+  #addEventSection .newEventTime .timeSelection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px; }
+    #addEventSection .newEventTime .timeSelection .time {
+      width: 59.5%; }
+    #addEventSection .newEventTime .timeSelection .period {
+      width: 39.5%; }
+
+#addEventSection .cityState {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  #addEventSection .cityState .city {
+    width: 59.5%; }
+  #addEventSection .cityState .state {
+    width: 39.5%; }
 
 .bookProfileHolder {
   height: 100%;

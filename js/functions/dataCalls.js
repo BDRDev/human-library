@@ -1,649 +1,151 @@
 
-import {
-	list_users_url,
-	get_all_books_url,
-	get_available_books_url,
-	sign_up_user_url,
-	book_account_success_url,
-	librarian_account_success_url,
-	book_account_success_admin_url,
-	librarian_account_success_admin_url,
-	create_empty_book_url,
-	create_empty_librarian_url,
-	attempt_to_login_url,
-	get_user_data_url, 
+import { prefix } from '../global_vars';
 
-	get_user_book_data_url, 
-	get_user_librarian_data_url,
-	get_event_book_list_url,
-	
-	update_unverified_user_url, 
-	send_unverified_email_url,
-
-	update_verified_user_url,
-	update_verified_librarian_url,
-
-	get_events_list_url,
-	get_specific_attend_list_url,
-
-	get_pending_users_url,
-	get_pending_librarians_url,
-
-	update_pending_users_url,
-	get_user_data_email_url,
-	user_sessions_url,
-	get_next_event_url,
-	check_if_attending_url,
-	get_emails_url,
-	mass_email_url,
-	check_unique_email_url,
-	get_user_email_url,
-	send_book_approved_email_url,
-	send_librarian_approved_email_url,
-
-	send_email_url,
-
-	add_new_event_url,
-
-} from '../global_vars';
-
-export const addNewEvent = async formData => {
-
-	console.log('addNewEvent', formData);
-
-	$.ajax({
-		type: 'POST',
-		url: add_new_event_url,
-		data: formData,
-		dataType: 'json',
-		success: (result) => {
-			console.log(result);
-		},
-		error: () => {
-			console.log('wrong');
-		}
-	});
-}
-
+//gets a list of users
 export const getUsers = async role => {
-
-	const users = await $.ajax({
-		type: 'GET',
-		url: list_users_url,
-		data: { role: role },
-		dataType: 'json'
-	})
-
-	return users;
-
+	const result = await $.get(`${prefix}/api/general/listUsers.php`, { role });
+	return $.parseJSON(result);
 }
 
-export const signUp = async userData => {
-
-	console.log("userData", userData);
-
-	const result = await $.ajax({
-		type: 'POST',
-		url: sign_up_user_url,
-		data: {
-			first: userData.first,
-			last: userData.last,
-			email: userData.email,
-			password: userData.password,
-			role: userData.role
-		}
-	});
-
+//adds user data to the db when they sign up
+export const signUp = async ({ first, last, email, password, role }) => {
+	const result = await $.post(`${prefix}/api/general/signUpUser.php`, { first, last, email, password, role });
 	return result;
-
 }
 
-export const checkForUniqueEmail = (email, callback) => {
-	console.log("check for unique email", email);
-	$.ajax({
-		type: 'POST',
-		url: check_unique_email_url,
-		async: false,
-		data: {
-			email: email
-		},
-		success: (result) => {
-			//console.log("result", result);
-			callback(result);
-		}
-	})
+//checks to be sure that an email is unique
+export const checkForUniqueEmail = async email => {
+	const result = await $.post(`${prefix}/api/general/checkUniqueEmail.php`, { email })
+	return result;
 } 
 
-export function createEmptyBook(userId, callback){
-
-	console.log("create empty book", userId);
-
-	$.ajax({
-		type: 'POST',
-		url: create_empty_book_url,
-		data: {
-			displayId: userId
-		},
-		success: (result) => {
-			console.log("empty book was successfully created");
-			callback();
-		}
-	})
-
-}
-
-export const createEmptyLibrarian = (userId, callback) => {
-
-	console.log("create empty librarian", userId);
-
-	$.ajax({
-		type: 'POST',
-		url: create_empty_librarian_url,
-		data: {
-			displayId: userId
-		},
-		success: (result) => {
-			console.log("empty librarian was successfully created");
-			callback();
-		}
-	})
-
-}
-
-export const attemptLogin = async formData => {
-
-	console.log("attempt to login");
-
-	const user = $.ajax({
-		type: 'GET',
-		url: attempt_to_login_url,
-		dataType: 'json',
-		data: {
-			email: formData.email,
-			password: formData.password
-		}
-	});
-
-	return user;
-
-}
-
-export const getAllBooks = async () => {
-
-	const books = await $.ajax({
-		type: 'GET',
-		url: get_all_books_url,
-		dataType: 'json'
-	})
-
-	return books;
-}
-
-export function getAvailableBooks(callback){
-
-	$.ajax({
-		type: 'GET',
-		url: get_available_books_url,
-		dataType: 'json',
-		success: (result) => {
-			callback(result);
-		}
-	})
-}
-
-export const getUserData = async userId => {
-
-	console.log('getUserData dataCall', userId)
-
-
-
-	let result = await $.ajax({
-	        type: 'GET',
-	        url: get_user_data_url,
-	        data: {
-	        	userId: parseInt(userId)
-	        },
-	        dataType: 'json',
-	    });
-
+//when a book signs up, this creates a blank book entry for them
+export const createEmptyBook = async displayId => {
+	const result = await $.post(`${prefix}/api/general/createEmptyBook.php`, { displayId });
 	return result;
-
 }
 
-export const updateUnverifiedUser = async (userId, formData) => {
+//when a librarian signs up, this creates a blank librarian entry for them
+export const createEmptyLibrarian = async displayId => {
+	const result = await $.post(`${prefix}/api/general/createEmptyLibrarian.php`, { displayId })
+	return result;
+}
 
-	console.log("update function", formData);
+//checks to see if the email password combo exists
+export const attemptLogin = async ({ email, password }) => {
+	const result = await $.get(`${prefix}/api/general/attemptToLogin.php`, { email, password })
+	return $.parseJSON(result);
+}
 
-	let why_book = formData.why_book;
-	let book_overview = formData.book_overview;
+//returns a list of all the books
+export const getAllBooks = async () => {
+	const result = await $.get(`${prefix}/api/general/getAllBooks.php`);
+	return $.parseJSON(result);
+}
 
-	console.log("why_book", why_book);
-	console.log("book_overview", book_overview);
+//returns a list of all available books 
+export const getAvailableBooks = async () =>{
+	const result = await $.get(`${prefix}/api/general/getAvailableBooks.php`);
+	return $.parseJSON(result);
+}
 
-	let result = await $.ajax({
-        type: 'GET',
-        url: update_unverified_user_url,
-        data: {
-        	userId: userId,
-        	why_book: why_book,
-        	book_overview: book_overview
-        },
-        dataType: 'json',
-    })
+//gets user data based off of userId
+export const getUserData = async userId => {
+	const result = await $.get(`${prefix}/api/general/getUserData.php`, { userId })
+	return $.parseJSON(result);
+}
 
+//when a user updates their 'why' page, sets the data
+export const updateUnverifiedUser = async (userId, { why_book, book_overview }) => {
+    const result = await $.get(`${prefix}/api/general/updateUnverifiedUser.php`, { userId, why_book, book_overview });
     return result;
 }
 
-export function sendUnverifiedEmail(data){
-
-	console.log("sending an email to admin regarding unverified user");
-
-	console.log("data", data);
-
-	$.ajax({
-		type: 'POST',
-		url: send_unverified_email_url,
-		data: data,
-		success: function(){
-			console.log("the admin was successfully emailed");
-		}
-	})
+//gets a users book data
+export const getBookData = async displayId => {
+    const result = await $.get(`${prefix}/api/general/getBookData.php`, { displayId });
+    return $.parseJSON(result);
 }
 
-export const bookApprovedEmail = (email) => {
-	console.log("sending an email to user reguarding getting approved");
-
-	$.ajax({
-		type: 'POST',
-		url: send_book_approved_email_url,
-		data: {
-			email: email
-		},
-		success: () => {
-			console.log("user - book - was successfully emailed")
-		}
-	})
+//gets a users librarian data
+export const getLibrarianData = async displayId => {
+	const result = await $.get(`${prefix}/api/general/getLibrarianData.php`, { displayId });
+	return $.parseJSON(result);
 }
 
-export const librarianApprovedEmail = (email) => {
-	console.log("sending an email to librarian reguarding getting approved");
-
-	$.ajax({
-		type: 'POST',
-		url: send_librarian_approved_email_url,
-		data: {
-			email: email
-		},
-		success: () => {
-			console.log("user - librarian - was successfully emailed")
-		}
-	})
+//updates the book's book data
+export const updateVerifiedUser = async (userId, data, callback) => {
+    const result = await $.post(`${prefix}/api/book/updateVerified.php`, { userId, dataArray: data });
+    callback();
 }
 
-export const getBookData = async userId => {
-
-
-	console.log("get users book data", userId);
-
-
-	const data = await $.ajax({
-        type: 'GET',
-        url: get_user_book_data_url,
-        data: {
-        	displayId: parseInt(userId)
-        },
-        dataType: 'json',
-    });
-    return data;
-
+//updates the librarian's librarian data
+export const updateVerifiedLibrarian = async (userId, data, callback) => {
+    const result = await $.post(`${prefix}/api/librarian/updateVerified.php`, { userId, dataArray: data });
+    callback();
 }
-
-export const getLibrarianData = (userId, callback) => {
-	console.log("get users librarian data");
-
-	$.ajax({
-	        type: 'GET',
-	        url: get_user_librarian_data_url,
-	        data: {
-	        	displayId: userId
-	        },
-	        dataType: 'json',
-	        success: function(result){
-	        	console.log("result", result);
-	            callback(result);
-	        }
-	    })
-
-}
-
-export const updateVerifiedUser = (userId, data, callback) => {
-
-	console.log("update verified user data", data);
-
-	let title = data.title;
-	let description = data.description;
-	let chapter_one = data.chapter_one;
-	let chapter_two = data.chapter_two;
-	let chapter_three = data.chapter_three;
-	let start_time = data.start_time;
-	let end_time = data.end_time;
-
-	$.ajax({
-        type: 'GET',
-        url: update_verified_user_url,
-        data: {
-        	userId: userId,
-        	title: title,
-        	description: description,
-        	chapter_one: chapter_one,
-        	chapter_two: chapter_two,
-        	chapter_three: chapter_three,
-        	start_time: start_time,
-        	end_time: end_time
-        },
-        dataType: 'json',
-        success: function(result){
-        	console.log("result", result);
-            callback();
-        }
-    })
-}
-
-export const updateVerifiedLibrarian = (userId, data, callback) => {
-	$.ajax({
-        type: 'GET',
-        url: update_verified_librarian_url,
-        data: {
-        	userId: userId,
-        	start_time: data.start_time,
-        	end_time: data.end_time
-        },
-        dataType: 'json',
-        success: function(result){
-        	console.log("result", result);
-            callback();
-        },
-        error: () => {
-        	console.log("was an error");
-        }
-    })
-}
-
 
 //This is used to get a list of all of the events in the database
-
-export function getAllEvents(callback){
-
-	$.ajax({
-		url: get_events_list_url,
-		dataType: 'json',
-		success: function(events){
-			
-			callback(events);
-		}
-	})
+//idk what this is for tbh
+export const getAllEvents = async callback => {
+	const result = await $.get(`${prefix}/api/general/getEventsList.php`);
+	callback($.parseJSON(result));
 }
 
 //used to get a single attendee
-export function getOneAttendee(userId, callback){
-
-	console.log("getOneAttendee", userId);
-
-	$.ajax({
-		url: get_specific_attend_list_url,
-		dataType: 'json',
-		data: {
-			userId: userId
-		},
-		success: function(result){
-			
-			callback(result);
-
-		}
-	})
+export const getOneAttendee = async (userId, callback) => {
+	const result = await $.get(`${prefix}/api/general/getOneAttendee.php`, { userId });
+	callback($.parseJSON(result));
 }
 
-//this is used to get all of the users who need to be approved to be a book
-export const getPendingBooks = async () => {
-
-	console.log("get the pending Books");
-
-	const books = await $.ajax({
-		url: get_pending_users_url,
-		dataType: 'json',
-	})
-
-	return books;
+//gets a user's data based off of their email
+export const getUserDataEmail = async email =>{
+	const result = await $.get(`${prefix}/api/general/getUserDataEmail.php`, { email })
+	return $.parseJSON(result);
 }
 
-export const getPendingLibrarians = async () => {
-	let librarians = await $.ajax({
-		url: get_pending_librarians_url,
-		dataType: 'json',
-	})
-
-	return librarians;
-}
-
-
-//this is used to set books from pending to approved
-export const approveUser = async userId => {
-
-	console.log("appprove the pending users");
-
-	const approved = await $.ajax({
-		url: update_pending_users_url,
-		data: { userId: userId },
-		dataType: 'json'
-	})
-
-	console.log(approved); 
-
-	return approved
-
-}
-
-//This function sends an email to the user when they successfully create a book account
-export function bookSignUpSuccessEmail(data){
-
-	$.ajax({
-		type: 'POST',
-		url: book_account_success_url,
-		data: data,
-		success: function(){
-			console.log("the user - book - was successfully emailed");
-		}
-	})
-}
-
-//This function sends an email to the user when they successfully create an accout
-export function librarianSignUpSuccessEmail(data){
-
-	$.ajax({
-		type: 'POST',
-		url: librarian_account_success_url,
-		data: data,
-		success: function(){
-			console.log("the user - librarian - was successfully emailed");
-		}
-	})
-}
-
-//this function sends an email to the admin when a user successfully creates an account
-export function bookSignUpSuccessEmailAdmin(data){
-
-	$.ajax({
-		type: 'POST',
-		url: book_account_success_admin_url,
-		data: data,
-		success: function(){
-			console.log("the admin was successfully emailed - book");
-		}
-	})
-}
-
-//this function sends an email to the admin when a user successfully creates an account
-export function librarianSignUpSuccessEmailAdmin(data){
-
-	$.ajax({
-		type: 'POST',
-		url: librarian_account_success_admin_url,
-		data: data,
-		success: function(){
-			console.log("the admin was successfully emailed - librarian");
-		}
-	})
-}
-
-export function getUserDataEmail(email, callback){
-
-	console.log("email", email);
-
-	$.ajax({
-		type: 'GET',
-		url: get_user_data_email_url,
-		dataType: 'json',
-		data: {
-			email: email
-		},
-		success: function(result){
-			callback(result)
-		},
-		
-	})
-}
-
-
-// export const getPendingLibrarians = async () => {
-// 	let librarians = await $.ajax({
-// 		url: get_pending_librarians_url,
-// 		dataType: 'json',
-// 	})
-
-// 	return librarians;
-// }
-
+//gets a users sessions
 export const getUserSessions = async session => {
-
-	console.log("getUserSessions", session);
-
-	try {
-		let result = await $.ajax({
-			type: 'GET',
-			url: user_sessions_url,
-			data: {
-				action: 'retrieve',
-				session: session
-			}
-		});
-
-		result = result.replace(/(\r\n|\n|\r)/gm, "");
-
-		return result;
-	} catch(error) {
-
-	}
-}
-
-
-export function setUserSessions(session, value){
-
-	console.log("setting: " + session + " as : " + value);
-
-	$.ajax({
-		type: 'POST',
-		url: user_sessions_url,
-		data: {
-			action: 'set',
-			session: session,
-			value: value
-		},
-		success: (result) => {
-			console.log("successfully set " + session);
-		},
-		error: () => {
-			console.log('error function');
-		}
-	})
-}
-
-export function destroyUserSession(session){
-
-	console.log(`destroying ${session} session`);
-
-	$.ajax({
-		type: 'GET',
-		url: user_sessions_url,
-		data: {
-			action: 'destroy',
-			session: session,
-		},
-		success: (result) => {
-			console.log("successfully destroyed " + session, result);
-		},
-		error: () => {
-			console.log('error function');
-		}
-	})
-}
-
-export const getUpcomingEvent = async () => {
-
-	console.log('getting the next event');
-
-	let result = await $.ajax({
-		type: 'GET',
-		url: get_next_event_url,
-		dataType: 'json',
-	})
-
+	let result = await $.get(`${prefix}/api/session/userSessions.php`, { action: 'retrieve', session })
+	result = result.replace(/(\r\n|\n|\r)/gm, "");
 	return result;
 }
 
-export const getAttendingUsers = async eventId => {
+//sets a users session
+export const setUserSessions = async (session, value) => {
+	const result = await $.post(`${prefix}/api/session/userSessions.php`, { action: 'set', session, value });
+	return result;
+}
 
-	const result = await $.ajax({
-		type: 'GET',
-		url: get_event_book_list_url,
-		dataType: 'json',
-		data: {
-			eventId: eventId
-		}
+//deletes a users session
+export const destroyUserSession = async session => {
+	const result = await $.get(`${prefix}/api/session/userSessions.php`, { action: 'destroy', session })
+	return result;
+}
 
-	})
-
-	return result
+//gets the next upcoming event
+export const getUpcomingEvent = async () => {
+	const result = await $.get(`${prefix}/api/event/getNext.php`);
+	return $.parseJSON(result);
 }
 
 //This is the check to see if the user is attending the next upcoming event
 export const checkIfAttending = async (userId, eventId) => {
-	
-	let result = await $.ajax({
-		type: 'GET',
-		url: check_if_attending_url,
-		dataType: 'json',
-		data: {
-			userId: userId,
-			eventId: eventId
-		}
-	});
+	const result = await $.get(`${prefix}/api/general/checkIfAttending.php`, { userId, eventId });
+	return $.parseJSON(result);
+}
+
+//gets a list of emails based off of a users role
+export const getEmails = async role => {
+	const result = await $.get(`${prefix}/api/email/getEmails.php`, { role });
 	return result;
 }
 
-export const getEmails = (role, callback) => {
-	console.log("() => getEmails from 'dataCalls'", role);
-	$.ajax({
-		type: 'GET',
-		url: get_emails_url,
-		dataType: 'json',
-		data: {
-			role: role
-		},
-		success: (result) => {
-			callback(result);
-		}
-	});
-}
+// export const getUserEmail = async userId => {
+// 	const result = await $.get(`${prefix}/api/email/getEmail`, { userId })
+// 	return result;
+// }
+
 
 export const massEmail = (email, subject, content) => {
 	console.log("() => massEmail from 'dataCalls'");
@@ -662,21 +164,6 @@ export const massEmail = (email, subject, content) => {
 	})
 }
 
-export const getUserEmail = (userId, callback) => {
-	console.log("() => getUserEmail from 'dataCalls'");
-
-	$.ajax({
-		type: 'GET',
-		url: get_user_email_url,
-		dataType: 'json',
-		data: {
-			userId: userId
-		},
-		success: (result) => {
-			console.log("get user email based off userId result", result);
-		}
-	})
-}
 
 export const sendEmail = (emailType, email, formData) => {
 	console.log("send an email", formData);
